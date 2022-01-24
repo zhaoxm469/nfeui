@@ -1,0 +1,8 @@
+{
+    "editor.tabSize": 4,
+    // "workingDirectories": [
+    //     "./",
+    //     "./docs"
+    // ]
+    "typescript.tsdk": "node_modules/typescript/lib"
+}

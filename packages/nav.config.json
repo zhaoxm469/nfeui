@@ -1,0 +1,20 @@
+{
+    "navs": [
+        {
+            "text": "基础组件",
+            "cType": "3",
+            "children": [
+                {
+                    "version": "0.0.1",
+                    "text": "Button",
+                    "sort": 1,
+                    "cName": "按钮",
+                    "show": true,
+                    "desc": "自定义按钮组件",
+                    "author": "zxm",
+                    "link": "/components/button/doc"
+                }
+            ]
+        }
+    ]
+}
