@@ -1,51 +1,39 @@
-const config = require('../src/config.json');
-const path = require('path');
 const fs = require('fs-extra');
-let importStr = `import { App } from 'vue';
-declare class UIComponent {
-  static install(vue: App): void;
-}\n`;
-const packages = [];
+const { join } = require('path');
 
-config.navs.forEach(item => {
-    item.packages.forEach(packs => {
-        const { show, name } = packs;
-        if (show) {
-            importStr += `declare class ${name} extends UIComponent {}\n`;
-            packages.push(name);
+// 生成types类型提示
+const createNfeUiTypes = () => {
+    const components = require('../packages/nav.config.json')
+    let exportResult = [];
+    for (let item of components.navs) {
+        item.children = item.children.filter(item=>item.show);
+        if(!item.children.length) break;
+        for (let navItem of item.children){
+            exportResult.push(`export { default as nf${navItem.text} } from "./packages/components/${navItem.text.toLocaleLowerCase()}";`)
         }
-    })
-})
-
-
-let installFunction = `
-export interface InstallationOptions {
-  locale?: any;
-  lang?: any;
-}
-declare function install(app: App, options?: InstallationOptions): void;
-export { ${packages.join(',')},install };
-declare const _default: {
-  install: typeof install;
-  version: string;
-};
-export default _default;`;
-
-let fileStr = importStr + installFunction;
-
-fs.outputFile(
-    path.resolve(__dirname, '../dist/nfeui.d.ts'),
-    fileStr,
-    'utf8',
-);
-
-fs.outputFile(
-    path.resolve(__dirname, '../dist/index.d.ts'),
-    `import * as NfeUI from './nfeui';
-export default NfeUI;
-export * from './nfeui';`,
-    'utf8',
-    error => {
-        // logger.success(`${package_config_path} 文件写入成功`);
     }
-);
+
+    return `
+
+        ${exportResult.join('\n')}
+
+        declare namespace _default {
+            export { install };
+            export { version };
+        }
+        export default _default;
+
+        export function install(app: any): void;
+        export const version: string;
+    `
+}
+
+
+function init (){
+    const temp = createNfeUiTypes();
+    fs.writeFileSync(join(__dirname,'../dist/nfeui.d.ts'),temp,'utf-8')
+    console.log('types 文件生成成功');
+}
+
+
+init();
