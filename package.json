@@ -7,19 +7,22 @@
     "exports": {
         ".": {
             "import": "./dist/nfeui.es.js",
-            "require": "./dist/nfeui.umd.js"
+            "require": "./dist/nfeui.umd.js",
+            "typings": "./dist/nfeui.d.ts"
         }
     },
-    "types": "dist/src/index.d.ts",
+    "typings": "dist/nfeui.d.ts",
+    "style": "dist/style.css",
     "author": "",
     "license": "MIT",
     "scripts": {
         "dev": "zx nucarf/dev.mjs",
-        "build": "vite build && yarn type",
+        "build": "vite build && yarn type && npm run generate:types",
         "type": "vue-tsc --declaration --emitDeclarationOnly",
         "test": "jest",
         "add": "node nucarf/createComponentMode",
         "generate:cnavconfig": "node nucarf/generate-cnavconfig --watch",
+        "generate:types": "node nucarf/generate-types ",
         "docs-build": "zx ./nucarf/docs-build.mjs",
         "docs-serve": "cross-env NODE_ENV=production vitepress-fc serve --root=docs",
         "docs-build-serve": "cross-env NODE_ENV=true yarn docs-build && yarn docs-serve",
