@@ -84,6 +84,13 @@ const onWatchFile = () => {
     generatorDocNav();
 }
 
+function init (){
+    generatorDocNav()
+}
+
+init();
+
+
 // 是否需要监听文件变化
 if (isWatch) watchFile([navConfigPath, vitepressConfigPath])
 
