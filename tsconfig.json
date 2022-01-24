@@ -1,48 +1,49 @@
 {
-  "compilerOptions": {
-    "baseUrl": ".",
-    "outDir": "dist",
-    "sourceMap": false,
-    "target": "es6",
-    "module": "esnext",
-    "moduleResolution": "node",
-    "allowJs": false,
-    "noUnusedLocals": true,
-    "strictNullChecks": true,
-    "noImplicitAny": true,
-    "noImplicitThis": true,
-    "experimentalDecorators": true,
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "removeComments": false,
-    "declaration": true,
-    "isolatedModules": true,
-    "declarationDir": "dist",
-    "skipLibCheck": true,
-    "jsx": "preserve",
-    "lib": [
-      "esnext",
-      "dom"
-    ],
-    "types": [
-      "jest",
-      "node"
-    ],
-    "rootDir": ".",
-    "paths": {
-      "@/*": [
-        "packages/*"
-      ],
-      "nfeui": [
+    "compilerOptions": {
+        "baseUrl": ".",
+        "outDir": "dist",
+        "sourceMap": false,
+        "target": "es6",
+        "module": "esnext",
+        "moduleResolution": "node",
+        "allowJs": false,
+        "noUnusedLocals": true,
+        "strictNullChecks": true,
+        "noImplicitAny": true,
+        "noImplicitThis": true,
+        "experimentalDecorators": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "removeComments": false,
+        "declaration": true,
+        "isolatedModules": true,
+        "declarationDir": "dist",
+        "skipLibCheck": true,
+        "jsx": "preserve",
+        "lib": [
+            "esnext",
+            "dom"
+        ],
+        "types": [
+            "jest",
+            "node",
+            "element-plus/global"
+        ],
+        "rootDir": ".",
+        "paths": {
+            "@/*": [
+                "packages/*"
+            ],
+            "nfeui": [
+                "packages"
+            ]
+        }
+    },
+    "include": [
         "packages"
-      ]
-    }
-  },
-  "include": [
-    "packages"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+    ],
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
 }
