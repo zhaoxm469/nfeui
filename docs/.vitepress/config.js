@@ -9,6 +9,9 @@ module.exports = {
         // 为了能在demo中正确的使用  import { X } from 'nfeui'
         [`nfeui`]: resolve('./packages'),
     },
+    head: [
+        ['link', { rel: 'stylesheet', href: '//cdn.jsdelivr.net/npm/element-plus/dist/index.css' }]
+    ],
     base:'',
     themeConfig: {
         logo: '/logo.png',
