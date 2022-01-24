@@ -139,6 +139,7 @@ function createDir () {
 
 // 生成文件
 function createFile (fileName, demoTemplateName){
+    // 读取模板内容
     let content = demoTemplate(newCpt)[demoTemplateName];
     const filePath = join(dirPath, fileName);
     return new Promise((reslove, reject)=> {
