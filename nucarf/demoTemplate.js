@@ -100,6 +100,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@import "../../../style/tailwindcss.scss";
 @import "./index.scss";
 </style>
 
