@@ -2,6 +2,7 @@ const prefix = 'nf';
 const cmtName = name => prefix + name
 
 
+// 转换为中线命名
 const upperCaseTohump = (value)=>{
     let result = '';
     for (let i = 0; i < value.length ; i ++ ) {
@@ -14,6 +15,9 @@ const upperCaseTohump = (value)=>{
     }
     return result;
 }
+
+// 首字母小写
+const toFirstLowercase = value => value.replace(value[0], value[0].toLocaleLowerCase());
 
 
 // 创建index.ts,最外部的导出模块TS文件
@@ -67,6 +71,7 @@ ${ desc }。
 
 // 创建 index.vue文件内容
 function createVue ({name}){
+    const exportPropsName = toFirstLowercase(name);
 
     return `
     
@@ -81,11 +86,11 @@ function createVue ({name}){
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { ${name}Props } from '.';
+import { ${exportPropsName}Props } from '.';
 
 export default defineComponent({
     name: '${cmtName(name)}',
-    props: ${name}Props,
+    props: ${exportPropsName}Props,
     setup() {
         return {
             msg: '张三'
@@ -104,19 +109,19 @@ export default defineComponent({
 
 // 生成src下的index.ts文件
 const createSrcIndexTs = ({name})=>{
+    const exportPropsName = toFirstLowercase(name);
+    
     return `
-    
-export const ${name}Props = {
-    title: {
-        type: String,
-        default: '',
-    },
-    type: {
-        type: String,
-        default: 'info',
-    },
-};
-    
+import { extend } from './../../../utils/basic';
+import { makeStringProp } from './../../../utils/props';
+
+type ${name}Size = 'large' | 'normal' | 'small' | 'mini';
+
+export const ${exportPropsName}Props = extend({}, {
+    text: String,
+    icon: String,
+    size: makeStringProp<${name}Size>('normal'),
+});
     `
 }
 
@@ -187,8 +192,7 @@ const demoTemplate = (options)=>{
         srcIndexVue: createVue(options),
         srcIndexTs: createSrcIndexTs(options),
         srcIndexScss: createSrcIndexScss(options),
-        test:createTest(options)
-        
+        test:createTest(options),
     }
 }
 

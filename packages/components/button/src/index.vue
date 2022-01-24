@@ -11,11 +11,11 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { ButtonProps } from '.';
+import { buttonProps } from '.';
 
 export default defineComponent({
     name: 'nfButton',
-    props: ButtonProps,
+    props: buttonProps,
     setup() {
         return {
             msg: '彩虹按钮'
