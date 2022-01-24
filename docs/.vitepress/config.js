@@ -40,8 +40,8 @@ module.exports = {
         search: {
             searchMaxSuggestions: 10,
         },
-        repo: '/nfeui',
-        repoLabel: 'Github',
+        repo: 'https://git.nucarf.cn/frontend/n-p-m/nfeui',
+        repoLabel: 'GitLab',
         lastUpdated: true,
         prevLink: true,
         nextLink: true,
