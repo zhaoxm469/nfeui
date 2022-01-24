@@ -1,3 +1,5 @@
+
+    
 <template>
     <div class="nf-button">
         <button class="button">
@@ -8,19 +10,23 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent } from 'vue'
 import { ButtonProps } from '.';
 
 export default defineComponent({
+    name: 'nfButton',
     props: ButtonProps,
     setup() {
         return {
-            msg: '张三'
+            msg: '彩虹按钮'
         };
     }
 });
 </script>
 
 <style lang="scss" scoped>
-@import './index.scss';
+@import "./index.scss";
 </style>
+
+    
+    

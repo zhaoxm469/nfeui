@@ -1,10 +1,14 @@
+
+    
 export const ButtonProps = {
     title: {
         type: String,
-        default: ''
+        default: '',
     },
     type: {
         type: String,
-        default: 'info'
-    }
+        default: 'info',
+    },
 };
+    
+    
