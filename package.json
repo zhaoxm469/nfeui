@@ -82,5 +82,8 @@
         "hooks": {
             "pre-commit": "pretty-quick --staged"
         }
+    },
+    "dependencies": {
+        "vue": "^3.2.29"
     }
 }
