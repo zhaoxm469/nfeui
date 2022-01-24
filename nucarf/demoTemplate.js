@@ -1,4 +1,5 @@
-const nameLc = 'test';
+const prefix = 'nf';
+const cmtName = name => prefix + name
 
 
 const upperCaseTohump = (value)=>{
@@ -83,6 +84,7 @@ import { defineComponent } from 'vue'
 import { ${name}Props } from '.';
 
 export default defineComponent({
+    name: '${cmtName(name)}',
     props: ${name}Props,
     setup() {
         return {
@@ -138,17 +140,17 @@ const createDemo  = ({name})=>{
             >
             <span>{{ count }}</span>
         </p>
-        <nf${name} @click="onClick">按钮</nf${name}>
+        <${cmtName(name)} @click="onClick">按钮</${cmtName(name)}>
     </div>
 </template>
 
 <script lang="ts">
-import { nf${name} } from 'nfeui';
+import { ${cmtName(name)} } from 'nfeui';
 import { ref, defineComponent } from 'vue';
 
 export default defineComponent({
     components: {
-        nf${name}
+        ${cmtName(name)}
     },
     setup() {
         const count = ref(0);
