@@ -3,32 +3,48 @@
 <template>
     <div>
         <p>
-            <span style="padding: 0 16px 0 4px; font-size: 14px; color: #777"
-                >点击次数:</span
-            >
+            <span style="padding: 0 16px 0 4px; font-size: 14px; color: #777">点击次数:</span>
             <span>{{ count }}</span>
         </p>
-        <nfButton @click="onClick">按钮</nfButton>
+        <nfButton
+            :loading="isLoading"
+            @loading-change="onLoadingChange"
+            type="primary"
+            @click="onClick"
+        >按钮</nfButton>
     </div>
 </template>
 
 <script lang="ts">
 import { nfButton } from 'nfeui';
-import { ref, defineComponent } from 'vue';
+import { defineComponent, reactive, toRefs } from 'vue';
 
 export default defineComponent({
     components: {
         nfButton
     },
     setup() {
-        const count = ref(0);
-        function onClick() {
-            count.value++;
+        const state = reactive({
+            count: 0,
+            isLoading: false
+        })
+
+        const methods = {
+            onClick() {
+                state.isLoading = true;
+                setTimeout(() => {
+                    state.count++;
+                    state.isLoading = false;
+                }, 1000);
+            },
+            onLoadingChange(loading: boolean) {
+                console.log(`loading 状态发生变化：${loading}`)
+            }
         }
 
         return {
-            count,
-            onClick
+            ...toRefs(state),
+            ...methods
         };
     }
 });
