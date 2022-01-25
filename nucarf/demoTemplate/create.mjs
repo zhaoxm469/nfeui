@@ -6,8 +6,10 @@ const inquirer = require('inquirer');
 const { UI_PREFIX } = process.env;
 import 'dotenv/config'
 
+
+
 // 默认使用的demo模板名称
-const demoTemplatFileName = 'default';
+const demoTemplatFileName = process.argv[3].replace('--template=','') || 'default';
 // demo模板路径
 const demoTemplatePath = path.join(__dirname, demoTemplatFileName);
 // 临时文件夹路径
@@ -25,7 +27,6 @@ const artExportComponentIndexTsPath = path.join(__dirname, './componetExportInde
 const navConfig = require(navConfigPath)
 
 artTemplate.defaults.rules[1].test = /{{{([@#]?)[ \t]*(\/?)([\w\W]*?)[ \t]*}}}/;
-
 
 // 合并用户选项
 function createNewOptions (opts={}) {
