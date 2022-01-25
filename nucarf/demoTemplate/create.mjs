@@ -6,10 +6,8 @@ const inquirer = require('inquirer');
 const { UI_PREFIX } = process.env;
 import 'dotenv/config'
 
-
-
 // 默认使用的demo模板名称
-const demoTemplatFileName = process.argv[3].replace('--template=','') || 'default';
+const demoTemplatFileName =  process.argv[3]?.replace('--template=','') || 'default';
 // demo模板路径
 const demoTemplatePath = path.join(__dirname, demoTemplatFileName);
 // 临时文件夹路径
