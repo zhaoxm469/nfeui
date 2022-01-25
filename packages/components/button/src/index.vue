@@ -1,8 +1,6 @@
-
-    
 <template>
     <button
-        class="font-bold cursor-pointer nf-button flex items-center py-2 rounded-lg px-6"
+        class="nf-button cursor-pointer flex items-center py-2 rounded-lg px-6"
         :class="[buttonType, buttonLoading]"
         @click.stop="handleClick($event)"
     >
@@ -12,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, toRefs, watch } from 'vue'
+import { computed, defineComponent, toRefs, watch } from 'vue';
 import { buttonEmits, buttonProps } from '.';
 
 export default defineComponent({
@@ -20,38 +18,40 @@ export default defineComponent({
     props: buttonProps,
     emits: buttonEmits,
     setup(props, { emit }) {
-
         const buttonType = computed(() => {
             const typesClass = {
                 primary: 'bg-blue-500 text-white hover:bg-blue-400',
                 success: 'bg-green-500 text-white hover:bg-green-400',
                 info: 'bg-white border border-solid border-gray-500 text-gray-700 hover:bg-blue-200 hover:text-blue-500 hover:border-blue-400',
-                default: 'bg-gray-600 text-white hover:bg-gray-500 ',
+                default: 'bg-gray-600 text-white hover:bg-gray-500 '
             };
 
-            return typesClass[props.type]
-        })
+            return typesClass[props.type];
+        });
 
         const handleClick = (evt: MouseEvent) => {
-            if (!props.loading) emit('click', evt)
-        }
+            if (!props.loading) emit('click', evt);
+        };
 
         const buttonLoading = computed(() => {
             if (props.loading) {
-                return `cursor-not-allowed`
+                return `cursor-not-allowed`;
             }
-        })
+        });
 
-        watch(() => props.loading, () => {
-            emit('loadingChange', props.loading)
-        })
+        watch(
+            () => props.loading,
+            () => {
+                emit('loadingChange', props.loading);
+            }
+        );
 
         return {
             buttonLoading,
             handleClick,
             ...toRefs(props),
             buttonType
-        }
+        };
     }
 });
 </script>

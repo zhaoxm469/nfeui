@@ -1,9 +1,9 @@
-
-    
 <template>
     <div>
         <p>
-            <span style="padding: 0 16px 0 4px; font-size: 14px; color: #777">点击次数:</span>
+            <span style="padding: 0 16px 0 4px; font-size: 14px; color: #777"
+                >点击次数:</span
+            >
             <span>{{ count }}</span>
         </p>
         <nfButton
@@ -11,7 +11,8 @@
             @loading-change="onLoadingChange"
             type="primary"
             @click="onClick"
-        >按钮</nfButton>
+            >按钮</nfButton
+        >
     </div>
 </template>
 
@@ -27,7 +28,7 @@ export default defineComponent({
         const state = reactive({
             count: 0,
             isLoading: false
-        })
+        });
 
         const methods = {
             onClick() {
@@ -38,9 +39,9 @@ export default defineComponent({
                 }, 1000);
             },
             onLoadingChange(loading: boolean) {
-                console.log(`loading 状态发生变化：${loading}`)
+                console.log(`loading 状态发生变化：${loading}`);
             }
-        }
+        };
 
         return {
             ...toRefs(state),
@@ -49,6 +50,3 @@ export default defineComponent({
     }
 });
 </script>
-
-
-    
