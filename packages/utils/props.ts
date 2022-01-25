@@ -10,30 +10,30 @@ export const numericProp = [Number, String];
 
 export const truthProp = {
     type: Boolean,
-    default: true as const,
+    default: true as const
 };
 
 export const makeRequiredProp = <T>(type: T) => ({
     type,
-    required: true as const,
+    required: true as const
 });
 
 export const makeArrayProp = <T>() => ({
     type: Array as PropType<T[]>,
-    default: () => [],
+    default: () => []
 });
 
 export const makeNumberProp = <T>(defaultVal: T) => ({
     type: Number,
-    default: defaultVal,
+    default: defaultVal
 });
 
 export const makeNumericProp = <T>(defaultVal: T) => ({
     type: numericProp,
-    default: defaultVal,
+    default: defaultVal
 });
 
 export const makeStringProp = <T>(defaultVal: T) => ({
     type: String as unknown as PropType<T>,
-    default: defaultVal,
+    default: defaultVal
 });
