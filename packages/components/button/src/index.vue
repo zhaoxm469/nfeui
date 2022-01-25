@@ -1,14 +1,10 @@
 <template>
     <button
-        class="nf-button cursor-pointer flex items-center py-2 rounded-lg px-6"
+        class="nfe-button cursor-pointer flex items-center py-2 rounded-lg px-6"
         :class="[buttonType, buttonLoading]"
         @click.stop="handleClick($event)"
     >
-        <div
-            class="loading w-4 h-4 mr-4 border border-solid border-white"
-            v-show="loading"
-            >loading</div
-        >
+        <div class="loading w-4 h-4 mr-4 border border-solid border-white" v-show="loading">loading</div>
         <slot />
     </button>
 </template>
@@ -18,7 +14,7 @@ import { computed, defineComponent, toRefs, watch } from 'vue';
 import { buttonEmits, buttonProps } from '.';
 
 export default defineComponent({
-    name: 'nfButton',
+    name: 'nfeButton',
     props: buttonProps,
     emits: buttonEmits,
     setup(props, { emit }) {
@@ -61,6 +57,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import '../../../style/tailwindcss.scss';
-@import './index.scss';
+@import "../../../style/tailwindcss.scss";
+@import "./index.scss";
 </style>
