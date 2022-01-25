@@ -1,0 +1,19 @@
+import { App } from 'vue';
+
+{{each imports}}
+import {{$value[0]}} from "./components/{{$value[1]}}/index";
+{{/each}}
+
+function install(app: App) {
+    const packages = [<%= cmtExportNames %>];
+    packages.forEach((item: any) => {
+        if (item.install) {
+            app.use(item);
+        } else if (item.name) {
+            app.component(item.name, item);
+        }
+    });
+}
+export { install, <%= cmtExportNames %> };
+
+export default { install, version: '0.0.1' };
