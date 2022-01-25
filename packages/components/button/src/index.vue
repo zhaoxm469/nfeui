@@ -4,7 +4,11 @@
         :class="[buttonType, buttonLoading]"
         @click.stop="handleClick($event)"
     >
-        <div class="loading w-4 h-4 mr-4 border border-solid border-white" v-show="loading">loading</div>
+        <div
+            class="loading w-4 h-4 mr-4 border border-solid border-white"
+            v-show="loading"
+            >loading</div
+        >
         <slot />
     </button>
 </template>
@@ -57,6 +61,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import "../../../style/tailwindcss.scss";
-@import "./index.scss";
+@import '../../../style/tailwindcss.scss';
+@import './index.scss';
 </style>
