@@ -1,8 +1,8 @@
 import { App } from 'vue';
 
-{{each imports}}
-import {{$value[0]}} from "./components/{{$value[1]}}/index";
-{{/each}}
+<% for(var i = 0; i < imports.length; i++){ %>
+import <%= imports[i][0] %> from "./components/<%= imports[i][1] %>/index";
+<% } %>
 
 function install(app: App) {
     const packages = [<%= cmtExportNames %>];
