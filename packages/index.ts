@@ -1,8 +1,9 @@
 import { App } from 'vue';
-import nfButton from './components/button/index';
+
+import nfeButton from "./components/Button/index";
 
 function install(app: App) {
-    const packages = [nfButton];
+    const packages = [nfeButton];
     packages.forEach((item: any) => {
         if (item.install) {
             app.use(item);
@@ -11,4 +12,6 @@ function install(app: App) {
         }
     });
 }
+export { install, nfeButton };
+
 export default { install, version: '0.0.1' };
