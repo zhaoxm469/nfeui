@@ -1,0 +1,16 @@
+@keyframes rotate {
+    from {
+        transform: rotatez(0deg);
+    }
+
+    to {
+        transform: rotatez(360deg);
+    }
+}
+.<%= humpName %> {
+    .loading {
+        border-radius: 50%;
+        clip-path: polygon(0% 0%, 100% 0%, 100% 30%, 0% 30%);
+        animation: rotate 0.5s linear infinite;
+    }
+}
