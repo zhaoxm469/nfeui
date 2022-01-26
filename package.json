@@ -14,7 +14,7 @@
     ],
     "scripts": {
         "dev": "zx nucarf/dev.mjs",
-        "build": "vite build && npm run type && npm run generate:types && docs-build",
+        "build": "vite build && npm run type && npm run generate:types && npm run docs-build",
         "type": "vue-tsc --declaration --emitDeclarationOnly",
         "test": "jest",
         "add": "zx nucarf/demoTemplate/create.mjs ",
