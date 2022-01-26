@@ -1,5 +1,7 @@
 # NfeUi 牛卡福PC端UI组件库。
 
+在线预览地址：https://nfeui.nucarf.cn  
+
 Vue3版本 
 ## 特性
 
