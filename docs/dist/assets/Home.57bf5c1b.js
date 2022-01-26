@@ -1,31 +1,31 @@
 import {
     _ as v,
     d as f,
-    u as A,
-    p as g,
+    u as T,
+    s as g,
     b as r,
-    q as t,
+    x as t,
     o as s,
     c as o,
     f as l,
-    s as n,
+    y as n,
     j as u,
-    x,
+    z as x,
     N as H,
     F,
-    y as I,
-    i as b,
+    A as I,
+    i as B,
     k as h,
     r as y
-} from './app.cbdcba5e.js';
-const B = { key: 0, class: 'home-hero' },
-    L = { key: 0, class: 'figure' },
-    C = ['src', 'alt'],
-    N = { key: 1, id: 'main-title', class: 'title' },
+} from './app.d0c06810.js';
+const L = { key: 0, class: 'home-hero' },
+    C = { key: 0, class: 'figure' },
+    N = ['src', 'alt'],
+    b = { key: 1, id: 'main-title', class: 'title' },
     w = { key: 2, class: 'description' },
     S = f({
         setup(i) {
-            const a = A(),
+            const a = T(),
                 e = g(),
                 _ = r(() => e.value.heroImage || m.value || c.value || $.value),
                 m = r(() => e.value.heroText !== null),
@@ -33,14 +33,14 @@ const B = { key: 0, class: 'home-hero' },
                 c = r(() => e.value.tagline !== null),
                 p = r(() => e.value.tagline || a.value.description),
                 $ = r(() => e.value.actionLink && e.value.actionText),
-                T = r(() => e.value.altActionLink && e.value.altActionText);
+                A = r(() => e.value.altActionLink && e.value.altActionText);
             return (d, Z) =>
                 t(_)
                     ? (s(),
-                      o('header', B, [
+                      o('header', L, [
                           d.$frontmatter.heroImage
                               ? (s(),
-                                o('figure', L, [
+                                o('figure', C, [
                                     l(
                                         'img',
                                         {
@@ -52,11 +52,11 @@ const B = { key: 0, class: 'home-hero' },
                                         },
                                         null,
                                         8,
-                                        C
+                                        N
                                     )
                                 ]))
                               : n('', !0),
-                          t(m) ? (s(), o('h1', N, u(t(k)), 1)) : n('', !0),
+                          t(m) ? (s(), o('h1', b, u(t(k)), 1)) : n('', !0),
                           t(c) ? (s(), o('p', w, u(t(p)), 1)) : n('', !0),
                           t($)
                               ? (s(),
@@ -75,7 +75,7 @@ const B = { key: 0, class: 'home-hero' },
                                     ['item']
                                 ))
                               : n('', !0),
-                          t(T)
+                          t(A)
                               ? (s(),
                                 x(
                                     H,
@@ -99,10 +99,10 @@ const B = { key: 0, class: 'home-hero' },
 var V = v(S, [['__scopeId', 'data-v-4aeb51c6']]);
 const j = { key: 0, class: 'home-features' },
     D = { class: 'wrapper' },
-    q = { class: 'container' },
+    z = { class: 'container' },
     E = { class: 'features' },
     R = { key: 0, class: 'title' },
-    z = { key: 1, class: 'details' },
+    q = { key: 1, class: 'details' },
     G = f({
         setup(i) {
             const a = g(),
@@ -113,7 +113,7 @@ const j = { key: 0, class: 'home-features' },
                     ? (s(),
                       o('div', j, [
                           l('div', D, [
-                              l('div', q, [
+                              l('div', z, [
                                   l('div', E, [
                                       (s(!0),
                                       o(
@@ -143,7 +143,7 @@ const j = { key: 0, class: 'home-features' },
                                                               ? (s(),
                                                                 o(
                                                                     'p',
-                                                                    z,
+                                                                    q,
                                                                     u(
                                                                         c.details
                                                                     ),
@@ -185,7 +185,7 @@ const W = { class: 'home', 'aria-labelledby': 'main-title' },
     Y = f({
         setup(i) {
             return (a, e) => {
-                const _ = b('Content');
+                const _ = B('Content');
                 return (
                     s(),
                     o('main', W, [
