@@ -13,7 +13,7 @@
         "README.md"
     ],
     "scripts": {
-        "dev": "zx nucarf/dev.mjs",
+        "dev": "vitepress-fc dev --root=docs --host",
         "build": "vite build && npm run type && npm run generate:types && npm run docs-build",
         "type": "vue-tsc --declaration --emitDeclarationOnly",
         "test": "jest",
@@ -71,7 +71,6 @@
         "unplugin-auto-import": "^0.5.11",
         "unplugin-vue-components": "^0.17.14",
         "vite": "^2.6.13",
-        "vitepress-for-component": "^0.16.9",
         "vue-jest": "^5.0.0-alpha.6",
         "vue-tsc": "^0.29.2",
         "zx": "^4.3.0"
