@@ -1,24 +1,29 @@
 <template>
-    <button
-        class="nfe-button cursor-pointer flex items-center py-2 rounded-lg px-6"
-        :class="[buttonType, buttonLoading]"
-        @click.stop="handleClick($event)"
-    >
-        <div class="loading w-4 h-4 mr-4 border border-solid border-white" v-show="loading">loading</div>
-        <slot />
-    </button>
+    <div class="<%= humpName %>">
+        <button
+            class="cursor-pointer flex items-center py-2 rounded-lg px-6"
+            :class="[<%= firstLowercaseName %>Type, <%= firstLowercaseName %>Loading]"
+            @click.stop="handleClick($event)"
+        >
+            <div
+                class="loading w-4 h-4 mr-4 border border-solid border-white"
+                v-show="loading"
+            >loading</div>
+            <slot />
+        </button>
+    </div>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, toRefs, watch } from 'vue';
-import { buttonEmits, buttonProps } from '.';
+import { <%= firstLowercaseName %>Emits, <%= firstLowercaseName %>Props } from '.';
 
 export default defineComponent({
-    name: 'nfeButton',
-    props: buttonProps,
-    emits: buttonEmits,
+    name: '<%= exportCmtName %>',
+    props: <%= firstLowercaseName %>Props,
+    emits: <%= firstLowercaseName %>Emits,
     setup(props, { emit }) {
-        const buttonType = computed(() => {
+        const <%= firstLowercaseName %>Type = computed(() => {
             const typesClass = {
                 primary: 'bg-blue-500 text-white hover:bg-blue-400',
                 success: 'bg-green-500 text-white hover:bg-green-400',
@@ -33,7 +38,7 @@ export default defineComponent({
             if (!props.loading) emit('click', evt);
         };
 
-        const buttonLoading = computed(() => {
+        const <%= firstLowercaseName %>Loading = computed(() => {
             if (props.loading) {
                 return `cursor-not-allowed`;
             }
@@ -47,10 +52,10 @@ export default defineComponent({
         );
 
         return {
-            buttonLoading,
+            <%= firstLowercaseName %>Loading,
             handleClick,
             ...toRefs(props),
-            buttonType
+            <%= firstLowercaseName %>Type
         };
     }
 });

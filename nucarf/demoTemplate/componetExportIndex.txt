@@ -1,9 +1,11 @@
 import { App } from 'vue';
 
-import nfeButton from "./components/Button/index";
+<% for(var i = 0; i < imports.length; i++){ %>
+import <%= imports[i][0] %> from "./components/<%= imports[i][1] %>/index";
+<% } %>
 
 function install(app: App) {
-    const packages = [nfeButton];
+    const packages = [<%= cmtExportNames %>];
     packages.forEach((item: any) => {
         if (item.install) {
             app.use(item);
@@ -12,6 +14,6 @@ function install(app: App) {
         }
     });
 }
-export { install, nfeButton };
+export { install, <%= cmtExportNames %> };
 
 export default { install, version: '0.0.1' };

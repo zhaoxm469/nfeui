@@ -1,10 +1,23 @@
-import { extend } from './../../../utils/basic';
-import { makeStringProp } from './../../../utils/props';
+/*
+ * @Author: zhaoxingming
+ * @Date: 2022-01-24 20:03:06
+ * @LastEditTime: 2022-01-25 18:48:00
+ * @LastEditors: vscode
+ * @Description: 类型最好在这里统一定义，组件的入参以及事件等信息
+ *
+ */
 
-type ButtonSize = 'large' | 'normal' | 'small' | 'mini';
+import { extend } from '../../../utils/basic';
+import { makeStringProp } from '../../../utils/props';
 
-export const buttonProps = extend({}, {
-    text: String,
-    icon: String,
-    size: makeStringProp<ButtonSize>('normal'),
-});
+type ButtonType = 'primary' | 'success' | 'info' | 'default';
+
+export const buttonEmits = ['click', 'loadingChange'];
+
+export const buttonProps = extend(
+    {},
+    {
+        type: makeStringProp<ButtonType>('default'),
+        loading: Boolean
+    }
+);

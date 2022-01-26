@@ -2,27 +2,24 @@
     "name": "nfeui",
     "version": "0.0.1",
     "description": "牛卡福PC端UI组件库",
-    "main": "./dist/nfeui.umd.js",
-    "module": "./dist/nfeui.es.js",
-    "exports": {
-        ".": {
-            "import": "./dist/nfeui.es.js",
-            "require": "./dist/nfeui.umd.js",
-            "typings": "./dist/nfeui.d.ts"
-        }
-    },
-    "typings": "dist/nfeui.d.ts",
+    "main": "dist/nfeui.umd.js",
+    "module": "dist/nfeui.es.js",
+    "typings": "dist/index.d.ts",
     "style": "dist/style.css",
     "author": "",
     "license": "MIT",
+    "files": [
+        "dist",
+        "README.md"
+    ],
     "scripts": {
         "dev": "zx nucarf/dev.mjs",
         "build": "vite build && yarn type && npm run generate:types",
         "type": "vue-tsc --declaration --emitDeclarationOnly",
         "test": "jest",
-        "add": "node nucarf/createComponentMode",
+        "add": "zx nucarf/demoTemplate/create.mjs ",
         "generate:cnavconfig": "node nucarf/generate-cnavconfig --watch",
-        "generate:types": "node nucarf/generate-types ",
+        "generate:types": "zx nucarf/generate-types.mjs ",
         "docs-build": "zx ./nucarf/docs-build.mjs",
         "docs-serve": "cross-env NODE_ENV=production vitepress-fc serve --root=docs",
         "docs-build-serve": "cross-env NODE_ENV=true yarn docs-build && yarn docs-serve",
@@ -46,6 +43,8 @@
         "@vue/eslint-config-typescript": "^7.0.0",
         "@vue/test-utils": "^2.0.0-beta.10",
         "@vuedx/typescript-plugin-vue": "^0.6.3",
+        "art-template": "^4.13.2",
+        "autoprefixer": "^10.4.2",
         "babel-generator": "^6.26.1",
         "babel-jest": "^26.6.3",
         "babel-traverse": "^6.26.0",
@@ -56,9 +55,11 @@
         "eslint-plugin-prettier": "^3.1.4",
         "eslint-plugin-vue": "^7.1.0",
         "gh-pages": "^3.1.0",
+        "globby": "^13.1.0",
         "husky": "^4.3.0",
         "jest": "^26.6.3",
         "np": "^7.4.0",
+        "postcss": "^8.4.5",
         "prettier": "^2.1.2",
         "pretty-quick": "^3.1.0",
         "rimraf": "^3.0.2",
@@ -67,12 +68,13 @@
         "rollup-plugin-css-only": "^2.1.0",
         "rollup-plugin-typescript2": "^0.30.0",
         "rollup-plugin-vue": "^6.0.0-beta.11",
+        "tailwindcss": "^3.0.15",
         "ts-jest": "^26.4.4",
         "typescript": "^4.4.4",
         "unplugin-auto-import": "^0.5.11",
         "unplugin-vue-components": "^0.17.14",
         "vite": "^2.6.13",
-        "vitepress-for-component": "^0.16.6",
+        "vitepress-for-component": "^0.16.9",
         "vue-jest": "^5.0.0-alpha.6",
         "vue-tsc": "^0.29.2",
         "zx": "^4.3.0"
@@ -80,11 +82,14 @@
     "keywords": [
         "vue",
         "vue3",
-        "components"
+        "components",
+        "nfeui",
+        "nucarf"
     ],
+    "sideEffects": false,
     "publishConfig": {
         "access": "public",
-        "registry": "https://registry.npmjs.org"
+        "registry": "http://npm.nucarf.cn/"
     },
     "husky": {
         "hooks": {
@@ -92,6 +97,7 @@
         }
     },
     "dependencies": {
+        "dotenv": "^14.3.0",
         "element-plus": "^1.3.0-beta.7",
         "vue": "^3.2.29"
     }

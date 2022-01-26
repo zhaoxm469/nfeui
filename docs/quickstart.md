@@ -29,7 +29,7 @@ $ pnpm install nfeui
 // main.ts
 import { createApp } from 'vue'
 import NfeUI from 'nfeui'
-import 'nfeui/dist/index.css'
+import 'nfeui/dist/style.css'
 import App from './App.vue'
 
 const app = createApp(App)
@@ -38,24 +38,43 @@ app.use(NfeUI)
 app.mount('#app')
 ```
 
-### 按需引入 （后续完善）
+### 按需引入 
 
-## 浏览器直接引入
+```TypeScript
+<template>
+    <nfeButton type="primary">按钮1</nfeButton>
+</template>
 
-直接通过浏览器的 HTML 标签导入 NfeUI，然后就可以使用全局变量 NfeUI 了 。  
+<script lang="ts" setup >
+import { nfeButton } from 'nfeui';
+</script>
+```
 
-### jsDelivr
+## 浏览器CDN直接引入
+
+直接通过浏览器的 HTML 标签导入 NfeUI，然后就可以使用全局变量 nfeui 了 。  
 
 ```html
-<head>
-  <!-- 导入样式 -->
-  <link
-    rel="stylesheet"
-    href="//cdn.jsdelivr.net/npm/nfeui/dist/index.css"
-  />
-  <!-- 导入 Vue 3 -->
-  <script src="//cdn.jsdelivr.net/npm/vue@next"></script>
-  <!-- 导入组件库 -->
-  <script src="//cdn.jsdelivr.net/npm/nfeui"></script>
-</head>
+<!-- 导入 nfeui 样式 -->
+<link rel="stylesheet" href="https://cdn.nucarf.cn/common/v1.0/nfeui/next.css" />
+<!-- 导入 Vue 3 -->
+<script src="//cdn.jsdelivr.net/npm/vue@next"></script>
+<!-- 导入 nfeui 组件库 -->
+<script src="https://cdn.nucarf.cn/common/v1.0/nfeui/next.js"></script>
+
+<div id="app"></div>
+
+<script>
+    const { createApp } = Vue;
+
+    createApp({
+        template: `
+         <nfeButton>按钮</nfeButton><br>
+         <nfeButton type="primary">确定</nfeButton><br>
+         <nfeButton type="success" loading>提交</nfeButton><br>
+       `
+    })
+        .use(nfeui)
+        .mount('#app')
+</script>
 ```

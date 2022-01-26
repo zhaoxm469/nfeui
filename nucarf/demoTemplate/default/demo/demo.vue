@@ -6,23 +6,23 @@
             >
             <span>{{ count }}</span>
         </p>
-        <nfeButton
+        <<%= exportCmtName %>
             :loading="isLoading"
             @loading-change="onLoadingChange"
             type="primary"
             @click="onClick"
-            >按钮</nfeButton
+            >按钮</<%= exportCmtName %>
         >
     </div>
 </template>
 
 <script lang="ts">
-import { nfeButton } from 'nfeui';
+import { <%= exportCmtName %> } from 'nfeui';
 import { defineComponent, reactive, toRefs } from 'vue';
 
 export default defineComponent({
     components: {
-        nfeButton
+        <%= exportCmtName %>
     },
     setup() {
         const state = reactive({

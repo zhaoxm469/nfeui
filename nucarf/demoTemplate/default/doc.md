@@ -1,10 +1,10 @@
 ---
 map:
     # 映射到docs的路径
-    path: /components/button
+    path: /components/<%= name %>
 ---
 
-# Button 按钮
+# <%= name %> 按钮
 
 自定义按钮。
 
@@ -30,7 +30,7 @@ map:
 | click         | 点击按钮触发         | event:Event |
 | loadingChange | loading 状态改变触发 | -           |
 
-### Button 插槽
+### <%= name %> 插槽
 
 | 插槽名 | 说明       |
 | ------ | ---------- |
