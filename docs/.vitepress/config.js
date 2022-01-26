@@ -7,12 +7,19 @@ module.exports = {
     srcIncludes: ['packages'],
     alias: {
         // 为了能在demo中正确的使用  import { X } from 'nfeui'
-        [`nfeui`]: resolve('./packages'),
+        [`nfeui`]: resolve('./packages')
     },
     head: [
-        ['link', { rel: 'stylesheet', href: '//cdn.jsdelivr.net/npm/element-plus/dist/index.css' }]
+        [
+            'link',
+            {
+                rel: 'stylesheet',
+                href: '//cdn.jsdelivr.net/npm/element-plus/dist/index.css'
+            }
+        ]
     ],
-    base:'',
+    sidebarPath: resolve('./packages/nav.config.json'),
+    base: '',
     themeConfig: {
         logo: '/logo.png',
         // lang: 'zh-CN',
@@ -37,16 +44,16 @@ module.exports = {
                             { text: '更新日志', link: '/changelog' }
                         ]
                     }
-                ],
-            },
+                ]
+            }
         },
         search: {
-            searchMaxSuggestions: 10,
+            searchMaxSuggestions: 10
         },
         repo: 'https://git.nucarf.cn/frontend/n-p-m/nfeui',
         repoLabel: 'GitLab',
         lastUpdated: true,
         prevLink: true,
-        nextLink: true,
-    },
+        nextLink: true
+    }
 };
