@@ -2,19 +2,16 @@
     "name": "nfeui",
     "version": "0.0.1",
     "description": "牛卡福PC端UI组件库",
-    "main": "./dist/nfeui.umd.js",
-    "module": "./dist/nfeui.es.js",
-    "exports": {
-        ".": {
-            "import": "./dist/nfeui.es.js",
-            "require": "./dist/nfeui.umd.js",
-            "typings": "./dist/nfeui.d.ts"
-        }
-    },
-    "typings": "dist/nfeui.d.ts",
+    "main": "dist/nfeui.umd.js",
+    "module": "dist/nfeui.es.js",
+    "typings": "dist/index.d.ts",
     "style": "dist/style.css",
     "author": "",
     "license": "MIT",
+    "files": [
+        "dist",
+        "README.md"
+    ],
     "scripts": {
         "dev": "zx nucarf/dev.mjs",
         "build": "vite build && yarn type && npm run generate:types",
@@ -85,11 +82,14 @@
     "keywords": [
         "vue",
         "vue3",
-        "components"
+        "components",
+        "nfeui",
+        "nucarf"
     ],
+    "sideEffects": false,
     "publishConfig": {
         "access": "public",
-        "registry": "https://registry.npmjs.org"
+        "registry": "http://npm.nucarf.cn/"
     },
     "husky": {
         "hooks": {
