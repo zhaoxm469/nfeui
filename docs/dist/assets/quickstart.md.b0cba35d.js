@@ -1,9 +1,4 @@
-import { _ as n, c as s, o as a, a as t } from './app.d0c06810.js';
-const p = { components: {} },
-    m =
-        '{"title":"\u5FEB\u901F\u5F00\u59CB","description":"","frontmatter":{},"headers":[{"level":2,"title":"\u4F7F\u7528\u5305\u7BA1\u7406\u5668\u5B89\u88C5","slug":"\u4F7F\u7528\u5305\u7BA1\u7406\u5668\u5B89\u88C5"},{"level":2,"title":"\u5728\u9879\u76EE\u4E2D\u4F7F\u7528","slug":"\u5728\u9879\u76EE\u4E2D\u4F7F\u7528"},{"level":3,"title":"\u5B8C\u6574\u5F15\u5165","slug":"\u5B8C\u6574\u5F15\u5165"},{"level":3,"title":"\u6309\u9700\u5F15\u5165","slug":"\u6309\u9700\u5F15\u5165"},{"level":2,"title":"\u6D4F\u89C8\u5668CDN\u76F4\u63A5\u5F15\u5165","slug":"\u6D4F\u89C8\u5668cdn\u76F4\u63A5\u5F15\u5165"}],"relativePath":"quickstart.md","lastUpdated":1643188148097}',
-    e = t(
-        `<h1 id="\u5FEB\u901F\u5F00\u59CB"><a class="header-anchor" href="#\u5FEB\u901F\u5F00\u59CB" aria-hidden="true">#</a> \u5FEB\u901F\u5F00\u59CB</h1><p>\u672C\u8282\u5C06\u4ECB\u7ECD\u5982\u4F55\u5728\u9879\u76EE\u4E2D\u4F7F\u7528 NfeUI</p><h2 id="\u4F7F\u7528\u5305\u7BA1\u7406\u5668\u5B89\u88C5"><a class="header-anchor" href="#\u4F7F\u7528\u5305\u7BA1\u7406\u5668\u5B89\u88C5" aria-hidden="true">#</a> \u4F7F\u7528\u5305\u7BA1\u7406\u5668\u5B89\u88C5</h2><p>\u6211\u4EEC\u5EFA\u8BAE\u60A8\u4F7F\u7528\u5305\u7BA1\u7406\u5668 (NPM, Yarn, pnpm) \u5B89\u88C5 NfeUI, \u7136\u540E\u60A8\u5C31\u53EF\u4EE5\u4F7F\u7528\u6253\u5305\u5DE5\u5177\uFF0C\u4F8B\u5982 Vite \u548C webpack</p><div class="language-bash"><pre><code><span class="token comment"># \u9009\u62E9\u4E00\u4E2A\u4F60\u559C\u6B22\u7684\u5305\u7BA1\u7406\u5668</span>
+import{_ as n,c as s,o as a,a as t}from"./app.d0c06810.js";const p={components:{}},m='{"title":"\u5FEB\u901F\u5F00\u59CB","description":"","frontmatter":{},"headers":[{"level":2,"title":"\u4F7F\u7528\u5305\u7BA1\u7406\u5668\u5B89\u88C5","slug":"\u4F7F\u7528\u5305\u7BA1\u7406\u5668\u5B89\u88C5"},{"level":2,"title":"\u5728\u9879\u76EE\u4E2D\u4F7F\u7528","slug":"\u5728\u9879\u76EE\u4E2D\u4F7F\u7528"},{"level":3,"title":"\u5B8C\u6574\u5F15\u5165","slug":"\u5B8C\u6574\u5F15\u5165"},{"level":3,"title":"\u6309\u9700\u5F15\u5165","slug":"\u6309\u9700\u5F15\u5165"},{"level":2,"title":"\u6D4F\u89C8\u5668CDN\u76F4\u63A5\u5F15\u5165","slug":"\u6D4F\u89C8\u5668cdn\u76F4\u63A5\u5F15\u5165"}],"relativePath":"quickstart.md","lastUpdated":1643189492316}',e=t(`<h1 id="\u5FEB\u901F\u5F00\u59CB"><a class="header-anchor" href="#\u5FEB\u901F\u5F00\u59CB" aria-hidden="true">#</a> \u5FEB\u901F\u5F00\u59CB</h1><p>\u672C\u8282\u5C06\u4ECB\u7ECD\u5982\u4F55\u5728\u9879\u76EE\u4E2D\u4F7F\u7528 NfeUI</p><h2 id="\u4F7F\u7528\u5305\u7BA1\u7406\u5668\u5B89\u88C5"><a class="header-anchor" href="#\u4F7F\u7528\u5305\u7BA1\u7406\u5668\u5B89\u88C5" aria-hidden="true">#</a> \u4F7F\u7528\u5305\u7BA1\u7406\u5668\u5B89\u88C5</h2><p>\u6211\u4EEC\u5EFA\u8BAE\u60A8\u4F7F\u7528\u5305\u7BA1\u7406\u5668 (NPM, Yarn, pnpm) \u5B89\u88C5 NfeUI, \u7136\u540E\u60A8\u5C31\u53EF\u4EE5\u4F7F\u7528\u6253\u5305\u5DE5\u5177\uFF0C\u4F8B\u5982 Vite \u548C webpack</p><div class="language-bash"><pre><code><span class="token comment"># \u9009\u62E9\u4E00\u4E2A\u4F60\u559C\u6B22\u7684\u5305\u7BA1\u7406\u5668</span>
 
 <span class="token comment"># NPM</span>
 $ <span class="token function">npm</span> <span class="token function">install</span> nfeui --save
@@ -52,12 +47,4 @@ app<span class="token punctuation">.</span><span class="token function">mount</s
         <span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span>nfeui<span class="token punctuation">)</span>
         <span class="token punctuation">.</span><span class="token function">mount</span><span class="token punctuation">(</span><span class="token string">&#39;#app&#39;</span><span class="token punctuation">)</span>
 </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
-</code></pre></div>`,
-        14
-    ),
-    o = [e];
-function c(l, u, r, i, k, d) {
-    return a(), s('div', null, o);
-}
-var f = n(p, [['render', c]]);
-export { m as __pageData, f as default };
+</code></pre></div>`,14),o=[e];function c(l,u,r,i,k,d){return a(),s("div",null,o)}var f=n(p,[["render",c]]);export{m as __pageData,f as default};
