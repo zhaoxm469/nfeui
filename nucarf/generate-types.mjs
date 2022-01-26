@@ -17,13 +17,13 @@ const createNfeUiTypes = () => {
     }
 
     return `
-
         ${exportResult.join('\n')}
 
-        declare namespace _default {
-            export { install };
-            export { version };
-        }
+        declare const _default: {
+            install: typeof install;
+            version: string;
+        };
+
         export default _default;
 
         export function install(app: any): void;
@@ -31,11 +31,20 @@ const createNfeUiTypes = () => {
     `
 }
 
+const createIndexType = ()=>{
+    return `
+        import ${UI_NAME} from './${UI_NAME.toLocaleLowerCase()}';
+        export default ${UI_NAME};
+        export * from './${UI_NAME.toLocaleLowerCase()}';
+    `
+}
+
 
 function init (){
     const temp = createNfeUiTypes();
     const fileName = `${UI_NAME.toLocaleLowerCase()}.d.ts`
-    fs.writeFileSync(join(__dirname, `../dist/${fileName}`),temp,'utf-8')
+    fs.writeFileSync(join(__dirname, `../dist/${fileName}`), temp, 'utf-8')
+    fs.writeFileSync(join(__dirname, `../dist/index.d.ts`), createIndexType(), 'utf-8')
     console.log(chalk.blue(`${fileName} 文件生成成功\n`));
 }
 
