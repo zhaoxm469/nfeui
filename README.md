@@ -2,7 +2,6 @@
 
 在线预览地址：https://nfeui.nucarf.cn  
 
-Vue3版本 
 ## 特性
 
 * 使用VUE 3语法
