@@ -12,8 +12,21 @@ map:
 
 <demo src="./demo/demo.vue"
   language="vue"
-  title="基本用法"
-  desc="点击切换。">
+  desc="使用 type 来定义按钮的样式。">
+</demo>
+
+### loading 状态
+
+<demo src="./demo/loading.vue"
+  language="vue"
+  desc="通过 loading 属性来设置按钮加载中的状态 ">
+</demo>
+
+### 点击
+
+<demo src="./demo/click.vue"
+  language="vue"
+  desc="点击按钮触发 count++ ">
 </demo>
 
 ### Props
