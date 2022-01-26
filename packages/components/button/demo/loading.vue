@@ -1,10 +1,9 @@
 <template>
     <div>
         <div class="flex space-x-10">
-            <nfeButton type="primary">提交</nfeButton>
-            <nfeButton>取消</nfeButton>
-            <nfeButton type="success">确认</nfeButton>
-            <nfeButton type="info">取消</nfeButton>
+            <nfeButton loading type="primary">提交</nfeButton>
+            <nfeButton loading>取消</nfeButton>
+            <nfeButton loading type="success">确认</nfeButton>
         </div>
     </div>
 </template>
