@@ -4,7 +4,7 @@ map:
     path: /components/<%= name %>
 ---
 
-# <%= name %> 按钮
+# <%= name %> <%= cName %>
 
 <%= desc %>
 
