@@ -7,8 +7,8 @@
  *
  */
 
-import { extend } from './../../../utils/basic';
-import { makeStringProp } from './../../../utils/props';
+import { extend } from '../../../utils/basic';
+import { makeStringProp } from '../../../utils/props';
 
 type ButtonType = 'primary' | 'success' | 'info' | 'default';
 
