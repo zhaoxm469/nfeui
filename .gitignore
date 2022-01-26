@@ -5,3 +5,4 @@ dist/
 !docs/dist
 yarn.lock
 .eslintcache
+.DS_Store
