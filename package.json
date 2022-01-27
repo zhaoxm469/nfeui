@@ -1,6 +1,6 @@
 {
-    "name": "nfeui_test01",
-    "version": "0.0.7",
+    "name": "nfeui",
+    "version": "0.0.1",
     "description": "牛卡福PC端UI组件库",
     "main": "dist/nfeui.umd.js",
     "module": "dist/nfeui.es.js",
@@ -20,7 +20,7 @@
         "add": "zx nucarf/demoTemplate/create/index.mjs ",
         "np": "np",
         "generate:types": "zx nucarf/generate-types.mjs ",
-        "ui-build": "ite build && npm run type && npm run generate:types",
+        "ui-build": "vite build && npm run type && npm run generate:types",
         "docs-build": "zx nucarf/docs-build.mjs",
         "docs-serve": "cross-env NODE_ENV=production vitepress-fc serve --root=docs",
         "docs-build-serve": "zx nucarf/docs-build-serve.mjs",
