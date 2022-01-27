@@ -4,11 +4,10 @@
 
 ## 环境准备
 
-本地环境需要安装 [Yarn1.x](https://yarnpkg.com/)、[Node.js](http://nodejs.org/) 和 [Git](https://git-scm.com/)
+本地环境需要安装 npm7.x 或者（[Yarn1.x](https://yarnpkg.com/)）、[Node.js](http://nodejs.org/) 和 [Git](https://git-scm.com/)
 
 ::: warning 注意
 
--   必须使用[Yarn1.x](https://yarnpkg.com/)，否则依赖可能安装不上。
 -   [Node.js](http://nodejs.org/) 这里推荐 `14.x` 及以上。
 
 :::
@@ -151,7 +150,8 @@ npm run add
 
 ![alt](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-fcb4b1b9-2325-4e40-b77b-04cd59163ef7/51dbb028-560e-426f-8f8d-e7f9cd8cde2f.png)
 
-最后我们修改 `packages/components/TestButton` 下的文件。 组件代码就会热更新到在线文档，可以边调试边预览边开发~
+最后我们只需要修改 `packages/components/TestButton` （命令工具帮我们创建好的目录结构）下的文件就可以了。  
+并且组件代码修改以后会热更新到在线文档，可以边调试边预览边开发~
 
 ## 发布
 
