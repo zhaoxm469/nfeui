@@ -17,7 +17,7 @@
         "build": "vite build && npm run type && npm run generate:types && npm run docs-build",
         "type": "vue-tsc --declaration --emitDeclarationOnly",
         "test": "jest",
-        "add": "zx nucarf/demoTemplate/create.mjs ",
+        "add": "zx nucarf/demoTemplate/create/index.mjs ",
         "generate:cnavconfig": "node nucarf/generate-cnavconfig --watch",
         "generate:types": "zx nucarf/generate-types.mjs ",
         "ui-build": "ite build && npm run type && npm run generate:types",
