@@ -4,11 +4,10 @@
 
 ## 环境准备
 
-本地环境需要安装 [Yarn1.x](https://yarnpkg.com/)、[Node.js](http://nodejs.org/) 和 [Git](https://git-scm.com/)
+本地环境需要安装 npm7.x 或者（[Yarn1.x](https://yarnpkg.com/)）、[Node.js](http://nodejs.org/) 和 [Git](https://git-scm.com/)
 
 ::: warning 注意
 
--   必须使用[Yarn1.x](https://yarnpkg.com/)，否则依赖可能安装不上。
 -   [Node.js](http://nodejs.org/) 这里推荐 `14.x` 及以上。
 
 :::
@@ -59,10 +58,10 @@ yarn
  │   │   │    │     ├── index.scss      # scss 文件
  │   │   │    │     ├── index.ts        # 组件的props类型，以及emit 类型存放在这里，自己在这个目录也可以把一些逻辑的更细的拆分
  │   │   │    │     └── index.vue       # 使用者最终引入的sfc模板
- │   │   │    ├── __test__              # 自动化测试（后续补上）
+ │   │   │    ├── __test__              # 组件测试目录
  │   │   │    ├── doc.md                # 组件使用文档，会自动同步到在线文档页面
  │   │   │    ├── index.ts              # 组件导出口（一般不需要修改这个文件）
- │   │   │    └── demo                  # demo实例文件夹
+ │   │   │    └── demo                  # demo示例文件夹
  │   │   │          └── demo.vue        # demo示例模板，可直接在doc文档引入
  │   ├── style                          # 样式目录
  │   ├── utils                          # 工具方法目录
@@ -92,6 +91,8 @@ yarn
         "test": "jest",
         # cli快捷生成组件模板文件
         "add": "zx nucarf/demoTemplate/create.mjs ",
+        # npm发包
+        "np": "np",
         # 生成UI组件打包后的type.d类型文件
         "generate:types": "zx nucarf/generate-types.mjs ",
         # UI文档站点打包
@@ -149,7 +150,8 @@ npm run add
 
 ![alt](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-fcb4b1b9-2325-4e40-b77b-04cd59163ef7/51dbb028-560e-426f-8f8d-e7f9cd8cde2f.png)
 
-最后我们修改 `packages/components/TestButton` 下的文件。 组件代码就会热更新到在线文档，可以边调试边预览边开发~
+最后我们只需要修改 `packages/components/TestButton` （命令工具帮我们创建好的目录结构）下的文件就可以了。  
+并且组件代码修改以后会热更新到在线文档，可以边调试边预览边开发~
 
 ## 发布
 
