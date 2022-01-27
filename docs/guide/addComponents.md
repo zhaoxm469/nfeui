@@ -88,7 +88,7 @@ yarn
         "build": "vite build && npm run type && npm run generate:types && docs-build",
         # 生成vue组件type.d.ts文件
         "type": "vue-tsc --declaration --emitDeclarationOnly",
-        # 执行jest测试
+        # 全量jest测试脚本执行
         "test": "jest",
         # cli快捷生成组件模板文件
         "add": "zx nucarf/demoTemplate/create.mjs ",
