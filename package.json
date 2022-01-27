@@ -1,5 +1,5 @@
 {
-    "name": "nfeui",
+    "name": "nfeui_test01",
     "version": "0.0.1",
     "description": "牛卡福PC端UI组件库",
     "main": "dist/nfeui.umd.js",
@@ -42,10 +42,6 @@
         "@vuedx/typescript-plugin-vue": "^0.6.3",
         "art-template": "^4.13.2",
         "autoprefixer": "^10.4.2",
-        "babel-generator": "^6.26.1",
-        "babel-jest": "^26.6.3",
-        "babel-traverse": "^6.26.0",
-        "babylon": "^6.18.0",
         "conventional-changelog-cli": "^2.1.1",
         "cross-env": "^7.0.2",
         "eslint": "^7.13.0",
@@ -86,6 +82,10 @@
     "publishConfig": {
         "access": "public",
         "registry": "http://npm.nucarf.cn/"
+    },
+    "np": {
+        "yarn": false,
+        "contents": "dist"
     },
     "husky": {
         "hooks": {
