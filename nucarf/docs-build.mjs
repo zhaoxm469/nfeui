@@ -1,7 +1,6 @@
 #!/usr/bin/env zx
 
 const { fs, path, chalk } = require('zx');
-// const { generatorDocNav } = require("./generate-cnavconfig")
 const vitepressPath = path.join(__dirname, '../docs/.vitepress/');
 const vitepressConfigPath = path.join(vitepressPath, 'config.js');
 const tempVitepressConfigPath = path.join(
@@ -10,7 +9,6 @@ const tempVitepressConfigPath = path.join(
 );
 
 await $`rimraf docs/dist`;
-// generatorDocNav();
 const rawVitepressData = fs.readFileSync(vitepressConfigPath, 'utf-8');
 const tempVitepressData = fs.readFileSync(tempVitepressConfigPath, 'utf-8');
 fs.writeFileSync(vitepressConfigPath, tempVitepressData);

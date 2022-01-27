@@ -18,6 +18,10 @@ module.exports = {
             {
                 rel: 'stylesheet',
                 href: '//cdn.jsdelivr.net/npm/element-plus/dist/index.css'
+            },
+            {
+                rel: 'stylesheet',
+                href: '/reset.css'
             }
         ]
     ],
