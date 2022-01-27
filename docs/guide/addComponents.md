@@ -92,6 +92,8 @@ yarn
         "test": "jest",
         # cli快捷生成组件模板文件
         "add": "zx nucarf/demoTemplate/create.mjs ",
+        # npm发包
+        "np": "np",
         # 生成UI组件打包后的type.d类型文件
         "generate:types": "zx nucarf/generate-types.mjs ",
         # UI文档站点打包
