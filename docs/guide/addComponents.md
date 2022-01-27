@@ -116,7 +116,7 @@ yarn
 
 ## 开发自定义组件
 
-以上都简单的了解以后，接下来就可以开发自己的自定义组件啦。
+上部分内容大致了解完一户，接下来就可以开发自己的自定义组件啦。
 
 ### 运行项目
 
@@ -131,6 +131,7 @@ npm run dev
 为了统一组件开发的目录规范，减少一些手动配置的繁琐操作，让咱们更专注于组件的开发。建议使用 `npm run add` 命令方式生成组件模板！
 
 ```bash
+# 生成组件命令
 npm run add
 
 # 然后根据命令提示，扒拉扒拉一顿填写
@@ -146,15 +147,14 @@ npm run add
 
 这个时候可以看到我们项目里 `packages` 文件下多出了几个文件，还有一些文件的更改。
 
-然后在访问我们的 http://localhost:3000 ,点击顶部导航`组件`按钮，在侧边栏就可以看到我们通过命令生成的组件模板，已经同步到我们的文档了。
+现在再访问我们的 http://localhost:3000 , 就可以在侧边栏可以看到多了一个 `TestButton 按钮2`的导航。
 
 ![alt](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-fcb4b1b9-2325-4e40-b77b-04cd59163ef7/51dbb028-560e-426f-8f8d-e7f9cd8cde2f.png)
 
-我们在 `packages/components/TestButton` 可以开发调试我们的组件，对应的文档会实时热更新的。
+最后我们修改 `packages/components/TestButton` 下的文件。 组件代码就会热更新到在线文档，可以边调试边预览边开发~
 
 ## 发布
 
-暂时发布流程是打包以后申请合并到`master`分支。master 分支会自动同步到 https://nfeui.nucarf.cn 。  
-发布到 npm 由指定人进行发布。
+输入 `npm run build ` 命令， 打包完成以后申请合并到`master`分支。 合并通过以后 会自动同步到 https://nfeui.nucarf.cn 。
 
-后续会完善这系列流程，自动发布到 cdn，文档增加版本更新提示等
+> 后续会完善这系列流程，自动发布到 cdn，文档增加版本更新提示等
