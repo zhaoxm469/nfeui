@@ -31,18 +31,22 @@ module.exports = {
                 label: '中文',
                 selectText: '语言',
                 nav: [
-                    { text: '指南', link: '/intro' },
+                    { text: '指南', link: '/guide/intro' },
                     { text: '组件', link: '/components/button/doc' }
                 ],
                 sidebar: [
                     {
                         text: '开发指南',
                         children: [
-                            { text: '介绍', link: '/intro' },
-                            { text: '快速开始', link: '/quickstart' },
-                            { text: '开发组件', link: '/addComponents' },
-                            { text: '更新日志', link: '/changelog' }
+                            { text: '介绍', link: '/guide/intro' },
+                            { text: '快速开始', link: '/guide/quickstart' },
+                            { text: '开发组件', link: '/guide/addComponents' },
+                            { text: '更新日志', link: '/guide/changelog' }
                         ]
+                    },
+                    {
+                        text: '其他',
+                        children: [{ text: '常见问题', link: '/other/faq' }]
                     }
                 ]
             }
