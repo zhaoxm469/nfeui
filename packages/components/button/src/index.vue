@@ -1,14 +1,10 @@
 <template>
     <button
-        class="nfe-button cursor-pointer flex items-center py-2 rounded-lg px-6"
+        class="nfe-button"
         :class="[buttonType, buttonLoading]"
         @click.stop="handleClick($event)"
     >
-        <div
-            class="loading w-4 h-4 mr-4 border border-solid border-white"
-            v-show="loading"
-            >loading</div
-        >
+        <div class="nfe-button-loading" v-show="loading">loading</div>
         <slot />
     </button>
 </template>

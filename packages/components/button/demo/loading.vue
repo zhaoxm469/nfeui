@@ -1,8 +1,10 @@
 <template>
-    <div class="flex flex-wrap">
-        <nfeButton class="mr-4 mb-4" loading type="primary">提交</nfeButton>
-        <nfeButton class="mr-4 mb-4" loading>取消</nfeButton>
-        <nfeButton class="mr-4 mb-4" loading type="success">确认</nfeButton>
+    <div class="tf-flex tf-flex-wrap">
+        <nfeButton class="tf-mr-20 tf-mb-10" loading type="primary"
+            >提交</nfeButton
+        >
+        <nfeButton class="tf-mr-20 tf-mb-10" loading>取消</nfeButton>
+        <nfeButton class="tf-mr-20" loading type="success">确认</nfeButton>
     </div>
 </template>
 
