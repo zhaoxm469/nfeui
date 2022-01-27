@@ -13,7 +13,7 @@ map:
 <demo src="./demo/demo.vue"
   language="vue"
   title="基本用法"
-  desc="点击切换。">
+  desc="点击按钮触发 count++">
 </demo>
 
 ### Props
