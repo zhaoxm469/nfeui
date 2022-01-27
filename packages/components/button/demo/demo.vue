@@ -1,5 +1,5 @@
 <template>
-    <div class="flex space-x-10">
+    <div class="flex space-x-10 flex-wrap">
         <nfeButton type="primary">提交</nfeButton>
         <nfeButton>取消</nfeButton>
         <nfeButton type="success">确认</nfeButton>
