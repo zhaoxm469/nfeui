@@ -3,12 +3,12 @@ import 'dotenv/config'
 
 const { UI_PREFIX } = process.env;
 const artTemplate = require('art-template');
-const { copy, moveSync, writeFileSync, removeSync, ensureFileSync } = require('fs-extra')
+const { copySync, writeFileSync, removeSync, ensureFileSync } = require('fs-extra')
 
 // 差值表达式解析规则修改
 artTemplate.defaults.rules[1].test = /{{{([@#]?)[ \t]*(\/?)([\w\W]*?)[ \t]*}}}/;
 
-// copy的文件重新命名 
+// 写入文件的时候进行文件重新命名 
 const createFileRename = (file, { firstLowercaseName })=>{
     // 把0000test文件，文件名跟组件名对齐
     if (file.includes('0000.spec.ts')) return file.replace('0000', firstLowercaseName)
@@ -40,12 +40,9 @@ export async function createDemoFile (newCpt, {
         await writeFileSync(tempDestPath, code,'utf-8' )
     }
 
-    // 移动临时目录的文件到 用户packages目录下
-    moveSync(tempDemoCmtPath, path.join(outputPath, newCpt.name),{
-        overwrite:true
-    });
-
-    // // 删除.临时 目录 
+    // copy 临时目录的文件到 用户packages目录下
+    copySync(tempDemoCmtPath, path.join(outputPath, newCpt.name));
+    // 删除.临时 目录 
     removeSync(tempDemoTemplatePath);
 }
 
