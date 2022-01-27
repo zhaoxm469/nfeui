@@ -3,7 +3,7 @@ import 'dotenv/config'
 
 const { UI_PREFIX } = process.env;
 const artTemplate = require('art-template');
-const { copy, moveSync, writeFileSync, removeSync} = require('fs-extra')
+const { copy, moveSync, writeFileSync, removeSync, ensureFileSync } = require('fs-extra')
 
 // 差值表达式解析规则修改
 artTemplate.defaults.rules[1].test = /{{{([@#]?)[ \t]*(\/?)([\w\W]*?)[ \t]*}}}/;
@@ -17,6 +17,7 @@ const createFileRename = (file, { firstLowercaseName })=>{
 
 // 创建DEMO相关文件
 export async function createDemoFile (newCpt, {
+    demoTemplatFilePathName,
     tempDemoTemplatePath,
     demoTemplatFilePath,
     outputPath
@@ -33,15 +34,12 @@ export async function createDemoFile (newCpt, {
 
     // 把文件copy到临时目录
     for (let file of demoFiles) {
-        const tempDestPath = tempDemoCmtPath + file.replace(demoTemplatFilePath, '');
-        await copy(file, createFileRename(tempDestPath, newCpt))
-    }
-
-    // demo模板差值表达式换成用户传入的动态数据
-    for (let demoPath of demoFiles) {
-        const code = artTemplate(demoPath, newCpt);
-        // 解析差值表达式以后，重新写入缓存目录
-        writeFileSync(demoPath, code, 'utf8')
+        let tempDestPath = tempDemoCmtPath + file.replace(demoTemplatFilePath, '');
+        tempDestPath = createFileRename(tempDestPath, newCpt);
+        // 确定文件是否存在
+        ensureFileSync(tempDestPath);
+        const code = artTemplate(file, newCpt);
+        await writeFileSync(tempDestPath, code,'utf-8' )
     }
 
     // 移动临时目录的文件到 用户packages目录下
@@ -49,7 +47,7 @@ export async function createDemoFile (newCpt, {
         overwrite:true
     });
 
-    // 删除.临时 目录 
+    // // 删除.临时 目录 
     removeSync(tempDemoTemplatePath);
 }
 
