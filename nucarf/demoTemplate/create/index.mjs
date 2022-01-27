@@ -22,7 +22,7 @@ async function init () {
     // 创建组件导出文件
     await createComponentExportFile(generatePathConfig);
 
-    // await $`clear`;
+    await $`clear`;
     console.log(chalk.green('\n组件生成成功，请开始你的表演吧！！！！\n'))
   
 }
