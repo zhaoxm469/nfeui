@@ -2,11 +2,10 @@
     <div class="<%= humpName %>">
 
         <button
-            class="cursor-pointer flex items-center py-2 rounded-lg px-6"
             :class="[<%= firstLowercaseName %>Type, <%= firstLowercaseName %>Loading]"
             @click.stop="handleClick($event)"
         >
-            <div class="loading w-4 h-4 mr-4 border border-solid border-white" v-show="loading">loading</div>
+            <div class="<%= humpName %>-loading" v-show="loading">loading</div>
             <slot />
         </button>
 
