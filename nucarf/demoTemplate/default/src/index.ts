@@ -1,7 +1,7 @@
 /*
  * @Author: <%= author %>
  * @LastEditors: vscode
- * @Description: 类型最好在这里统一定义，组件的入参以及事件等信息
+ * @Description: 组件的Event事件，和Props 最好在这里统一定义。
  */
 
 import { extend } from './../../../utils/basic';
