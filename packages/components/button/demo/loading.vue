@@ -1,8 +1,8 @@
 <template>
-    <div class="flex space-x-10">
-        <nfeButton loading type="primary">提交</nfeButton>
-        <nfeButton loading>取消</nfeButton>
-        <nfeButton loading type="success">确认</nfeButton>
+    <div class="flex flex-wrap">
+        <nfeButton class="mr-4 mb-4" loading type="primary">提交</nfeButton>
+        <nfeButton class="mr-4 mb-4" loading>取消</nfeButton>
+        <nfeButton class="mr-4 mb-4" loading type="success">确认</nfeButton>
     </div>
 </template>
 
