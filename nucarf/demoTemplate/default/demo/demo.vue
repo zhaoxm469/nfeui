@@ -1,55 +1,52 @@
 <template>
     <div>
         <p>
-            <span style="padding: 0 16px 0 4px; font-size: 14px; color: #777"
-                >点击次数:</span
-            >
+            按钮点击次数:
             <span>{{ count }}</span>
         </p>
-        <<%= exportCmtName %>
-            :loading="isLoading"
-            @loading-change="onLoadingChange"
-            type="primary"
-            @click="onClick"
-            >按钮</<%= exportCmtName %>
-        >
+        <div class="flex mt-10">
+            <<%= exportCmtName %>
+                :loading="isLoading"
+                @loading-change="onLoadingChange"
+                type="primary"
+                @click="handleBtnClick"
+            >点我增加次数！</<%= exportCmtName %>>
+        </div>
     </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { <%= exportCmtName %> } from 'nfeui';
-import { defineComponent, reactive, toRefs } from 'vue';
+import { reactive, toRefs } from 'vue';
 
-export default defineComponent({
-    components: {
-        <%= exportCmtName %>
-    },
-    setup() {
-        const state = reactive({
-            count: 0,
-            isLoading: false
-        });
+const useClick = () => {
+    const state = reactive({
+        count: 0,
+        isLoading: false
+    });
 
-        const methods = {
-            onClick() {
-                state.isLoading = true;
-                setTimeout(() => {
-                    state.count++;
-                    state.isLoading = false;
-                }, 1000);
-            },
-            onLoadingChange(loading: boolean) {
-                console.log(`loading 状态发生变化：${loading}`);
-            }
-        };
+    const methods = {
+        handleBtnClick() {
+            state.isLoading = true;
+            setTimeout(() => {
+                state.count++;
+                state.isLoading = false;
+            }, 1000);
+        },
+    };
 
-        return {
-            ...toRefs(state),
-            ...methods
-        };
+    return {
+        ...toRefs(state),
+        ...methods
     }
-});
+}
+
+const onLoadingChange = (loading: boolean) => console.log(`loading 状态发生变化：${loading}`);
+
+const { count, isLoading, handleBtnClick } = useClick();
+
 </script>
+
 <style scoped lang="scss">
 @import "../../../style/tailwindcss.scss";
 </style>
