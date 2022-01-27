@@ -92,8 +92,6 @@ yarn
         "test": "jest",
         # cli快捷生成组件模板文件
         "add": "zx nucarf/demoTemplate/create.mjs ",
-        # 监听组件路由配置变化，注入到文档路由
-        "generate:cnavconfig": "node nucarf/generate-cnavconfig --watch",
         # 生成UI组件打包后的type.d类型文件
         "generate:types": "zx nucarf/generate-types.mjs ",
         # UI文档站点打包
