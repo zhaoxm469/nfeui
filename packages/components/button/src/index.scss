@@ -14,3 +14,16 @@
         animation: rotate 0.5s linear infinite;
     }
 }
+
+.nfe-button-default {
+    @apply bg-gray-600 text-white hover:bg-gray-500;
+}
+.nfe-button-info {
+    @apply bg-white border border-solid border-gray-500 text-gray-700 hover:bg-blue-200 hover:text-blue-500 hover:border-blue-400;
+}
+.nfe-button-success {
+    @apply bg-green-500 text-white hover:bg-green-400;
+}
+.nfe-button-primary {
+    @apply bg-blue-500 text-white hover:bg-blue-400;
+}

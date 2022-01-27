@@ -1,23 +1,14 @@
 <template>
-    <div>
-        <div class="flex space-x-10">
-            <nfeButton type="primary">提交</nfeButton>
-            <nfeButton>取消</nfeButton>
-            <nfeButton type="success">确认</nfeButton>
-            <nfeButton type="info">取消</nfeButton>
-        </div>
+    <div class="flex space-x-10">
+        <nfeButton type="primary">提交</nfeButton>
+        <nfeButton>取消</nfeButton>
+        <nfeButton type="success">确认</nfeButton>
+        <nfeButton type="info">取消</nfeButton>
     </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { nfeButton } from 'nfeui';
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-    components: {
-        nfeButton
-    }
-});
 </script>
 
 <style scoped lang="scss">
