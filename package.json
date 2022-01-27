@@ -1,6 +1,6 @@
 {
     "name": "nfeui_test01",
-    "version": "0.0.1",
+    "version": "0.0.6",
     "description": "牛卡福PC端UI组件库",
     "main": "dist/nfeui.umd.js",
     "module": "dist/nfeui.es.js",
@@ -84,8 +84,7 @@
         "registry": "http://npm.nucarf.cn/"
     },
     "np": {
-        "yarn": false,
-        "contents": "dist"
+        "yarn": false
     },
     "husky": {
         "hooks": {
