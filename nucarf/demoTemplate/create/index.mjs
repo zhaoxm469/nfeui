@@ -6,7 +6,9 @@ import { chalk } from "zx";
 
 const rootPath = process.cwd();
 // 生成路径配置文件
-const generatePathConfig = demoGeneratePathConfig(rootPath);
+const generatePathConfig = demoGeneratePathConfig(rootPath,{
+    // demoTemplateName:process.argv[]
+});
 
 async function init () {
     // 获取命令行交互结果

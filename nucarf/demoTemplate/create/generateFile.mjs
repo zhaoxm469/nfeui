@@ -30,7 +30,6 @@ export async function createDemoFile (newCpt, {
 
     // 读取全部文件，进行模板差值表达式解析
     const demoFiles = await globby(path.join(demoTemplatFilePath, '/**/*.*'));
-    
 
     // 把文件copy到临时目录
     for (let file of demoFiles) {

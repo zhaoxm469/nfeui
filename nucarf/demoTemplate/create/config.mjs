@@ -47,8 +47,7 @@ export const componentType = [{
     id: 6,
 }]
 
-export const demoGeneratePathConfig = (root, userConfigFn = noop )=>{
-    const userConfig = userConfigFn() || {};
+export const demoGeneratePathConfig = (root, userConfig = {} )=>{
     
     let pathConfig = {
         // 默认名称
