@@ -1,5 +1,5 @@
 {
-    "name": "nfeui_test01",
+    "name": "nfeui",
     "version": "0.0.6",
     "description": "牛卡福PC端UI组件库",
     "main": "dist/nfeui.umd.js",
@@ -61,6 +61,8 @@
         "rollup-plugin-css-only": "^2.1.0",
         "rollup-plugin-typescript2": "^0.30.0",
         "rollup-plugin-vue": "^6.0.0-beta.11",
+        "stylelint": "^14.3.0",
+        "stylelint-config-standard": "^24.0.0",
         "tailwindcss": "^3.0.15",
         "ts-jest": "^26.4.4",
         "typescript": "^4.4.4",
