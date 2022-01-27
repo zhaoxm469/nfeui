@@ -20,30 +20,14 @@
         "declarationDir": "dist",
         "skipLibCheck": true,
         "jsx": "preserve",
-        "lib": [
-            "esnext",
-            "dom"
-        ],
-        "types": [
-            "jest",
-            "node",
-            "element-plus/global"
-        ],
+        "lib": ["esnext", "dom"],
+        "types": ["jest", "node", "element-plus/global"],
         "rootDir": ".",
         "paths": {
-            "@/*": [
-                "packages/*"
-            ],
-            "nfeui": [
-                "packages"
-            ]
+            "@/*": ["packages/*"],
+            "nfeui": ["packages"]
         }
     },
-    "include": [
-        "packages"
-    ],
-    "exclude": [
-        "node_modules",
-        "dist"
-    ]
+    "include": ["packages"],
+    "exclude": ["node_modules", "docs", "**/__test__", "dist"]
 }
