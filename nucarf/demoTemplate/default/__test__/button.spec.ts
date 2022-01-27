@@ -6,16 +6,17 @@ describe('<%= name %>.vue', () => {
     it('<%= firstLowercaseName %> type ', () => {
         const <%= firstLowercaseName %>Types = ['primary', 'success', 'info', 'default']
 
-        const typeNone = mount(<%= name %>)
-        expect(typeNone.classes()).toContain('<%= humpName %>-default')
+        const typeNoneEl = mount(<%= name %>).element.querySelector('button');
+        expect(typeNoneEl?.classList).toContain('<%= humpName %>-default')
 
         <%= firstLowercaseName %>Types.forEach(type => {
-            const wrapper = mount(<%= name %>, {
+            const el = mount(<%= name %>, {
                 props: {
                     type
                 }
-            })
-            expect(wrapper.classes()).toContain(`<%= humpName %>-${type}`)
+            }).element.querySelector('button');
+
+            expect(el?.classList).toContain(`<%= humpName %>-${type}`)
         })
     })
 })
