@@ -41,12 +41,11 @@ const fontSize = () => {
 };
 
 module.exports = {
-    purge: [
+    content: [
         './packages/**/*.html',
         './packages/**/*.vue',
         './packages/**/*.jsx'
     ],
-    content: [],
     prefix: `tf-`,
     theme: {
         extend: {
@@ -54,9 +53,6 @@ module.exports = {
             fontSize,
             borderRadius
         }
-    },
-    corePlugins: {
-        // preflight: false,
     },
     plugins: []
 };
