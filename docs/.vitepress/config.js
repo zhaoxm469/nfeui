@@ -1,7 +1,10 @@
 const { resolve } = require('path');
+require('dotenv/config');
+const { UI_NAME } = process.env;
+const pck = require(resolve('./package.json'));
 
 module.exports = {
-    title: 'nfeui',
+    title: UI_NAME + ` v${pck.version}`,
     description: '',
     // 扫描srcIncludes里面的 *.md文件
     srcIncludes: ['packages'],
