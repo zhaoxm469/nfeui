@@ -50,8 +50,8 @@ export const componentType = [{
 export const demoGeneratePathConfig = (root, userConfig = {} )=>{
     
     let pathConfig = {
-        // 默认名称
-        demoTemplatFilePathName:'default',
+        // DEMO 目录名
+        demoTemplatFileName:'default',
         // 默认使用DEMO生成模板文件夹
         demoTemplatFilePath:'nucarf/demoTemplate/',
         // 临时文件夹路径
@@ -69,7 +69,7 @@ export const demoGeneratePathConfig = (root, userConfig = {} )=>{
     Object.assign(pathConfig, userConfig)
 
     // 组装成新的 模板生成文件夹路径
-    pathConfig.demoTemplatFilePath += pathConfig.demoTemplatFilePathName;
+    pathConfig.demoTemplatFilePath += pathConfig.demoTemplatFileName;
 
     Object.keys(pathConfig).forEach(key => pathConfig[key] = join(root, pathConfig[key]))
 

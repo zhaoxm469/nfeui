@@ -7,14 +7,14 @@ import { chalk } from "zx";
 const rootPath = process.cwd();
 // 生成路径配置文件
 const generatePathConfig = demoGeneratePathConfig(rootPath,{
-    // demoTemplateName:process.argv[]
+    demoTemplatFileName: process.argv[3]?.replace('--template=', '') || 'default'
 });
 
 async function init () {
     // 获取命令行交互结果
-    // const opts = await createInquirer(generatePathConfig);
+    const opts = await createInquirer(generatePathConfig);
     // 生成新的配置对象
-    let newCpt = mergeOptions();
+    let newCpt = mergeOptions(opts);
     // 生成DEMO相关文件
     await createDemoFile(newCpt, generatePathConfig);
     // 修改docs文档路由

@@ -17,7 +17,6 @@ const createFileRename = (file, { firstLowercaseName })=>{
 
 // 创建DEMO相关文件
 export async function createDemoFile (newCpt, {
-    demoTemplatFilePathName,
     tempDemoTemplatePath,
     demoTemplatFilePath,
     outputPath
