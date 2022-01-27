@@ -1,6 +1,6 @@
 module.exports = {
     preset: 'ts-jest',
-    collectCoverageFrom: ['src/**/*.ts'],
+    testPathIgnorePatterns: ['/node_modules/', '<rootDir>/nucarf/'],
     moduleNameMapper: {},
     transform: {
         '^.+\\.vue$': 'vue-jest'
