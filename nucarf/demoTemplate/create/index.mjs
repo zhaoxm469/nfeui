@@ -8,8 +8,6 @@ const rootPath = process.cwd();
 // 生成路径配置文件
 const generatePathConfig = demoGeneratePathConfig(rootPath);
 
-// console.log({ rootPath });
-
 async function init () {
     // 获取命令行交互结果
     // const opts = await createInquirer(generatePathConfig);

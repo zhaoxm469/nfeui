@@ -8,6 +8,13 @@ const { copy, moveSync, writeFileSync, removeSync} = require('fs-extra')
 // 差值表达式解析规则修改
 artTemplate.defaults.rules[1].test = /{{{([@#]?)[ \t]*(\/?)([\w\W]*?)[ \t]*}}}/;
 
+// copy的文件重新命名 
+const createFileRename = (file, { firstLowercaseName })=>{
+    // 把0000test文件，文件名跟组件名对齐
+    if (file.includes('0000.spec.ts')) return file.replace('0000', firstLowercaseName)
+    return file;
+}
+
 // 创建DEMO相关文件
 export async function createDemoFile (newCpt, {
     tempDemoTemplatePath,
@@ -20,11 +27,15 @@ export async function createDemoFile (newCpt, {
     // 拼接组件名称 .temp/Button
     const tempDemoCmtPath = path.join(tempDemoTemplatePath, name);
 
-    // 把文件copy到缓存目录
-    await copy(demoTemplatFilePath, tempDemoCmtPath)
-
     // 读取全部文件，进行模板差值表达式解析
-    const demoFiles = await globby(path.join(tempDemoCmtPath, '/**/*.*'));
+    const demoFiles = await globby(path.join(demoTemplatFilePath, '/**/*.*'));
+    
+
+    // 把文件copy到临时目录
+    for (let file of demoFiles) {
+        const tempDestPath = tempDemoCmtPath + file.replace(demoTemplatFilePath, '');
+        await copy(file, createFileRename(tempDestPath, newCpt))
+    }
 
     // demo模板差值表达式换成用户传入的动态数据
     for (let demoPath of demoFiles) {
