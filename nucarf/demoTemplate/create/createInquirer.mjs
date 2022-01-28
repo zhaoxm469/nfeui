@@ -66,7 +66,7 @@ export default function createInquirer ({ navConfigPath}) {
             },
             {
                 type: "confirm",
-                message: "是否生成测试DEMO模板？",
+                message: "是否需要生成__test__模板？",
                 name: "isGenTestFile",
             },
             {

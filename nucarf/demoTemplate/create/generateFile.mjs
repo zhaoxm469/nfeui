@@ -20,7 +20,7 @@ function getGlobbyIgnore (newCpt, demoTemplatFilePath){
 
     let globbyIgnore = [];
     // 根据用户选项，不—__test___测试文件
-    if (newCpt.isGenTestFile) globbyIgnore.push(path.join(demoTemplatFilePath,'/__test__/*.*'));
+    if (!newCpt.isGenTestFile) globbyIgnore.push(path.join(demoTemplatFilePath,'/__test__/*.*'));
 
     return globbyIgnore;
 }
