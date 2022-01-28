@@ -84,7 +84,7 @@ yarn
         # 运行项目
         "dev": "zx nucarf/dev.mjs",
         # UI组件打包 && 打包UI在线文档
-        "build": "vite build && npm run type && npm run generate:types && docs-build",
+        "build": "npm run ui-build && npm run docs-build",
         # 生成vue组件type.d.ts文件
         "type": "vue-tsc --declaration --emitDeclarationOnly",
         # 全量jest测试脚本执行
