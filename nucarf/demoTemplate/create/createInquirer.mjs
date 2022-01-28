@@ -59,20 +59,28 @@ export default function createInquirer ({ navConfigPath}) {
             //     }
             // },
             {
-                type: 'input',
+                type: 'rawlist',
                 name: 'cType',
-                message:
-                    '请选择组件分类(输入编号)：' + componentType.map(item => `${item.id}.${item.name}`).join(','),
-                validate (value) {
-                    if (componentType.some(item => item.id == value)) return true;
-                    return '输入有误！请输入选项前编号';
-                }
+                message: '请选择组件分类',
+                choices: componentType.map(item=>item.name),
+            },
+            {
+                type: "confirm",
+                message: "是否生成测试DEMO模板？",
+                name: "isGenTestFile",
             },
             {
                 type: 'input',
                 name: 'author',
-                message: '组件作者:'
+                message: '组件作者:',
+                validate (value) {
+                    if (value) return true;
+                    return '请把您的姓名或昵称留下！';
+                }
             }
-        ])
+        ]).then(opt => {
+            opt.cType = componentType.find(item => item.name == opt.cType).id;
+            return opt
+        })
 
 }

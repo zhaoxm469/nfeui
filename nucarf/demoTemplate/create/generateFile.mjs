@@ -22,13 +22,21 @@ export async function createDemoFile (newCpt, {
     outputPath
 }) {
 
+    const globbyPath = patterns => path.join(demoTemplatFilePath, patterns)
     const { name } = newCpt;
+
+    let globbyIgnore = [];
+    // 根据用户选项，不copy测试文件
+    if (newCpt.isGenTestFile) globbyIgnore.push(globbyPath('/__test__/*.*'));
+    
 
     // 拼接组件名称 .temp/Button
     const tempDemoCmtPath = path.join(tempDemoTemplatePath, name);
 
     // 读取全部文件，进行模板差值表达式解析
-    const demoFiles = await globby(path.join(demoTemplatFilePath, '/**/*.*'));
+    const demoFiles = await globby(globbyPath('/**/*.*'),{
+        ignore: globbyIgnore
+    });
 
     // 把文件copy到临时目录
     for (let file of demoFiles) {
