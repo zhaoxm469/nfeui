@@ -14,7 +14,7 @@
     ],
     "scripts": {
         "dev": "vitepress-fc dev --root=docs --host",
-        "build": "vite build && npm run type && npm run generate:types && npm run docs-build",
+        "build": "npm run ui-build && npm run docs-build",
         "type": "vue-tsc --declaration --emitDeclarationOnly",
         "test": "jest",
         "add": "zx nucarf/demoTemplate/create/index.mjs ",
