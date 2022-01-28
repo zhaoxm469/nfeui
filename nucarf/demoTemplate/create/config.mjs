@@ -11,7 +11,7 @@ export const defOptions = {
     // 组件中文名称
     cName: '按钮',
     // 组件描述
-    desc: '自定义按钮',
+    desc: '这里是组件描述信息。。。。。。',
     // 组件类型
     cType: '1',
     // 是否显示组件

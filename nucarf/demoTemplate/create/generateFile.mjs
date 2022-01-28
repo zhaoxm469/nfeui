@@ -15,6 +15,16 @@ const createFileRename = (file, { firstLowercaseName })=>{
     return file;
 }
 
+// 通过用户传入的选项，判断哪些文件不需要生成，从而忽略哪些文件的匹配
+function getGlobbyIgnore (newCpt, demoTemplatFilePath){
+
+    let globbyIgnore = [];
+    // 根据用户选项，不—__test___测试文件
+    if (!newCpt.isGenTestFile) globbyIgnore.push(path.join(demoTemplatFilePath,'/__test__/*.*'));
+
+    return globbyIgnore;
+}
+
 // 创建DEMO相关文件
 export async function createDemoFile (newCpt, {
     tempDemoTemplatePath,
@@ -28,7 +38,9 @@ export async function createDemoFile (newCpt, {
     const tempDemoCmtPath = path.join(tempDemoTemplatePath, name);
 
     // 读取全部文件，进行模板差值表达式解析
-    const demoFiles = await globby(path.join(demoTemplatFilePath, '/**/*.*'));
+    const demoFiles = await globby(path.join(demoTemplatFilePath,'/**/*.*'),{
+        ignore: getGlobbyIgnore(newCpt, demoTemplatFilePath)
+    });
 
     // 把文件copy到临时目录
     for (let file of demoFiles) {

@@ -84,7 +84,7 @@ yarn
         # 运行项目
         "dev": "zx nucarf/dev.mjs",
         # UI组件打包 && 打包UI在线文档
-        "build": "vite build && npm run type && npm run generate:types && docs-build",
+        "build": "npm run ui-build && npm run docs-build",
         # 生成vue组件type.d.ts文件
         "type": "vue-tsc --declaration --emitDeclarationOnly",
         # 全量jest测试脚本执行
@@ -100,7 +100,7 @@ yarn
         # UI 打包
         "ui-build": "vite build && npm run type && npm run generate:types",
         # 文档站点打包文件预览
-        "docs-serve": "cross-env NODE_ENV=production vitepress-fc serve --root=docs",
+        "docs-serve": "cross-env NODE_ENV=production gc-vitepress serve --root=docs",
         # 文档打包&预览
         "docs-build-serve": "zx nucarf/docs-build-serve.mjs",
         # 根据项目的commit 自动生成 changelogs
