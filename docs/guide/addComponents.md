@@ -100,7 +100,7 @@ yarn
         # UI 打包
         "ui-build": "vite build && npm run type && npm run generate:types",
         # 文档站点打包文件预览
-        "docs-serve": "cross-env NODE_ENV=production vitepress-fc serve --root=docs",
+        "docs-serve": "cross-env NODE_ENV=production gc-vitepress serve --root=docs",
         # 文档打包&预览
         "docs-build-serve": "zx nucarf/docs-build-serve.mjs",
         # 根据项目的commit 自动生成 changelogs
