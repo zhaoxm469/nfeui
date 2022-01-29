@@ -1,4 +1,4 @@
-import { App } from 'vue';
+import { App } from 'vue-demi';
 
 <% for(var i = 0; i < imports.length; i++){ %>
 import <%= imports[i][0] %> from "./components/<%= imports[i][1] %>/index";

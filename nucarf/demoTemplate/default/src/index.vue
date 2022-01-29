@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, toRefs, watch } from 'vue';
+import { computed, defineComponent, toRefs, watch } from 'vue-demi';
 import { <%= firstLowercaseName %>Emits, <%= firstLowercaseName %>Props } from '.';
 
 export default defineComponent({
@@ -40,7 +40,7 @@ export default defineComponent({
             }
         );
 
-        return {
+       return {
             <%= firstLowercaseName %>Loading,
             handleClick,
             ...toRefs(props),

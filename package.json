@@ -1,6 +1,6 @@
 {
-    "name": "nfeui",
-    "version": "0.0.1",
+    "name": "nfeui_test01",
+    "version": "1.1.0",
     "description": "牛卡福PC端UI组件库",
     "main": "dist/nfeui.umd.js",
     "module": "dist/nfeui.es.js",
@@ -80,6 +80,7 @@
         "unplugin-auto-import": "^0.5.11",
         "unplugin-vue-components": "^0.17.14",
         "vite": "^2.7.13",
+        "vue": "^3.2.29",
         "vue-jest": "^5.0.0-alpha.6",
         "vue-tsc": "^0.29.2",
         "zx": "^4.3.0"
@@ -105,7 +106,15 @@
         }
     },
     "dependencies": {
-        "vue": "^3.2.29",
         "vue-demi": "^0.12.1"
+    },
+    "peerDependencies": {
+        "@vue/composition-api": "^1.0.0-rc.1",
+        "vue": "^2.0.0 || >=3.0.0"
+    },
+    "peerDependenciesMeta": {
+        "@vue/composition-api": {
+            "optional": true
+        }
     }
 }

@@ -2,7 +2,7 @@
  * prop type helpers
  * help us to write less code and reduce bundle size
  */
-import type { PropType } from 'vue';
+import type { PropType } from 'vue-demi';
 
 export const unknownProp = null as unknown as PropType<unknown>;
 

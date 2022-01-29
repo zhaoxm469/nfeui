@@ -22,7 +22,7 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 export default {
     optimizeDeps: {
         include: [],
-        exclude: []
+        exclude: ['vue-demi']
     },
     plugins: [
         vue(),

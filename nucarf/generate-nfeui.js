@@ -3,7 +3,7 @@ const package = require('../package.json');
 const fs = require('fs-extra');
 const path = require('path');
 
-let importStr = `import { App } from 'vue';\n`;
+let importStr = `import { App } from 'vue-demi';\n`;
 const packages = [];
 
 config.navs.forEach(item=>{

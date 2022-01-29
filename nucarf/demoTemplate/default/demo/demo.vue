@@ -17,7 +17,7 @@
 
 <script lang="ts" setup>
 import { <%= exportCmtName %> } from 'nfeui';
-import { reactive, toRefs } from 'vue';
+import { reactive, toRefs } from 'vue-demi';
 
 const useClick = () => {
     const state = reactive({

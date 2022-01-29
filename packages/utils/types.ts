@@ -1,2 +1,2 @@
-import { Plugin } from 'vue';
+import { Plugin } from 'vue-demi';
 export type SFCWithInstall<T> = T & Plugin;

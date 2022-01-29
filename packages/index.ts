@@ -1,4 +1,4 @@
-import { App } from 'vue';
+import { App } from 'vue-demi';
 
 import nfeButton from "./components/Button/index";
 

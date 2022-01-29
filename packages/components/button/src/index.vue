@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, toRefs, watch } from 'vue';
+import { computed, defineComponent, toRefs, watch } from 'vue-demi'
 import { buttonEmits, buttonProps } from '.';
 
 export default defineComponent({
@@ -48,6 +48,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@import '../../../style/tailwindcss.scss';
-@import './index.scss';
+@import "../../../style/tailwindcss.scss";
+@import "./index.scss";
 </style>

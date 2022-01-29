@@ -10,15 +10,14 @@
                 @loading-change="onLoadingChange"
                 type="primary"
                 @click="handleBtnClick"
-                >点我增加次数！</nfeButton
-            >
+            >点我增加次数！</nfeButton>
         </div>
     </div>
 </template>
 
 <script lang="ts" setup>
 import { nfeButton } from 'nfeui';
-import { reactive, toRefs } from 'vue';
+import { reactive, toRefs } from 'vue-demi';
 
 const useClick = () => {
     const state = reactive({
@@ -49,5 +48,5 @@ const { count, isLoading, handleBtnClick } = useClick();
 </script>
 
 <style scoped lang="scss">
-@import '../../../style/tailwindcss.scss';
+@import "../../../style/tailwindcss.scss";
 </style>
