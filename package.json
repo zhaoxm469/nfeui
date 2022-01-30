@@ -108,9 +108,6 @@
     "np": {
         "yarn": false
     },
-    "lint-staged": {
-        "*.ts": "eslint  --fix"
-    },
     "husky": {
         "hooks": {
             "pre-commit": "pretty-quick --staged"
