@@ -1,6 +1,7 @@
 import { App } from 'vue-demi';
 
 import nfeButton from "./components/Button/index";
+import { version } from '../package.json'
 
 function install(app: App) {
     const packages = [nfeButton];
@@ -14,4 +15,4 @@ function install(app: App) {
 }
 export { install, nfeButton };
 
-export default { install, version: '0.0.1' };
+export default { install, version };

@@ -10,6 +10,7 @@ specifiers:
   '@vitejs/plugin-vue': ^1.1.4
   '@vitejs/plugin-vue-jsx': ^1.1.7
   '@vue/compiler-sfc': ^3.2.29
+  '@vue/composition-api': ^1.4.5
   '@vue/eslint-config-prettier': ^6.0.0
   '@vue/eslint-config-typescript': ^7.0.0
   '@vue/test-utils': ^2.0.0-beta.10
@@ -59,7 +60,7 @@ specifiers:
   zx: ^4.3.0
 
 dependencies:
-  vue-demi: 0.12.1_vue@3.2.29
+  '@vue/composition-api': 1.4.5_vue@3.2.29
 
 devDependencies:
   '@babel/core': 7.16.12
@@ -83,7 +84,7 @@ devDependencies:
   conventional-changelog-cli: 2.2.2
   cross-env: 7.0.3
   dotenv: 14.3.2
-  element-plus: 1.3.0-beta.9_vue@3.2.29
+  element-plus: 1.3.0-beta.9_4bc58c565cd5a676cc7fcc291ea8eecd
   eslint: 7.32.0
   eslint-plugin-prettier: 3.4.1_eslint@7.32.0+prettier@2.5.1
   eslint-plugin-vue: 7.20.0_eslint@7.32.0
@@ -114,6 +115,7 @@ devDependencies:
   unplugin-vue-components: 0.17.15_7890021b40eb736c074f3dd6be382e03
   vite: 2.7.13
   vue: 3.2.29
+  vue-demi: 0.12.1_4bc58c565cd5a676cc7fcc291ea8eecd
   vue-jest: 5.0.0-alpha.10_aa4ae91d417d7827bcc04c4f5297bacb
   vue-tsc: 0.29.8_typescript@4.5.5
   zx: 4.3.0
@@ -1778,6 +1780,14 @@ packages:
       '@vue/shared': 3.2.29
     dev: true
 
+  /@vue/composition-api/1.4.5_vue@3.2.29:
+    resolution: {integrity: sha512-2Esgcc0EGBqyck4b/yrP2VnGmMr6cPYAE4nF3StIzP8+umNAbRZqBJDc6AhE58whPRt3lHAPf83eppgW7a2dUg==}
+    peerDependencies:
+      vue: '>= 2.5 < 3'
+    dependencies:
+      vue: 3.2.29
+    dev: false
+
   /@vue/eslint-config-prettier/6.0.0_3a54add3d5e9e8defdbc9136dd4833c2:
     resolution: {integrity: sha512-wFQmv45c3ige5EA+ngijq40YpVcIkAy0Lihupnsnd1Dao5CBbPyfCzqtejFLZX1EwH/kCJdpz3t6s+5wd3+KxQ==}
     peerDependencies:
@@ -1960,7 +1970,7 @@ packages:
       - supports-color
     dev: true
 
-  /@vueuse/core/7.5.5_vue@3.2.29:
+  /@vueuse/core/7.5.5_4bc58c565cd5a676cc7fcc291ea8eecd:
     resolution: {integrity: sha512-RBDqmIoGfak4h3xdXa/Av+ibkb8NY044wEy6+PG2FAWNaID8/FkqmSFjbxogrbmpSX1yZ1PBHrM8DUp/FrIpbg==}
     peerDependencies:
       '@vue/composition-api': ^1.1.0
@@ -1971,12 +1981,13 @@ packages:
       vue:
         optional: true
     dependencies:
-      '@vueuse/shared': 7.5.5_vue@3.2.29
+      '@vue/composition-api': 1.4.5_vue@3.2.29
+      '@vueuse/shared': 7.5.5_4bc58c565cd5a676cc7fcc291ea8eecd
       vue: 3.2.29
-      vue-demi: 0.12.1_vue@3.2.29
+      vue-demi: 0.12.1_4bc58c565cd5a676cc7fcc291ea8eecd
     dev: true
 
-  /@vueuse/shared/7.5.5_vue@3.2.29:
+  /@vueuse/shared/7.5.5_4bc58c565cd5a676cc7fcc291ea8eecd:
     resolution: {integrity: sha512-mzzTsotHQRPnPAChy8iCv6ek/90CKYhAFyMRgNsMxpT0afZJkbMO/X0OaOu/1NuGbgb8UVjlsWKmCUgKTOF5hA==}
     peerDependencies:
       '@vue/composition-api': ^1.1.0
@@ -1987,8 +1998,9 @@ packages:
       vue:
         optional: true
     dependencies:
+      '@vue/composition-api': 1.4.5_vue@3.2.29
       vue: 3.2.29
-      vue-demi: 0.12.1_vue@3.2.29
+      vue-demi: 0.12.1_4bc58c565cd5a676cc7fcc291ea8eecd
     dev: true
 
   /JSONStream/1.3.5:
@@ -3702,7 +3714,7 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /element-plus/1.3.0-beta.9_vue@3.2.29:
+  /element-plus/1.3.0-beta.9_4bc58c565cd5a676cc7fcc291ea8eecd:
     resolution: {integrity: sha512-h+I6VVtJNwjVkNhfhXp2oCYjgBN7kWQ2Y6nWzwc0wiphAlQDhGuBXAGj9eYpf1uOrMgIpFFwbRhvK7C6sOJsWg==}
     peerDependencies:
       vue: ^3.2.0
@@ -3710,7 +3722,7 @@ packages:
       '@ctrl/tinycolor': 3.4.0
       '@element-plus/icons-vue': 0.2.6_vue@3.2.29
       '@popperjs/core': 2.11.2
-      '@vueuse/core': 7.5.5_vue@3.2.29
+      '@vueuse/core': 7.5.5_4bc58c565cd5a676cc7fcc291ea8eecd
       async-validator: 4.0.7
       dayjs: 1.10.7
       lodash: 4.17.21
@@ -9999,7 +10011,7 @@ packages:
     resolution: {integrity: sha1-f/N0vTnuSnwFx3yZfZQQUg4dArw=}
     dev: true
 
-  /vue-demi/0.12.1_vue@3.2.29:
+  /vue-demi/0.12.1_4bc58c565cd5a676cc7fcc291ea8eecd:
     resolution: {integrity: sha1-9+GO++z/0RqwadFHLXoG4xm0F0w=}
     engines: {node: '>=12'}
     hasBin: true
@@ -10011,7 +10023,9 @@ packages:
       '@vue/composition-api':
         optional: true
     dependencies:
+      '@vue/composition-api': 1.4.5_vue@3.2.29
       vue: 3.2.29
+    dev: true
 
   /vue-eslint-parser/7.11.0_eslint@7.32.0:
     resolution: {integrity: sha1-IUtd6pYQB/z/su5luJEjB2KNDa8=}
