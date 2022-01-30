@@ -12,6 +12,14 @@
         "dist",
         "README.md"
     ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/zhaoxm469/nfeui.git"
+    },
+    "bugs": {
+        "url": "https://github.com/zhaxm469o/nfeui/issues"
+    },
+    "homepage": "https://github.com/zhaoxm469/nfeui/#readme",
     "scripts": {
         "dev": "gc-vitepress dev --root=docs --host",
         "build": "npm run ui-build && npm run docs-build",
@@ -99,6 +107,11 @@
     },
     "np": {
         "yarn": false
+    },
+    "lint-staged": {
+        "packages/**/*.ts": [
+            "prettier --parser=typescript --write"
+        ]
     },
     "husky": {
         "hooks": {
