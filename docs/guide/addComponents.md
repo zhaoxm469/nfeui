@@ -8,7 +8,7 @@
 
 ::: warning 注意
 
--   [Node.js](http://nodejs.org/) 这里推荐 `14.x` 及以上。
+- [Node.js](http://nodejs.org/) 这里推荐 `14.x` 及以上。
 
 :::
 
@@ -16,12 +16,12 @@
 
 这里推荐您使用 [vscode](https://code.visualstudio.com/)，可以安装以下工具来提高开发效率及代码格式化
 
--   [volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar) - vue3 开发必备，不支持 vue2，启用这个插件的时候记得禁用`Vetur`插件哦
--   [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) - 脚本代码检查
--   [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) - 代码格式化
--   [Stylelint](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint) - css 格式化
--   [DotENV](https://marketplace.visualstudio.com/items?itemName=mikestead.dotenv) - .env 文件 高亮
--   [Tailwindcss](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss) - tailwindcss 智能感知提示
+- [volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar) - vue3 开发必备，不支持 vue2，启用这个插件的时候记得禁用`Vetur`插件哦
+- [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) - 脚本代码检查
+- [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) - 代码格式化
+- [Stylelint](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint) - css 格式化
+- [DotENV](https://marketplace.visualstudio.com/items?itemName=mikestead.dotenv) - .env 文件 高亮
+- [Tailwindcss](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss) - tailwindcss 智能感知提示
 
 ## 代码获取
 
@@ -34,13 +34,17 @@ git clone https://git.nucarf.cn/frontend/n-p-m/nfeui
 ## 安装依赖
 
 ```bash
-# npm
-npm install
+# 选择一个你喜欢的包管理器 （推荐用pnpm）
 
-# or
+# pnpm
+$ pnpm install
 
-# yarn
-yarn
+# NPM
+$ npm install
+
+# Yarn
+$ yarn
+
 ```
 
 ## 项目核心目录介绍
@@ -155,6 +159,8 @@ npm run add
 
 ## 发布
 
-输入 `npm run build ` 命令， 打包完成以后申请合并到`master`分支。 合并通过以后 会自动同步到 https://nfeui.nucarf.cn 。
+1. 首先需要手动输入 `npm run build ` 命令进行资源打包。
+2. 自己 codeReview 一遍以后，指定审核人并提交申请到 master 分支。
+3. 审核人 codeReview 以后合并到 `master`，合并完成以后文档会自动同步到 [NfeUi 官网](https://nfeui.nucarf.cn)。
 
 > 后续会完善这系列流程，自动发布到 cdn，文档增加版本更新提示等
