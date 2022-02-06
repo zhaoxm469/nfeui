@@ -1,31 +1,31 @@
 @keyframes rotate {
-    from {
-        transform: rotatez(0deg);
-    }
+	from {
+		transform: rotatez(0deg);
+	}
 
-    to {
-        transform: rotatez(360deg);
-    }
+	to {
+		transform: rotatez(360deg);
+	}
 }
 .nfe-button {
-    @apply tf-cursor-pointer tf-h-32 tf-flex tf-items-center tf-px-20 tf-text-14 tf-rounded-8;
-    .nfe-button-loading {
-        @apply tf-rounded-50%  tf-w-10 tf-h-10 tf-mr-10 tf-border tf-border-solid tf-border-white;
-        clip-path: polygon(0% 0%, 100% 0%, 100% 30%, 0% 30%);
-        animation: rotate 0.5s linear infinite;
-    }
+	@apply nt-cursor-pointer nt-h-32 nt-flex nt-items-center nt-px-20 nt-text-14 nt-rounded-8;
+	.nfe-button-loading {
+		@apply nt-rounded-50%  nt-w-10 nt-h-10 nt-mr-10 nt-border nt-border-solid nt-border-white;
+		clip-path: polygon(0% 0%, 100% 0%, 100% 30%, 0% 30%);
+		animation: rotate 0.5s linear infinite;
+	}
 }
 
 .nfe-button-primary {
-    @apply tf-bg-blue-500 tf-text-white hover:tf-bg-blue-400;
+	@apply nt-bg-blue-500 nt-text-white hover:nt-bg-blue-400;
 }
 
 .nfe-button-default {
-    @apply tf-bg-gray-600 tf-text-white hover:tf-bg-gray-500;
+	@apply nt-bg-gray-600 nt-text-white hover:nt-bg-gray-500;
 }
 .nfe-button-info {
-    @apply tf-bg-white tf-border hover:tf-bg-blue-200 hover:tf-text-blue-500;
+	@apply nt-bg-white nt-border hover:nt-bg-blue-200 hover:nt-text-blue-500;
 }
 .nfe-button-success {
-    @apply tf-bg-green-500 tf-text-white hover:tf-bg-green-400;
+	@apply nt-bg-green-500 nt-text-white hover:nt-bg-green-400;
 }
