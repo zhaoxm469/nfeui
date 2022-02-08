@@ -4,7 +4,7 @@
             按钮点击次数:
             <span>{{ count }}</span>
         </p>
-        <div class="tf-flex tf-mt-10">
+        <div class="nt-flex nt-mt-10">
             <<%= exportCmtName %>
                 :loading="isLoading"
                 @loading-change="onLoadingChange"
