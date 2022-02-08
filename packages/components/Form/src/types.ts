@@ -82,7 +82,7 @@ export enum FormItemCustomSlotNameEnum {
 
 export type FormItemCustomSlotNameKey = keyof typeof FormItemCustomSlotNameEnum
 
-type FormItemCustomSlotReturn = (() => VNode) | string | undefined
+type FormItemCustomSlotReturn = (() => VNode) | string
 
 
 export type CustomSlot = Partial<Record<FormItemCustomSlotNameKey, FormItemCustomSlotReturn>> & {
