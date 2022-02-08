@@ -24,7 +24,6 @@ const elSlotStrategy = (componentSlot: Record<string, any> = {}, schema: Partial
     }
 
     strategy[schema.component!] && strategy[schema.component!]!();
-    console.log(schema.component);
 
     return componentSlot;
 }
