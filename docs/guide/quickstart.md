@@ -56,27 +56,26 @@ import { nfeButton } from 'nfeui';
 
 ```html
 <!-- 导入 nfeui 样式 -->
-<link
-    rel="stylesheet"
-    href="https://cdn.nucarf.cn/common/v1.0/nfeui/next.css"
-/>
+<link rel="stylesheet" href="https://cdn.nucarf.cn/common/v1.0/nfeui/next.css" />
 <!-- 导入 Vue 3 -->
 <script src="//cdn.jsdelivr.net/npm/vue@next"></script>
 <!-- 导入 nfeui 组件库 -->
 <script src="https://cdn.nucarf.cn/common/v1.0/nfeui/next.js"></script>
 
-<div id="app"></div>
+<!-- ELement UI 样式 ， 如果使用包含Element的二次封装的组件打开此注释 -->
+<!-- <script src="https://cdn.nucarf.cn/common/v1.0/nfeui/next.js"></script> -->
+
+
+<div id="app">
+    <nfe-button>按钮</nfe-button><br>
+    <nfe-button type="primary">确定</nfe-button><br>
+    <nfe-button type="success" loading>提交</nfe-button><br>
+</div>
 
 <script>
     const { createApp } = Vue;
 
-    createApp({
-        template: `
-         <nfeButton>按钮</nfeButton><br>
-         <nfeButton type="primary">确定</nfeButton><br>
-         <nfeButton type="success" loading>提交</nfeButton><br>
-       `
-    })
+    createApp({})
         .use(nfeui)
         .mount('#app');
 </script>
