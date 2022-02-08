@@ -17,10 +17,10 @@ export interface FormActionType {
     // updateSchema: (data: Partial<FormSchema> | Partial<FormSchema>[]) => Promise<void>;
     setProps: (formProps: Partial<FormProps>) => Promise<void>;
     setValue: (params: Record<string, any>) => Promise<void>;
-    onSubmit?: () => Promise<void>;
-    onCancel?: () => Promise<void>;
-    onResetFields?: () => Promise<void>;
-    onMock?: () => Promise<void>;
+    onSubmit: () => Promise<void>;
+    onCancel: () => Promise<void>;
+    onResetFields: () => Promise<void>;
+    onMock: () => Promise<void>;
     getFormData: () => Record<string, any>,
     // removeSchemaByFiled: (field: string | string[]) => Promise<void>;
     // appendSchemaByField: (
