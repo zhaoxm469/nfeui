@@ -15,6 +15,22 @@
                     "link": "/components/button/doc"
                 }
             ]
+        },
+        {
+            "text": "业务组件",
+            "cType": 6,
+            "children": [
+                {
+                    "version": "0.0.1",
+                    "text": "Form",
+                    "sort": 1,
+                    "cName": "表单",
+                    "show": true,
+                    "desc": "基于Element plus 二次封装的表单组件",
+                    "author": "zhaoxm",
+                    "link": "/components/Form/doc"
+                }
+            ]
         }
     ]
 }
