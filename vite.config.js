@@ -15,7 +15,7 @@ const banner = `/*!
 import AutoImport from "unplugin-auto-import/vite";
 // import Components from 'unplugin-vue-components/vite';
 // import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
-import ElementPlus from "unplugin-element-plus/vite";
+// import ElementPlus from "unplugin-element-plus/vite";
 
 /**
  * @type {import('vite').UserConfig}
@@ -28,7 +28,7 @@ export default {
 	plugins: [
 		vue(),
 		vueJsx(),
-		ElementPlus(),
+		// ElementPlus(),
 		// AutoImport({
 		//     resolvers: [ElementPlusResolver()],
 		// }),
