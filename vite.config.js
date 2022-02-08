@@ -53,14 +53,14 @@ export default {
 		rollupOptions: {
 			// make sure to externalize deps that shouldn't be bundled
 			// into your library
-			external: ["vue", "element-plus"],
+			external: ["vue"],
 			output: {
 				banner,
 				// Provide global variables to use in the UMD build
 				// for externalized deps
 				globals: {
 					vue: "Vue",
-					"element-plus": "ElementPlus",
+					// "element-plus": "ElementPlus",
 				},
 				exports: "named",
 			},
