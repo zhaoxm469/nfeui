@@ -28,7 +28,10 @@
                     "show": true,
                     "desc": "基于Element plus 二次封装的表单组件",
                     "author": "zhaoxm",
-                    "link": "/components/Form/doc"
+                    "link": "/components/Form/doc",
+                    "exportMethods": {
+                        "useForm": "/components/Form/src/useForm"
+                    }
                 }
             ]
         }
