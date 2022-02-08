@@ -10,7 +10,7 @@ const generatePathConfig = demoGeneratePathConfig(rootPath,{
     demoTemplatFileName: process.argv[3]?.replace('--template=', '') || 'default'
 });
 
-async function init () {
+async function create(){
     // 获取命令行交互结果
     const opts = await createInquirer(generatePathConfig);
     // 生成新的配置对象
@@ -24,8 +24,11 @@ async function init () {
 
     await $`clear`;
     console.log(chalk.green('\n组件生成成功，请开始你的表演吧！！！！\n'))
-  
 }
 
+async function init () {
+    if (process.argv[3] === '--createComponentExportFile') return await createComponentExportFile(generatePathConfig);
+    await create();
+}
 
 init();

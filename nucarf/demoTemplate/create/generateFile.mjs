@@ -106,21 +106,38 @@ export function createComponentExportFile ({
  }) {
     const navConfig = require(navConfigPath)
 
-    let cmtExportNames = [], imports = [];
+    let cmtExportNames = [], imports = [] , exportMethodsList = [] , exportMethodsNames = [];
+
+    const setArtTemplateData = ({ text, exportMethods }) => {
+        const cmtName = UI_PREFIX + text;
+
+        imports.push([cmtName, text])
+        cmtExportNames.push(cmtName)
+
+        // 跟随组件一起导出的方法
+        if (exportMethods) {
+            for (let key in exportMethods) {
+                exportMethodsList.push({
+                    name: key,
+                    path: exportMethods[key]
+                })
+                exportMethodsNames.push(key)
+            }
+        }
+
+    }
 
     navConfig.navs.forEach(item => {
-        item.children.forEach(({ show, text }) => {
-            const cmtName = UI_PREFIX + text;
-            if (show) {
-                imports.push([cmtName, text])
-                cmtExportNames.push(cmtName)
-            }
+        item.children.forEach((item) => {
+            if (item.show) setArtTemplateData(item);
         })
     })
-
+   
     const code = artTemplate(artExportComponentIndexTsPath, {
         cmtExportNames: cmtExportNames.join(','),
-        imports
+        imports,
+        exportMethodsList,
+        exportMethodsNames: exportMethodsNames.join(',')
     });
 
     writeFileSync(exportComponentIndexTsPath, code, 'utf-8')

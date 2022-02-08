@@ -7,17 +7,30 @@ import 'dotenv/config'
 // 生成types类型提示
 const createNfeUiTypes = () => {
     const components = require('../packages/nav.config.json')
-    let exportResult = [];
+
+    let exportComponent = [], appExportMethods = [];
+
+    const navItemCd = (navItem)=>{
+        exportComponent.push(`export { default as ${UI_PREFIX + navItem.text} } from "./packages/components/${navItem.text.toLocaleLowerCase()}";`)
+
+        if (navItem.exportMethods) {
+            Object.keys(navItem.exportMethods).forEach(keyName => {
+                appExportMethods.push(` export { default as ${keyName} } from "./packages${navItem.exportMethods[keyName]}";`)
+            })
+        }
+    }
+
     for (let item of components.navs) {
         item.children = item.children.filter(item=>item.show);
         if(!item.children.length) break;
         for (let navItem of item.children){
-            exportResult.push(`export { default as ${UI_PREFIX+navItem.text} } from "./packages/components/${navItem.text.toLocaleLowerCase()}";`)
+            navItemCd(navItem);
         }
     }
 
     return `
-        ${exportResult.join('\n')}
+        ${exportComponent.join('\n')}
+        ${appExportMethods.join('\n')}
 
         declare const _default: {
             install: typeof install;
