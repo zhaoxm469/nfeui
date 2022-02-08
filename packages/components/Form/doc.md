@@ -8,7 +8,7 @@ map:
 
 基于Element plus 二次封装的表单组件 , 扩展了一些常用功能 .
 
-使用本组件务必保证项目中安装了 引入或者安装了 Element plus .
+使用本组件，务必引用 Element plus 的样式 
 
 ### 基本用法
 
