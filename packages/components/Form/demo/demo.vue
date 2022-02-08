@@ -147,9 +147,15 @@ const [register, { setValue, getFormData }] = useForm({
         mock: {
             type: '@integer(60, 100)'
         },
+        customSlot: {
+            componentBottom: () => h('span', {
+                style: {
+                    color: 'red'
+                }
+            }, '插槽：下面搞点东西'),
+        },
         componentSlot: {
             append: () => h('div', '岁'),
-            componentBottom: 'usenameBottom',
             // labelLeft: () => h('span', '888'),
             // labelRight: 'usenameLabelRight'
             // formItemTop: () => h('div', '44')
