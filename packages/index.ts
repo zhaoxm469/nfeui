@@ -6,6 +6,10 @@ import nfeButton from "./components/Button/index";
 import nfeForm from "./components/Form/index";
 
 
+
+import useForm from "./components/Form/src/useForm";
+
+
 function install(app: App) {
     const packages = [nfeButton,nfeForm];
     packages.forEach((item: any) => {
@@ -16,6 +20,6 @@ function install(app: App) {
         }
     });
 }
-export { install, nfeButton,nfeForm };
+export { install, nfeButton,nfeForm, useForm };
 
 export default { install, version: '0.0.1' };
