@@ -8,7 +8,11 @@
 		>
 			<el-row>
 				<template v-for="schema in formItemSchema" :key="schema.prop">
-					<FormItems :schema="schema" :slots="$slots"></FormItems>
+					<FormItems
+						:schema="schema"
+						:slots="$slots"
+						:colProps="formPropsRef.colProps"
+					></FormItems>
 				</template>
 			</el-row>
 			<el-row :span="24" v-if="showFootBtn" align="middle" justify="center">

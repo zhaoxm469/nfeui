@@ -42,6 +42,11 @@ const [register, { setValue, getFormData }] = useForm({
 	// size: 'default',
 	// inlineMessage: true,
 	// statusIcon: true,
+	colProps: {
+		xs: 24,
+		sm: 12,
+		lg: 8,
+	},
 	showSubmitButton: true,
 	showCancelButton: true,
 	showMockButton: true,
@@ -76,9 +81,6 @@ const [register, { setValue, getFormData }] = useForm({
 			mock: {
 				type: "@cname",
 			},
-			colProps: {
-				span: 12,
-			},
 			rules: [
 				{
 					required: true,
@@ -109,9 +111,6 @@ const [register, { setValue, getFormData }] = useForm({
 					console.log(`个数发生改变${count}`);
 				});
 			},
-			colProps: {
-				span: 12,
-			},
 			styleProps: {
 				width: "100%",
 			},
@@ -121,9 +120,6 @@ const [register, { setValue, getFormData }] = useForm({
 			label: "分类",
 			value: "",
 			component: "Select",
-			colProps: {
-				span: 12,
-			},
 			styleProps: {
 				width: "100%",
 			},
@@ -149,9 +145,6 @@ const [register, { setValue, getFormData }] = useForm({
 			value: "",
 			tip: "年龄就是岁月留下的痕迹",
 			component: "Input",
-			colProps: {
-				span: 12,
-			},
 			disabled: true,
 			prop: "age",
 			placeholder: "请输入年龄",
@@ -186,10 +179,6 @@ const [register, { setValue, getFormData }] = useForm({
 				type: "@mobile",
 			},
 			placeholder: "请输入手机号",
-			colProps: {
-				span: 24,
-				// row: true
-			},
 			customSlot: {
 				// top: () => h('div', '顶部'),
 				// bottom: 'telRight',

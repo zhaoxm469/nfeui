@@ -1,9 +1,31 @@
 import { Component, VNode } from "vue";
 import { ComponentSize } from "element-plus/es/utils/types";
 import { FormItemRule } from "element-plus/es/components/form/src/form.type";
-import { ColProps } from "element-plus";
 
 export type PartialFormSchema = Partial<FormItemsSchema>;
+
+type ColProps = {
+	/** 自定义元素标签 */
+	tag: string;
+	/** 栅格占据的列数 */
+	span: number;
+	/** 栅格左侧的间隔格数 */
+	offset: number;
+	/** 栅格向左移动格数 */
+	pull: number;
+	/** 栅格向右移动格数 */
+	push: number;
+	/** <768px 响应式栅格数或者栅格属性对象 */
+	xs: number;
+	/** ≥768px 响应式栅格数或者栅格属性对象 */
+	sm: number;
+	/** ≥992px 响应式栅格数或者栅格属性对象 */
+	md: number;
+	/** ≥1200px 响应式栅格数或者栅格属性对象 */
+	lg: number;
+	/** ≥1920px 响应式栅格数或者栅格属性对象 */
+	xl: number;
+};
 
 export type FormSchemaOptions = {
 	key?: string | number;
@@ -55,6 +77,7 @@ export type FormProps = {
 	showMockButton?: boolean;
 	/** Show cancel button */
 	showCancelButton?: boolean;
+	colProps?: Partial<ColProps>;
 	// scrollToError: BooleanConstructor;
 } & Recordable;
 

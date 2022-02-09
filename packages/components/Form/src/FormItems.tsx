@@ -8,6 +8,7 @@ import {
 	ElInputNumber,
 	ElSelect,
 	ElOption,
+	ColProps,
 } from "element-plus";
 import { DefineComponent, defineComponent, h, resolveComponent } from "vue";
 import {
@@ -78,6 +79,10 @@ export default defineComponent({
 			type: Object,
 			default: () => {},
 		},
+		colProps: {
+			type: Object as PropType<Partial<ColProps>>,
+			default: () => {},
+		},
 	},
 	setup(props, { emit }) {
 		let { schema, slots } = props;
@@ -120,11 +125,12 @@ export default defineComponent({
 			componentTop,
 		} = customComponentSlot(schema, slots);
 		const colRow = schema.colProps?.row ? "display:flex" : "";
+		const colProps = { ...props.colProps, ...schema.colProps };
 
 		return () => (
 			<>
 				{before()}
-				<el-col {...schema.colProps} style={colRow}>
+				<el-col {...colProps} style={colRow}>
 					{top()}
 					<el-form-item
 						v-slots={elFormItemSlot(schema, labelLeft, labelRight)}
