@@ -12,9 +12,9 @@ type SlotStrategy = Partial<Record<FormItemComponentName, () => void>>;
 
 // 有的组件需要插槽，比如Select，这里存放各种组件对应默认插槽的策略
 const elSlotStrategy = (
-	componentSlot: Record<string, any> = {},
+	componentSlot: Recordable = {},
 	schema: PartialFormSchema
-): Record<string, any> => {
+): Recordable => {
 	const strategy: SlotStrategy = {
 		Select() {
 			componentSlot["default"] = () =>
@@ -39,7 +39,7 @@ const elSlotStrategy = (
 // 标准化插槽数据，一个数据适配器的接口
 export const normalizationSlotData = (
 	componentSlot: ComponentSlot | CustomSlot | undefined,
-	slots: Record<string, any>
+	slots: Recordable
 ) => {
 	if (!componentSlot) return {};
 
@@ -65,7 +65,7 @@ export const normalizationSlotData = (
 // 获取Element Component 组件的插槽
 export const getElComponentSlot = (
 	schema: PartialFormSchema,
-	slots: Record<string, any>
+	slots: Recordable
 ) => {
 	return elSlotStrategy(
 		normalizationSlotData(schema.componentSlot, slots),
@@ -76,7 +76,7 @@ export const getElComponentSlot = (
 // 获取自定义插槽数据
 const getCustomComponentSlot = (
 	schema: PartialFormSchema,
-	slots: Record<string, any>
+	slots: Recordable
 ) => {
 	return normalizationSlotData(schema.customSlot, slots);
 };
@@ -84,7 +84,7 @@ const getCustomComponentSlot = (
 // 自定义插槽
 export const customComponentSlot = (
 	schema: PartialFormSchema,
-	slots: Record<string, any>
+	slots: Recordable
 ) => {
 	// @ts-ignore
 	const custimComponent = (_props, { slots }) =>

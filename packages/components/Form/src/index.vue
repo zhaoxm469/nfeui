@@ -64,7 +64,7 @@ type Rules = Record<string, FormItemRule[]>;
 
 interface State {
 	formPropsRef: Partial<FormProps>;
-	formModel: Record<string, any>;
+	formModel: Recordable;
 	formItemSchema: PartialFormSchema[] | undefined;
 	showFootBtn: boolean | undefined;
 	rules: Rules;
