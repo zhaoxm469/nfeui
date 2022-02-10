@@ -77,8 +77,10 @@ export type FormProps = {
 	showMockButton?: boolean;
 	/** Show cancel button */
 	showCancelButton?: boolean;
+	/** el props 配置项，子集formItems会继承此属性 */
 	colProps?: Partial<ColProps>;
 	// scrollToError: BooleanConstructor;
+	// footBottonSlot: {}
 } & Recordable;
 
 export type FormItemComponentName =
@@ -139,6 +141,8 @@ export type FormItemsSchema = {
 	label: string;
 	/** 表单域 model 字段 */
 	prop: string;
+	/** 是否显示 */
+	ifShow?: (formModal: Recordable) => boolean;
 	/** 使用的组件 */
 	component: FormItemComponentName;
 	/** formItem自定义插槽 */
@@ -181,6 +185,8 @@ export type FormItemsSchema = {
 	options?: FormSchemaOptions[];
 	/** 样式 */
 	styleProps?: Recordable;
+	/** 重置表单时候的默认值，用户如果不传会自定赋值为value为用户传入的value */
+	defaultValue?: any;
 } & Recordable;
 
 interface Mock {
