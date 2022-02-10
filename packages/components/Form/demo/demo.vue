@@ -10,11 +10,10 @@
 </template>
 
 <script lang="ts" setup>
-import { nfeForm } from "nfeui";
-import useForm from "../src/useForm";
+import { nfeForm, useForm } from "nfeui";
 import { Search } from "@element-plus/icons-vue";
 import { FormSubmitParams } from "../src/types";
-import { h, nextTick } from "vue";
+import { h, nextTick, toRefs } from "vue";
 import { ElMessage } from "element-plus";
 
 const getCityList = (keyword: string) => {
@@ -152,16 +151,18 @@ const [register, { setValue, getFormData }] = useForm({
 				type: "@integer(60, 100)",
 			},
 			customSlot: {
-				componentBottom: () =>
-					h(
+				componentBottom: (formModel) => {
+					const { username, age } = toRefs(formModel);
+					return h(
 						"span",
 						{
 							style: {
 								color: "red",
 							},
 						},
-						"插槽：下面搞点东西"
-					),
+						`姓名：${username.value}，年龄${age.value}`
+					);
+				},
 			},
 			componentSlot: {
 				append: () => h("div", "岁"),
@@ -175,6 +176,7 @@ const [register, { setValue, getFormData }] = useForm({
 			component: "Input",
 			value: "",
 			prop: "tel",
+			required: true,
 			mock: {
 				type: "@mobile",
 			},
