@@ -83,9 +83,13 @@ export default defineComponent({
 			type: Object as PropType<Partial<ColProps>>,
 			default: () => {},
 		},
+		formModel: {
+			type: Object as PropType<Partial<Recordable>>,
+			default: () => {},
+		},
 	},
 	setup(props, { emit }) {
-		let { schema, slots } = props;
+		let { schema, slots, formModel } = props;
 
 		// 不同组件可能需要不同的动作，例如远程搜索等，这里使用策略模式，后期只要componentStrategy加上不同的策略名跟方法就能扩展各组件的差异
 		schema.component &&
@@ -123,7 +127,7 @@ export default defineComponent({
 			append,
 			before,
 			componentTop,
-		} = customComponentSlot(schema, slots);
+		} = customComponentSlot(schema, slots, formModel);
 		const colRow = schema.colProps?.row ? "display:flex" : "";
 		const colProps = { ...props.colProps, ...schema.colProps };
 

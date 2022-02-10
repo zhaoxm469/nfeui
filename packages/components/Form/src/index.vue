@@ -4,7 +4,7 @@
 			ref="ruleFormRef"
 			v-bind="formPropsRef"
 			:model="formModel"
-			:rules="rules"
+			:rules="formRules"
 		>
 			<el-row>
 				<template v-for="schema in formItemSchema" :key="schema.prop">
@@ -12,6 +12,7 @@
 						:schema="schema"
 						:slots="$slots"
 						:colProps="formPropsRef.colProps"
+						:formModel="formModel"
 					></FormItems>
 				</template>
 			</el-row>
@@ -41,7 +42,6 @@
 </template>
 
 <script lang="ts">
-import { FormItemRule } from "element-plus/es/components/form/src/form.type";
 import { ElForm, ElFormItem, ElInput, ElButton, ElRow } from "element-plus";
 import {
 	computed,
@@ -56,23 +56,24 @@ import {
 import {
 	FormActionType,
 	FormProps,
+	FormRules,
 	FormSubmitParams,
 	PartialFormSchema,
 } from "./types";
 import { formEmits, formProps } from ".";
 import FormItems from "./FormItems";
 import useMock from "../../../hooks/useMock";
+import getFormRules from "./formRules";
 
 type FormInstance = InstanceType<typeof ElForm>;
-type Rules = Record<string, FormItemRule[]>;
 
 interface State {
 	formPropsRef: Partial<FormProps>;
 	formModel: Recordable;
 	formItemSchema: PartialFormSchema[] | undefined;
 	showFootBtn: boolean | undefined;
-	rules: Rules;
 	isSubmitLoading: boolean;
+	formRules: FormRules;
 }
 
 export default defineComponent({
@@ -111,16 +112,8 @@ export default defineComponent({
 					showSubmitButton
 				);
 			}),
-			rules: computed(() => {
-				let rulesResult: Rules = {};
-				state.formPropsRef.formItems?.forEach((item) => {
-					if (item.rules) {
-						rulesResult[item.prop!] = item.rules;
-					}
-				});
-				return rulesResult;
-			}),
 			isSubmitLoading: false,
+			formRules: {},
 		});
 
 		// 监听formItemSchema数据变化，传递到formModel用于表单校验
@@ -130,6 +123,8 @@ export default defineComponent({
 				toRaw(newFormItemSchema)?.forEach(
 					(item) => (state.formModel[item.prop!] = item.value || "")
 				);
+
+				state.formRules = getFormRules(state.formItemSchema!);
 			},
 			{
 				deep: true,
@@ -157,7 +152,7 @@ export default defineComponent({
 				});
 			},
 			getFormData() {
-				return toRaw(state.formModel);
+				return { ...toRaw(state.formModel) };
 			},
 			async onCancel() {
 				emit("cancel");

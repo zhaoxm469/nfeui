@@ -84,13 +84,14 @@ const getCustomComponentSlot = (
 // 自定义插槽
 export const customComponentSlot = (
 	schema: PartialFormSchema,
-	slots: Recordable
+	slots: Recordable,
+	formModel?: Recordable
 ) => {
 	// @ts-ignore
-	const custimComponent = (_props, { slots }) =>
+	const custimComponent = (props, { slots }) =>
 		Object.keys(FormItemCustomSlotNameEnum).map(
 			(key: FormItemCustomSlotNameKey) =>
-				slots[FormItemCustomSlotNameEnum[key]]?.()
+				slots[FormItemCustomSlotNameEnum[key]]?.(formModel)
 		);
 
 	// 获取适配器转换过的新的插槽对象

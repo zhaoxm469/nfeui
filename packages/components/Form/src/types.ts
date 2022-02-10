@@ -120,9 +120,11 @@ export enum FormItemCustomSlotNameEnum {
 	before = "before",
 }
 
+export type FormRules = Recordable<FormItemRule[]>;
+
 export type FormItemCustomSlotNameKey = keyof typeof FormItemCustomSlotNameEnum;
 
-type FormItemCustomSlotReturn = (() => VNode) | string;
+type FormItemCustomSlotReturn = ((formData: Recordable) => VNode) | string;
 
 export type CustomSlot = Partial<
 	Record<FormItemCustomSlotNameKey, FormItemCustomSlotReturn>
