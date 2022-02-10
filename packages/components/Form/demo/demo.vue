@@ -160,7 +160,7 @@ const [register, { setValue, getFormData }] = useForm({
 								color: "red",
 							},
 						},
-						`姓名：${username.value}，年龄${age.value}`
+						`底部插槽，获取姓名：${username.value}，年龄${age.value}`
 					);
 				},
 			},
