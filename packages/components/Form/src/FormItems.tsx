@@ -10,7 +10,13 @@ import {
 	ElOption,
 	ColProps,
 } from "element-plus";
-import { DefineComponent, defineComponent, h, resolveComponent } from "vue";
+import {
+	computed,
+	DefineComponent,
+	defineComponent,
+	h,
+	resolveComponent,
+} from "vue";
 import {
 	customComponentSlot,
 	elFormItemSlot,
@@ -128,13 +134,17 @@ export default defineComponent({
 			before,
 			componentTop,
 		} = customComponentSlot(schema, slots, formModel);
+
 		const colRow = schema.colProps?.row ? "display:flex" : "";
 		const colProps = { ...props.colProps, ...schema.colProps };
+		const ifShow = computed(() =>
+			schema.ifShow ? schema.ifShow(formModel) : true
+		);
 
 		return () => (
 			<>
 				{before()}
-				<el-col {...colProps} style={colRow}>
+				<el-col {...colProps} style={colRow} v-show={ifShow.value}>
 					{top()}
 					<el-form-item
 						v-slots={elFormItemSlot(schema, labelLeft, labelRight)}
