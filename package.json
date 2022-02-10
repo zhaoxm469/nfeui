@@ -124,7 +124,9 @@
 	},
 	"dependencies": {
 		"@element-plus/icons-vue": "^0.2.6",
+		"@types/lodash": "^4.14.178",
 		"@vue/shared": "^3.2.29",
+		"lodash": "^4.17.21",
 		"saas": "^1.0.0",
 		"unplugin-element-plus": "^0.2.0",
 		"vue": "^3.2.29"
