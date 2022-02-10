@@ -43,7 +43,8 @@
 
 <script lang="ts">
 import { ElForm, ElFormItem, ElInput, ElButton, ElRow } from "element-plus";
-import { isEqual } from 'lodash'
+import isEqual from "lodash/isEqual";
+
 import {
 	computed,
 	defineComponent,
@@ -121,28 +122,25 @@ export default defineComponent({
 		watch(
 			() => state.formItemSchema,
 			(newFormItemSchema) => {
-                console.count('formItemSchema watch');
-                
-				toRaw(newFormItemSchema)?.forEach(
-					(item) => {
-                        if(state.formModel[item.prop]!=item.value) {
-                            state.formModel[item.prop] = item.value
-                        }
-                    }
-				);
+				console.count("formItemSchema watch");
 
-                // 获取新的fule校验规则
-                let formRules =  getFormRules(toRaw(state.formItemSchema!));
-                // 这里要判断老的规则 跟监听 formItem新生成的规则是否一样，如果一样代表虽然formItems数据发生变化了，但是用户没有修改规则
-                // 就无需重新设置formRules对象了，避免其他值发生更改页面规则全部触发的bug
-                if(!isEqual(formRules,toRaw(state.formRules))) state.formRules =formRules;
+				toRaw(newFormItemSchema)?.forEach((item) => {
+					if (state.formModel[item.prop] != item.value) {
+						state.formModel[item.prop] = item.value;
+					}
+				});
+
+				// 获取新的fule校验规则
+				let formRules = getFormRules(toRaw(state.formItemSchema!));
+				// 这里要判断老的规则 跟监听 formItem新生成的规则是否一样，如果一样代表虽然formItems数据发生变化了，但是用户没有修改规则
+				// 就无需重新设置formRules对象了，避免其他值发生更改页面规则全部触发的bug
+				if (!isEqual(formRules, toRaw(state.formRules)))
+					state.formRules = formRules;
 			},
 			{
 				deep: true,
 			}
 		);
-
-
 
 		const methods: FormActionType = {
 			async setProps(formProps: FormProps) {
@@ -173,7 +171,7 @@ export default defineComponent({
 			async onResetFields() {
 				// console.log(toRaw(state.formItemSchema));
 				state.formItemSchema?.forEach((item) => {
-                    item.value = item.defaultValue;
+					item.value = item.defaultValue;
 				});
 				ruleFormRef.value?.resetFields();
 
