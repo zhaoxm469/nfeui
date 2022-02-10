@@ -43,6 +43,7 @@
 
 <script lang="ts">
 import { ElForm, ElFormItem, ElInput, ElButton, ElRow } from "element-plus";
+import { isEqual } from 'lodash'
 import {
 	computed,
 	defineComponent,
@@ -55,10 +56,10 @@ import {
 } from "vue";
 import {
 	FormActionType,
+	FormItemsSchema,
 	FormProps,
 	FormRules,
 	FormSubmitParams,
-	PartialFormSchema,
 } from "./types";
 import { formEmits, formProps } from ".";
 import FormItems from "./FormItems";
@@ -70,7 +71,7 @@ type FormInstance = InstanceType<typeof ElForm>;
 interface State {
 	formPropsRef: Partial<FormProps>;
 	formModel: Recordable;
-	formItemSchema: PartialFormSchema[] | undefined;
+	formItemSchema: FormItemsSchema[] | undefined;
 	showFootBtn: boolean | undefined;
 	isSubmitLoading: boolean;
 	formRules: FormRules;
@@ -116,20 +117,32 @@ export default defineComponent({
 			formRules: {},
 		});
 
-		// 监听formItemSchema数据变化，传递到formModel用于表单校验
+		// 监听formItemSchema数据变化，重新生成formModel
 		watch(
 			() => state.formItemSchema,
 			(newFormItemSchema) => {
+                console.count('formItemSchema watch');
+                
 				toRaw(newFormItemSchema)?.forEach(
-					(item) => (state.formModel[item.prop!] = item.value || "")
+					(item) => {
+                        if(state.formModel[item.prop]!=item.value) {
+                            state.formModel[item.prop] = item.value
+                        }
+                    }
 				);
 
-				state.formRules = getFormRules(state.formItemSchema!);
+                // 获取新的fule校验规则
+                let formRules =  getFormRules(toRaw(state.formItemSchema!));
+                // 这里要判断老的规则 跟监听 formItem新生成的规则是否一样，如果一样代表虽然formItems数据发生变化了，但是用户没有修改规则
+                // 就无需重新设置formRules对象了，避免其他值发生更改页面规则全部触发的bug
+                if(!isEqual(formRules,toRaw(state.formRules))) state.formRules =formRules;
 			},
 			{
 				deep: true,
 			}
 		);
+
+
 
 		const methods: FormActionType = {
 			async setProps(formProps: FormProps) {
@@ -158,15 +171,12 @@ export default defineComponent({
 				emit("cancel");
 			},
 			async onResetFields() {
-				ruleFormRef.value?.resetFields();
 				// console.log(toRaw(state.formItemSchema));
 				state.formItemSchema?.forEach((item) => {
-					if (typeof item.value === "number" && item.component !== "Input") {
-						item.value = 0;
-					} else {
-						item.value = "";
-					}
+                    item.value = item.defaultValue;
 				});
+				ruleFormRef.value?.resetFields();
+
 				emit("reset");
 			},
 			async onMock() {
