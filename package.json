@@ -27,7 +27,7 @@
 		"version": "npm run docs-build",
 		"test": "jest",
 		"add": "zx nucarf/demoTemplate/create/index.mjs ",
-		"np": "np",
+		"np": "npm run ui-build && np",
 		"commit": "git-cz",
 		"generate:types": "zx nucarf/generate-types.mjs  ",
 		"ui-build": "zx nucarf/ui-build.mjs && vite build && npm run type && npm run generate:types",
