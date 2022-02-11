@@ -115,7 +115,8 @@
 		"registry": "http://npm.nucarf.cn/"
 	},
 	"np": {
-		"yarn": false
+		"yarn": false,
+		"cleanup": false
 	},
 	"husky": {
 		"hooks": {
