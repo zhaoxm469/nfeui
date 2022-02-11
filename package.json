@@ -24,6 +24,7 @@
 		"dev": "gc-vitepress dev --root=docs --host",
 		"build": "npm run ui-build && npm run docs-build",
 		"type": "vue-tsc --declaration --emitDeclarationOnly",
+		"version": "npm run docs-build",
 		"test": "jest",
 		"add": "zx nucarf/demoTemplate/create/index.mjs ",
 		"np": "np",
