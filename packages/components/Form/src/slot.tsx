@@ -54,7 +54,7 @@ export const normalizationSlotData = (
 				console.error(`请检查您是否在模板中定义${vnodeOrRfe}插槽了`);
 				break;
 			}
-			componentSlot[slotName] = () => slots[vnodeOrRfe]();
+			componentSlot[slotName] = slots[vnodeOrRfe];
 		}
 	}
 
