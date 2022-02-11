@@ -103,9 +103,9 @@ const [register] = useForm({
 			mock: {
 				type: "@integer(60, 100)",
 			},
-			componentSlot: {
-				append: () => h("div", "岁"),
-			},
+			customSlot:{
+                componentBottom:()=>h('span','validator函数自定义校验')
+            }
 		},
 		{
 			label: "爱好",
@@ -129,8 +129,18 @@ const [register] = useForm({
 					},
 				},
 			],
+            customSlot:{
+                componentBottom:()=>h('div',[
+                    h('span','异步校验,爱好不能填写'),
+                    h('span',{
+                        style:{
+                            color:'red'
+                        }
+                    },'xx')
+                ])
+            },
 			mock: {
-				type: "@integer(60, 100)",
+				type:"@mobile()",
 			},
 		},
 	],
