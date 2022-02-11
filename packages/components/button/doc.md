@@ -1,7 +1,7 @@
 ---
 map:
-    # 映射到docs的路径
-    path: /components/button
+  # 映射到docs的路径
+  path: /components/button
 ---
 
 # Button 按钮

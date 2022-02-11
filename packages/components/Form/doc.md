@@ -92,7 +92,7 @@ const [ register ] = useForm(formProps);
 | maxlength   | 最大长度                                                                     | number                                                      | -      | -      |
 | minLength   | 最小长度                                                                     | number                                                      | -      | -      |
 | disabled    | 是否禁用                                                                     | boolean                                                     | true   | false  |
-| mock        | mock 数据规则                                                                | {type?:string,rules?: Record<string, any\>}                 | -      | -      |
+| mock        | mock 数据规则                                                                | {type?:MockType,rules?: Record<string, any\>}               | -      | -      |
 | styleProps  | 组件样式设置                                                                 | Record<string, any\>                                        | -      | -      |
 
 ```typescript
@@ -117,7 +117,7 @@ type FormItemComponentName = "Input" | "Select" | "Autocomplete";
 
 // customSlot 支持的自定义插槽
 type FormItemCustomSlotNameKey =
-	| "top"
+	 "top"
 	| "bottom"
 	| "componentBottom"
 	| "componentTop"
@@ -125,4 +125,58 @@ type FormItemCustomSlotNameKey =
 	| "labelRight"
 	| "append"
 	| "before";
+
+typeof MockType =
+    "@boolean( min?, max?, current? )"
+    | "@natural( min?, max? )"
+    | "@integer( min?, max? )"
+    | "@float( min?, max?, dmin?, dmax? )"
+    | "@character( pool? )"
+    | "@string( pool?, min?, max? )"
+    | "@range(start?, stop, step?)"
+    | "@date( format? )"
+    | "@time( format? )"
+    | "@datetime( format? )"
+    | "@now( unit?, format? )"
+    | "@image( size?, background?, foreground?, format?, text? )"
+    | "@dataImage( size?, text? )"
+    | "@color()"
+    | "@hex()"
+    | "@rgb()"
+    | "@rgba()"
+    | "@hsl()"
+    | "@paragraph( min?, max? )"
+    | "@sentence( min?, max? )"
+    | "@word( min?, max? )"
+    | "@title( min?, max? )"
+    | "@cparagraph( min?, max? )"
+    | "@csentence( min?, max? )"
+    | "@cword( pool?, min?, max? )"
+    | "@ctitle( min?, max? )"
+    | "@first()"
+    | "@last()"
+    | "@name( middle? )"
+    | "@cfirst()"
+    | "@clast()"
+    | "@cname()"
+    | "@url()"
+    | "@domain()"
+    | "@protocol()"
+    | "@tld()"
+    | "@email()"
+    | "@ip()"
+    | "@region()"
+    | "@province()"
+    | "@city( prefix? )"
+    | "@county( prefix? )"
+    | "@zip()"
+    | "@capitalize( word )"
+    | "@upper( str )"
+    | "@lower( str )"
+    | "@pick( arr )"
+    | "@shuffle( arr )"
+    | "@guid()"
+    | "@id()"
+    | "@increment( step? )"
+
 ```
