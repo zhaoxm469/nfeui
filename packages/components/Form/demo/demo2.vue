@@ -1,10 +1,6 @@
 <template>
 	<div class>
-		<nfeForm
-			@register="register"
-			@submit="onSubmit"
-			@reset="onReset"
-		/>
+		<nfeForm @register="register" @submit="onSubmit" @reset="onReset" />
 	</div>
 </template>
 
@@ -60,7 +56,7 @@ const [register] = useForm({
 			placeholder: "请输入年龄",
 			mock: {
 				type: "@integer(60, 100)",
-			}
+			},
 		},
 	],
 });

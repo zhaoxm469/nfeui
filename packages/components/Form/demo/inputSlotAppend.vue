@@ -1,11 +1,10 @@
 <template>
-    <div>append</div>
+	<div>append</div>
 </template>
-<script setup lang="ts" >
-</script>
+<script setup lang="ts"></script>
 <style scoped>
 div {
-    background: red;
-    color: #fff;
+	background: red;
+	color: #fff;
 }
 </style>
