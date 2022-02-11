@@ -1,11 +1,6 @@
 <template>
 	<div class>
-		<nfeForm
-			@register="register"
-			@submit="onSubmit"
-			@cancel="onCancel"
-			@reset="onReset"
-		/>
+		<nfeForm @register="register" @submit="onSubmit" @reset="onReset" />
 	</div>
 </template>
 
@@ -161,10 +156,6 @@ const onSubmit = ({ formData, loading }: FormSubmitParams) => {
 		});
 		loading(false);
 	}, 1000);
-};
-
-const onCancel = () => {
-	console.log("触发取消");
 };
 
 const onReset = () => {
