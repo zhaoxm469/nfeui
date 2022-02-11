@@ -149,7 +149,8 @@ export default defineComponent({
 					<el-form-item
 						v-slots={elFormItemSlot(schema, labelLeft, labelRight)}
 						labelWidth={schema.labelWidth}
-						prop={schema.prop}>
+						prop={schema.prop}
+					>
 						{componentTop()}
 						{getElComponent()}
 						{componentBottom()}
