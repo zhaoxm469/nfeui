@@ -188,6 +188,98 @@ export type FormItemsSchema = {
 } & Recordable;
 
 interface Mock {
+    /**
+     * @description:MockJs 占位符字符串 
+     * 
+     * 以下占位符字符串均可支持
+     * 
+     * 
+     * ===============Basic=============
+     * 
+     * @boolean( min?, max?, current? )
+     * @natural( min?, max? )       -> 返回一个随机的自然数（大于等于 0 的整数）。
+     * @integer( min?, max? )       -> 返回一个随机字符。
+     * @float( min?, max?, dmin?, dmax? )"
+     * @character( pool? )"         -> 返回一个随机字符。
+     * @string( pool?, min?, max? )"
+     * @range(start?, stop, step?)" -> 返回一个整型数组。
+     * 
+     * ===============Date=============
+     * 
+     * @date( format? )"
+     * @time( format? )"
+     * @datetime( format? )"
+     * @now( unit?, format? )"
+     * 
+     * ===============Image==============
+     * 
+     * @image( size?, background?, foreground?, format?, text? )"
+     * @dataImage( size?, text? )"
+     * 
+     * ===============Color==============
+     * 
+     * @color()"
+     * @hex()"
+     * @rgb()"
+     * @rgba()"
+     * @hsl()"
+     * 
+     * ===============Text==============
+     * 
+     * 
+     * @paragraph( min?, max? )"        -> 随机生成一段文本。
+     * @sentence( min?, max? )"         -> 随机生成一个句子，第一个单词的首字母大写。
+     * @word( min?, max? )"             -> 随机生成一个单词。
+     * @title( min?, max? )"            -> 随机生成一句标题，其中每个单词的首字母大写。
+     * @cparagraph( min?, max? )"       -> 随机生成一段中文文本。
+     * @csentence( min?, max? )"        -> 随机生成一段中文文本。
+     * @cword( pool?, min?, max? )"     -> 随机生成一个汉字。
+     * @ctitle( min?, max? )"           -> 随机生成一句中文标题。
+     * 
+     * 
+     * ===============NAME==============
+     * 
+     * @first()"            -> 随机生成一个常见的英文名。
+     * @last()"             -> 随机生成一个常见的英文姓。
+     * @name( middle? )"    -> 随机生成一个常见的英文姓名。
+     * @cfirst()"           -> 随机生成一个常见的中文名。
+     * @clast()"            -> 随机生成一个常见的中文姓。
+     * @cname()"            -> 随机生成一个常见的中文姓名。
+     * 
+     * ===============Web==============
+     * 
+     * 
+     * @url()"              -> 随机生成一个 URL。
+     * @domain()"           -> 随机生成一个域名。
+     * @protocol()"         -> 随机生成一个 URL 协议。返回以下值之
+     * @tld()"              -> 随机生成一个顶级域名（Top Level Domain）。
+     * @email()"            -> 随机生成一个邮件地址。
+     * @ip()"               -> 随机生成一个 IP 地址。
+     * 
+     * ===============Address==============
+     * 
+     * @region()"           -> 随机生成一个（中国）大区。
+     * @province()"         -> 随机生成一个（中国）省（或直辖市、自治区、特别行政区）。
+     * @city( prefix? )"    -> 随机生成一个（中国）市。
+     * @county( prefix? )"  -> 随机生成一个（中国）县。
+     * @zip()"              -> 随机生成一个邮政编码（六位数字）。
+     * 
+     * ===============Helper==============
+     * 
+     * @capitalize( word )" -> 把字符串的第一个字母转换为大写。
+     * @upper( str )"       -> 把字符串转换为大写。
+     * @lower( str )"       -> 把字符串转换为小写。
+     * @pick( arr )"        -> 从数组中随机选取一个元素，并返回。
+     * @shuffle( arr )"     -> 打乱数组中元素的顺序，并返回。
+     * 
+     * ===============Miscellaneous==============
+     * 
+     * @guid()"             -> 随机生成一个 GUID。
+     * @id()"               -> 随机生成一个 18 位身份证。
+     * @increment( step? )  -> 整数自增的步长。默认值为 1。
+     * @mobile()            -> 随机生成手机号
+     * @constellation()     -> 随机生成某一个星座
+     */
     type?: string;
     rules?: Recordable;
 }
