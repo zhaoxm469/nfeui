@@ -1,7 +1,6 @@
 import { toRaw } from "vue";
 import {
 	ComponentSlot,
-	CustomSlot,
 	FormItemComponentName,
 	FormItemCustomSlotNameEnum,
 	FormItemCustomSlotNameKey,
@@ -38,7 +37,7 @@ const elSlotStrategy = (
 
 // 标准化插槽数据，一个数据适配器的接口
 export const normalizationSlotData = (
-	componentSlot: ComponentSlot | CustomSlot | undefined,
+	componentSlot: ComponentSlot | undefined,
 	slots: Recordable
 ) => {
 	if (!componentSlot) return {};
