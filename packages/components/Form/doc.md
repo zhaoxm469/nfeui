@@ -4,11 +4,16 @@ map:
   path: /components/Form
 ---
 
-# Form 表单
+# Form 万能表单
 
 基于 Element plus 二次封装的表单组件 , 扩展了一些常用功能 , 通过配置 JSON 就能快速生成表单 .
 
 > 本组件不包含样式文件 ， 使用此组件项目中务必自行引入 Element UI 样式文件。
+
+## 相关文档
+
+- [MockJs](http://mockjs.com/examples.html#DPD) - 用于配置 FormItems.mock 选项
+- [ElementPlus](https://element-plus.gitee.io/zh-CN/component/button.html#%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95) - 饿了么 UI 组件文档
 
 ## 基础使用
 
@@ -16,11 +21,11 @@ map:
 
 ## 动态控制是否显示隐藏 FormItem
 
-<demo src="./demo/demo2.vue" language="vue"  desc="通过设置ifShow属性即可控制formItem的显示隐藏 "></demo>
+<demo src="./demo/demo2.vue" desc="通过设置ifShow属性即可控制formItem的显示隐藏 " language="vue" ></demo>
 
 ## 表单校验
 
-<demo src="./demo/demo3.vue" language="vue" desc="FormItems.rules 用法跟Element form.rules 保持一致" ></demo>
+<demo src="./demo/demo3.vue" desc="FormItems.rules 用法跟Element form.rules 保持一致"  language="vue" ></demo>
 
 ## useForm Methods
 
@@ -68,25 +73,56 @@ const [ register ] = useForm(formProps);
 
 > FormItems 的是 FormItems.component 组件对应的 饿了么组件的 props 属性 。
 
-| 属性          | 说明                                                                                | 类型                                        | 可选值                                                                                                                                                                                                                 | 默认值 |
-| ------------- | ----------------------------------------------------------------------------------- | ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | -------- | -------- | ----------------- | -------------- | ----------- | ------------ | --- |
-| label         | 标签标题                                                                            | string                                      | -                                                                                                                                                                                                                      | -      |
-| prop          | 表单域 model 字段                                                                   | string                                      | -                                                                                                                                                                                                                      | -      |
-| component     | 使用 EL 的组件名称，无需加 El 前缀                                                  | string                                      | Input , Autocomplete , Cascade , Checkbox , Color Picker , Date Picker , DateTime Picker , Input Number , Radio , Rate , Select , Virtualized Select , Slider , Switch , Time Picker , Time Select , Transfer , Upload | -      |
-| componentSlot | componentKey 对应组件的插槽，可查看饿了么组件文档看使用的组件支持哪些插槽，传入即可 | Record<string, any\>                        | -                                                                                                                                                                                                                      | -      |
-| customSlot    | 自定义组件插槽，为了满足不同业务场景的需求，在 FormItem 分别自定义了多个插槽位置    | Record<string, any\>                        | "bottom"                                                                                                                                                                                                               | "top"  | "before" | "append" | "componentBottom" | "componentTop" | "labelLeft" | "labelRight" | -   |
-| required      | 是否必填，如不设置，则会根据校验规则自动生成                                        | boolean                                     | true                                                                                                                                                                                                                   | false  |
-| field         | 字段筛选，需要 as 成前端组件支持的字段名 text、value。 例如 oldKey as newKey        | string                                      | -                                                                                                                                                                                                                      | -      |
-| value         | 双向绑定存放的数据                                                                  | string                                      | -                                                                                                                                                                                                                      | -      |
-| clearable     | 是否展示清除按钮                                                                    | boolean                                     | true                                                                                                                                                                                                                   | false  |
-| placeholder   | 占位符                                                                              | string                                      | -                                                                                                                                                                                                                      | -      |
-| ifShow        | 是否显示                                                                            | (formData:Record)=>boolean                  | -                                                                                                                                                                                                                      | -      |
-| labelWidth    | label 宽度                                                                          | string                                      | -                                                                                                                                                                                                                      | -      |
-| suffixIcon    | 后缀 icon                                                                           | Component                                   | -                                                                                                                                                                                                                      | -      |
-| prefixIcon    | 前缀 icon                                                                           | Component                                   | -                                                                                                                                                                                                                      | -      |
-| colProps      | 间距配置                                                                            | {span:number}                               | -                                                                                                                                                                                                                      | -      |
-| maxlength     | 最大长度                                                                            | number                                      | -                                                                                                                                                                                                                      | -      |
-| minLength     | 最小长度                                                                            | number                                      | -                                                                                                                                                                                                                      | -      |
-| disabled      | 是否禁用                                                                            | boolean                                     | true                                                                                                                                                                                                                   | false  |
-| mock          | mock 数据规则                                                                       | {type?:string,rules?: Record<string, any\>} | -                                                                                                                                                                                                                      | -      |
-| styleProps    | 组件样式设置                                                                        | Record<string, any\>                        | -                                                                                                                                                                                                                      | -      |
+| 属性        | 说明                                                                         | 类型                                                        | 可选值 | 默认值 |
+| ----------- | ---------------------------------------------------------------------------- | ----------------------------------------------------------- | ------ | ------ |
+| label       | 标签标题                                                                     | string                                                      | -      | -      |
+| prop        | 表单域 model 字段                                                            | string                                                      | -      | -      |
+| component   | FormItemComponentName                                                        | Record<string, any\>                                        | -      | -      |
+| customSlot  | 自定义组件插槽                                                               | Record<FormItemCustomSlotNameKey, FormItemCustomSlotReturn> | -      | -      |
+| required    | 是否必填，如不设置，则会根据校验规则自动生成                                 | boolean                                                     | true   | false  |
+| field       | 字段筛选，需要 as 成前端组件支持的字段名 text、value。 例如 oldKey as newKey | string                                                      | -      | -      |
+| value       | 双向绑定存放的数据                                                           | string                                                      | -      | -      |
+| clearable   | 是否展示清除按钮                                                             | boolean                                                     | true   | false  |
+| placeholder | 占位符                                                                       | string                                                      | -      | -      |
+| ifShow      | 是否显示                                                                     | (formData:Record)=>boolean                                  | -      | -      |
+| labelWidth  | label 宽度                                                                   | string                                                      | -      | -      |
+| suffixIcon  | 后缀 icon                                                                    | Component                                                   | -      | -      |
+| prefixIcon  | 前缀 icon                                                                    | Component                                                   | -      | -      |
+| colProps    | 间距配置                                                                     | {span:number}                                               | -      | -      |
+| maxlength   | 最大长度                                                                     | number                                                      | -      | -      |
+| minLength   | 最小长度                                                                     | number                                                      | -      | -      |
+| disabled    | 是否禁用                                                                     | boolean                                                     | true   | false  |
+| mock        | mock 数据规则                                                                | {type?:string,rules?: Record<string, any\>}                 | -      | -      |
+| styleProps  | 组件样式设置                                                                 | Record<string, any\>                                        | -      | -      |
+
+```typescript
+type FormItemComponentName =
+	| "Input"
+	| "Autocomplete"
+	| "Cascade"
+	| "Checkbox"
+	| "ColorPicker"
+	| "DatePicker"
+	| "DateTimePicker"
+	| "InputNumber"
+	| "Radio"
+	| "Rate"
+	| "Select"
+	| "Virtualized Select"
+	| "Slider"
+	| "Switch"
+	| "Time Picker"
+	| "Time Select"
+	| "Transfer"
+	| "Upload";
+
+type FormItemCustomSlotNameKey =
+	| "top"
+	| "bottom"
+	| "componentBottom"
+	| "componentTop"
+	| "labelLeft"
+	| "labelRight"
+	| "append"
+	| "before";
+```
