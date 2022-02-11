@@ -1,5 +1,5 @@
 module.exports = {
 	yarn: false,
-	contents: "dist",
+	contents: "./dist",
 	cleanup: false,
 };
