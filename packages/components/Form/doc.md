@@ -4,7 +4,7 @@ map:
   path: /components/Form
 ---
 
-# Form 万能表单
+# Form 万能表单（wip）
 
 基于 Element plus 二次封装的表单组件 , 扩展了一些常用功能 , 通过配置 JSON 就能快速生成表单 .
 
@@ -19,11 +19,18 @@ map:
 
 <demo src="./demo/demo.vue"  ></demo>
 
-## 动态控制是否显示隐藏 FormItem
+### customSlot & componentSlot 插槽使用
+
+针对每一项 FormItem 组件都设置了丰富的插槽。  
+如固定布局不满足业务需求，跟根据插槽随意扩展。同时也支持使用 componentKey 对应的饿了么组件提供的插槽
+
+<demo src="./demo/slot.vue"></demo>
+
+### 动态控制是否显示隐藏 FormItem
 
 <demo src="./demo/demo2.vue" desc="通过设置ifShow属性即可控制formItem的显示隐藏 " ></demo>
 
-## 表单校验
+### 表单校验
 
 <demo src="./demo/demo3.vue" desc="FormItems.rules 用法跟Element form.rules 保持一致"  ></demo>
 
@@ -95,6 +102,14 @@ const [ register ] = useForm(formProps);
 | mock        | mock 数据规则                                                                | {type?:MockType,rules?: Record<string, any\>}               | -      | -      |
 | styleProps  | 组件样式设置                                                                 | Record<string, any\>                                        | -      | -      |
 
+## Type 类型
+
+常用 Type 类型的定义
+
+### FormItemComponentName
+
+> 用于 formProps.formItems[].component = FormItemComponentName;
+
 ```typescript
 // component字段目前支持的组件
 type FormItemComponentName = "Input" | "Select" | "Autocomplete";
@@ -114,10 +129,16 @@ type FormItemComponentName = "Input" | "Select" | "Autocomplete";
 // | "TimeSelect"
 // | "Transfer"
 // | "Upload";
+```
 
+### FormItemCustomSlotNameKey
+
+> 用于 formProps.formItems[].customSlot = FormItemCustomSlotNameKey;
+
+```typescript
 // customSlot 支持的自定义插槽
 type FormItemCustomSlotNameKey =
-	 "top"
+	| "top"
 	| "bottom"
 	| "componentBottom"
 	| "componentTop"
@@ -125,6 +146,15 @@ type FormItemCustomSlotNameKey =
 	| "labelRight"
 	| "append"
 	| "before";
+```
+
+### MockType
+
+对应[MockJs 文档](http://mockjs.com/examples.html#Basic)的占位符
+
+> 用于 formProps.formItems[].mock.type = MockType;
+
+```typescript
 
 typeof MockType =
     "@boolean( min?, max?, current? )"
