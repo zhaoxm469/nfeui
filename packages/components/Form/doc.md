@@ -96,26 +96,26 @@ const [ register ] = useForm(formProps);
 | styleProps  | 组件样式设置                                                                 | Record<string, any\>                                        | -      | -      |
 
 ```typescript
-type FormItemComponentName =
-	| "Input"
-	| "Autocomplete"
-	| "Cascade"
-	| "Checkbox"
-	| "ColorPicker"
-	| "DatePicker"
-	| "DateTimePicker"
-	| "InputNumber"
-	| "Radio"
-	| "Rate"
-	| "Select"
-	| "Virtualized Select"
-	| "Slider"
-	| "Switch"
-	| "Time Picker"
-	| "Time Select"
-	| "Transfer"
-	| "Upload";
+// component字段目前支持的组件
+type FormItemComponentName = "Input" | "Select" | "Autocomplete";
+// | "Cascade"
+// | "Checkbox"
+// | "ColorPicker"
+// | "DatePicker"
+// | "DateTimePicker"
+// | "InputNumber"
+// | "Radio"
+// | "Rate"
+// | "Select"
+// | "Virtualized Select"
+// | "Slider"
+// | "Switch"
+// | "TimePicker"
+// | "TimeSelect"
+// | "Transfer"
+// | "Upload";
 
+// customSlot 支持的自定义插槽
 type FormItemCustomSlotNameKey =
 	| "top"
 	| "bottom"
