@@ -51,7 +51,7 @@ $ yarn
 
 ```bash
  ├── dist                               # UI组件打包文件
- ├── postcss.config.js                  # post.config配置
+ ├── postcss.config.js                  # postcss.config配置
  ├── tsconfig.json                      # ts配置文件
  ├── packages                           # 组件源码核心目录
  │   ├── index.ts                       # 组件导出模块，一般不用修改这个文件，打包的时候 会根据nav.config.json自动生成导出的模块
@@ -86,7 +86,7 @@ $ yarn
 {
     "scripts": {
         # 运行项目
-        "dev": "zx nucarf/dev.mjs",
+		"dev": "gc-vitepress dev --root=docs --host",
         # UI组件打包 && 打包UI在线文档
         "build": "npm run ui-build && npm run docs-build",
         # 生成vue组件type.d.ts文件
@@ -94,15 +94,17 @@ $ yarn
         # 全量jest测试脚本执行
         "test": "jest",
         # cli快捷生成组件模板文件
-        "add": "zx nucarf/demoTemplate/create.mjs ",
+		"add": "zx nucarf/demoTemplate/create/index.mjs ",
+        # git提交辅助
+		"commit": "git-cz",
         # npm发包
         "np": "np",
         # 生成UI组件打包后的type.d类型文件
         "generate:types": "zx nucarf/generate-types.mjs ",
         # UI文档站点打包
         "docs-build": "zx nucarf/docs-build.mjs",
-        # UI 打包
-        "ui-build": "vite build && npm run type && npm run generate:types",
+        # UI组件 打包
+		"ui-build": "zx nucarf/ui-build.mjs && vite build && npm run type && npm run generate:types",
         # 文档站点打包文件预览
         "docs-serve": "cross-env NODE_ENV=production gc-vitepress serve --root=docs",
         # 文档打包&预览
@@ -127,7 +129,7 @@ $ yarn
 npm run dev
 ```
 
-运行成功以后，就可以通过 http://localhost:3000 访问我们的组件文档了。
+运行成功以后，就可以通过 http://localhost:3000 访问我们的UI组件站点文档了。
 
 ### 通过命令生成组件基础模板
 
@@ -144,6 +146,7 @@ npm run add
 # ? 组件描述(五十个字以内)： 写一个按钮组件玩玩
 # ? 请选择组件分类(输入编号)：1.布局组件,2.操作反馈,3.基础组件,4.导航组件,5.数据录入,6.业务组件 6
 # ? 组件作者: zhaodage
+# ? 是否需要生成__test__模板？
 
 # 组件生成成功，请开始你的表演吧！！！！
 ```
