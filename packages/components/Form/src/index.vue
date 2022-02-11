@@ -150,7 +150,11 @@ export default defineComponent({
 				const loading = (isLoading = true) => {
 					state.isSubmitLoading = isLoading;
 				};
+
+				loading();
 				ruleFormRef.value?.validate((valid) => {
+					loading(false);
+
 					if (valid) {
 						emit("submit", {
 							formData: toRaw(state.formModel),
