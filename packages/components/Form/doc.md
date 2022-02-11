@@ -17,15 +17,15 @@ map:
 
 ## 基础使用
 
-<demo src="./demo/demo.vue" language="vue"  ></demo>
+<demo src="./demo/demo.vue"  ></demo>
 
 ## 动态控制是否显示隐藏 FormItem
 
-<demo src="./demo/demo2.vue" desc="通过设置ifShow属性即可控制formItem的显示隐藏 " language="vue" ></demo>
+<demo src="./demo/demo2.vue" desc="通过设置ifShow属性即可控制formItem的显示隐藏 " ></demo>
 
 ## 表单校验
 
-<demo src="./demo/demo3.vue" desc="FormItems.rules 用法跟Element form.rules 保持一致"  language="vue" ></demo>
+<demo src="./demo/demo3.vue" desc="FormItems.rules 用法跟Element form.rules 保持一致"  ></demo>
 
 ## useForm Methods
 
