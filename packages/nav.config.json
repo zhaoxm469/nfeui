@@ -1,39 +1,39 @@
 {
-    "navs": [
-        {
-            "text": "基础组件",
-            "cType": "3",
-            "children": [
-                {
-                    "version": "0.0.1",
-                    "text": "Button",
-                    "sort": 1,
-                    "cName": "按钮",
-                    "show": true,
-                    "desc": "自定义按钮",
-                    "author": "zxm",
-                    "link": "/components/button/doc"
-                }
-            ]
-        },
-        {
-            "text": "业务组件",
-            "cType": 6,
-            "children": [
-                {
-                    "version": "0.0.1",
-                    "text": "Form",
-                    "sort": 1,
-                    "cName": "表单",
-                    "show": true,
-                    "desc": "基于Element plus 二次封装的表单组件",
-                    "author": "zhaoxm",
-                    "link": "/components/Form/doc",
-                    "exportMethods": {
-                        "useForm": "/components/Form/src/useForm"
-                    }
-                }
-            ]
-        }
-    ]
+	"navs": [
+		{
+			"text": "基础组件",
+			"cType": "3",
+			"children": [
+				{
+					"version": "0.0.1",
+					"text": "Button",
+					"sort": 1,
+					"cName": "按钮",
+					"show": true,
+					"desc": "自定义按钮",
+					"author": "zxm",
+					"link": "/components/button/doc"
+				}
+			]
+		},
+		{
+			"text": "业务组件",
+			"cType": 6,
+			"children": [
+				{
+					"version": "0.0.1",
+					"text": "Form",
+					"sort": 1,
+					"cName": "万能表单",
+					"show": true,
+					"desc": "基于Element plus 二次封装的表单组件",
+					"author": "zhaoxm",
+					"link": "/components/Form/doc",
+					"exportMethods": {
+						"useForm": "/components/Form/src/useForm"
+					}
+				}
+			]
+		}
+	]
 }
