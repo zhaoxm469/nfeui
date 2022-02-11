@@ -144,13 +144,13 @@ export default defineComponent({
 		return () => (
 			<>
 				{before()}
-				<el-col {...colProps} style={colRow} v-show={ifShow.value}>
+				<el-col {...colProps} v-show={ifShow.value}>
 					{top()}
 					<el-form-item
 						v-slots={elFormItemSlot(schema, labelLeft, labelRight)}
 						labelWidth={schema.labelWidth}
 						prop={schema.prop}
-					>
+						style={colRow}>
 						{componentTop()}
 						{getElComponent()}
 						{componentBottom()}
