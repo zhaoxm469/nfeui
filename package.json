@@ -23,7 +23,6 @@
 	"scripts": {
 		"dev": "gc-vitepress dev --root=docs --host",
 		"build": "npm run ui-build && npm run docs-build",
-		"version": "npm run docs-build",
 		"type": "vue-tsc --declaration --emitDeclarationOnly",
 		"test": "jest",
 		"add": "zx nucarf/demoTemplate/create/index.mjs ",
