@@ -1,6 +1,6 @@
 {
 	"name": "nfeui",
-	"version": "0.0.5",
+	"version": "0.0.7",
 	"description": "牛卡福PC端UI组件库",
 	"main": "dist/nfeui.umd.js",
 	"module": "dist/nfeui.es.js",
@@ -23,6 +23,7 @@
 	"scripts": {
 		"dev": "gc-vitepress dev --root=docs --host",
 		"build": "npm run ui-build && npm run docs-build",
+		"version": "npm run docs-build",
 		"type": "vue-tsc --declaration --emitDeclarationOnly",
 		"test": "jest",
 		"add": "zx nucarf/demoTemplate/create/index.mjs ",
