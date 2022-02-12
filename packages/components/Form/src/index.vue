@@ -21,19 +21,27 @@
 					type="primary"
 					v-if="formPropsRef.showSubmitButton"
 					:loading="isSubmitLoading"
+					:disabled="isSubmitLoading"
 					@click="onSubmit"
 					>确定</el-button
 				>
-				<el-button v-if="formPropsRef.showResetButton" @click="onResetFields"
+				<el-button
+					v-if="formPropsRef.showResetButton"
+					:disabled="isSubmitLoading"
+					@click="onResetFields"
 					>重置</el-button
 				>
 				<el-button
 					type="primary"
+					:disabled="isSubmitLoading"
 					v-if="formPropsRef.showMockButton"
 					@click="onMock"
 					>模拟数据</el-button
 				>
-				<el-button v-if="formPropsRef.showCancelButton" @click="onCancel"
+				<el-button
+					:disabled="isSubmitLoading"
+					v-if="formPropsRef.showCancelButton"
+					@click="onCancel"
 					>取消</el-button
 				>
 			</el-row>
@@ -125,7 +133,8 @@ export default defineComponent({
 				console.count("formItemSchema watch");
 
 				toRaw(newFormItemSchema)?.forEach((item) => {
-					if (state.formModel[item.prop] != item.value) {
+					// 给formModel赋值的时候 首先判断 跟原来的value 是否相等，如果不想等在赋值
+					if (state.formModel[item.prop] !== item.value) {
 						state.formModel[item.prop] = item.value;
 					}
 				});
@@ -134,8 +143,9 @@ export default defineComponent({
 				let formRules = getFormRules(toRaw(state.formItemSchema!));
 				// 这里要判断老的规则 跟监听 formItem新生成的规则是否一样，如果一样代表虽然formItems数据发生变化了，但是用户没有修改规则
 				// 就无需重新设置formRules对象了，避免其他值发生更改页面规则全部触发的bug
-				if (!isEqual(formRules, toRaw(state.formRules)))
+				if (!isEqual(formRules, toRaw(state.formRules))) {
 					state.formRules = formRules;
+				}
 			},
 			{
 				deep: true,

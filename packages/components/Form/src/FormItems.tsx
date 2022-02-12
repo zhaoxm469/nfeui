@@ -126,12 +126,12 @@ export default defineComponent({
 		// 获取自定义插槽组件
 		const {
 			componentBottom,
-			top,
-			bottom,
+			formItemTop,
+			formItemBottom,
 			labelLeft,
 			labelRight,
-			append,
-			before,
+			wrapAppend,
+			wrapBefore,
 			componentTop,
 		} = customComponentSlot(schema, slots, formModel);
 
@@ -143,9 +143,9 @@ export default defineComponent({
 
 		return () => (
 			<>
-				{before()}
+				{wrapBefore()}
 				<el-col {...colProps} v-show={ifShow.value}>
-					{top()}
+					{formItemTop()}
 					<el-form-item
 						v-slots={elFormItemSlot(schema, labelLeft, labelRight)}
 						labelWidth={schema.labelWidth}
@@ -155,9 +155,9 @@ export default defineComponent({
 						{getElComponent()}
 						{componentBottom()}
 					</el-form-item>
-					{bottom()}
+					{formItemBottom()}
 				</el-col>
-				{append()}
+				{wrapAppend()}
 			</>
 		);
 	},
