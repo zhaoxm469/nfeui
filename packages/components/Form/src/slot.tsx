@@ -1,12 +1,14 @@
-import { toRaw } from "vue";
+import { h, reactive, toRaw, VNode } from "vue";
 import {
 	ComponentSlot,
 	FormItemComponentName,
 	FormItemCustomSlotNameEnum,
 	FormItemCustomSlotNameKey,
+	FormSchemaOptions,
 	PartialFormSchema,
 } from "./types";
 import { QuestionFilled } from "@element-plus/icons-vue";
+import { ElOption } from "element-plus";
 type SlotStrategy = Partial<Record<FormItemComponentName, () => void>>;
 
 // 有的组件需要插槽，比如Select，这里存放各种组件对应默认插槽的策略
@@ -16,17 +18,37 @@ const elSlotStrategy = (
 ): Recordable => {
 	const strategy: SlotStrategy = {
 		Select() {
-			componentSlot["default"] = () =>
-				schema.options?.map((item) => {
+			let options = schema.options;
+
+			if (typeof options === "function") {
+				(options as () => Promise<any[]>)().then(
+					(options) => (schema.options = options)
+				);
+			} else {
+				options as FormSchemaOptions[];
+			}
+
+			let elOptions: VNode[] = [];
+
+			if (Array.isArray(options)) {
+				elOptions = options.map((item) => {
 					if (schema.fieldObj) {
 						for (let key in schema.fieldObj) {
 							if (item[key]) item[schema.fieldObj[key]] = item[key];
 						}
 					}
-					return (
-						<el-option key={item.key} label={item.label} value={item.value} />
-					);
+
+					return h(ElOption, {
+						key: item.key!,
+						value: item.value!,
+						label: item.label,
+					});
 				});
+			}
+
+			// 这样写样式有点丑陋，以后有时间优化这个
+			// componentSlot["empty"] = () => h('span', '暂无数据')
+			componentSlot["default"] = () => h("div", elOptions);
 		},
 	};
 
