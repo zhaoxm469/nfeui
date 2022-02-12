@@ -30,7 +30,8 @@
 					"author": "zhaoxm",
 					"link": "/components/Form/doc",
 					"exportMethods": {
-						"useForm": "/components/Form/src/useForm"
+						"useForm": "/components/Form/src/useForm",
+						"useMock": "/hooks/useMock"
 					}
 				}
 			]

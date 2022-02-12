@@ -1,25 +1,23 @@
-import { App } from 'vue';
-
+import { App } from "vue";
 
 import nfeButton from "./components/Button/index";
 
 import nfeForm from "./components/Form/index";
 
-
-
 import useForm from "./components/Form/src/useForm";
 
+import useMock from "./hooks/useMock";
 
 function install(app: App) {
-    const packages = [nfeButton,nfeForm];
-    packages.forEach((item: any) => {
-        if (item.install) {
-            app.use(item);
-        } else if (item.name) {
-            app.component(item.name, item);
-        }
-    });
+	const packages = [nfeButton, nfeForm];
+	packages.forEach((item: any) => {
+		if (item.install) {
+			app.use(item);
+		} else if (item.name) {
+			app.component(item.name, item);
+		}
+	});
 }
-export { install, nfeButton,nfeForm, useForm };
+export { install, nfeButton, nfeForm, useForm, useMock };
 
-export default { install, version: '0.0.1' };
+export default { install, version: "0.0.1" };
