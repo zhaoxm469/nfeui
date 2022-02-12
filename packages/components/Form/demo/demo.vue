@@ -10,11 +10,13 @@
 </template>
 
 <script lang="ts" setup>
-import { nfeForm, useForm } from "nfeui";
+import { nfeForm, useForm, useMock } from "nfeui";
 import { Search } from "@element-plus/icons-vue";
 import { FormSubmitParams } from "../src/types";
 import { h, nextTick, toRefs } from "vue";
 import { ElMessage } from "element-plus";
+
+const { getRulesData } = useMock();
 
 const getCityList = (keyword: string) => {
 	return new Promise((reslove, reject) => {
@@ -33,14 +35,24 @@ const getCityList = (keyword: string) => {
 	});
 };
 
+const getPriceOptions = () => {
+	return new Promise<any[]>((reslove, reject) => {
+		setTimeout(() => {
+			const result = getRulesData({
+				"list|1-20": [
+					{
+						"label|1-100": 1,
+						"key|1-100000000": 1,
+					},
+				],
+			}).list;
+			reslove(result);
+		}, 1000);
+	});
+};
+
 const [register, { setValue, getFormData }] = useForm({
-	// inline: true,
 	labelWidth: 80,
-	// labelPosition: 'top',
-	// disabled: !true,
-	// size: 'default',
-	// inlineMessage: true,
-	// statusIcon: true,
 	colProps: {
 		xs: 24,
 		sm: 12,
@@ -58,25 +70,6 @@ const [register, { setValue, getFormData }] = useForm({
 			prop: "username",
 			placeholder: "请输入姓名",
 			clearable: true,
-			onClick() {
-				console.log("点击");
-			},
-			onChange() {
-				console.log("发生改变");
-			},
-			onInput() {
-				console.log("oninput....");
-			},
-			onClear() {
-				console.log("清空数据");
-				// 清空数据以后，给电话号输入框随便写点啥把
-				setValue({
-					tel: "17888",
-				});
-			},
-			onSelect() {
-				console.log("选中文字");
-			},
 			mock: {
 				type: "@cname",
 			},
@@ -87,28 +80,60 @@ const [register, { setValue, getFormData }] = useForm({
 					trigger: "blur",
 				},
 				{
-					min: 2,
-					message: "姓名长度不能小于2",
+					pattern: /^(?:[\u4e00-\u9fa5·]{2,16})$/,
+					message: "姓名不合法",
 				},
 			],
 		},
 		{
+			label: "单价",
+			prop: "price",
+			component: "Select",
+			options: getPriceOptions,
+			value: "0",
+			field: "label as value",
+			styleProps: {
+				flex: "1",
+			},
+			colProps: {
+				row: true,
+			},
+			customSlot: {
+				componentBottom: () =>
+					h(
+						"div",
+						{
+							style: {
+								paddingLeft: "10px",
+							},
+						},
+						"元"
+					),
+			},
+		},
+		{
 			label: "个数",
-			value: 0,
+			value: 1,
 			component: "InputNumber",
 			prop: "count",
-			step: 2,
 			max: 10,
 			min: 0,
 			mock: {
 				type: "@integer(0,10!)",
 			},
-			onChange() {
-				nextTick(() => {
-					const { count } = getFormData();
-
-					console.log(`个数发生改变${count}`);
-				});
+			customSlot: {
+				componentBottom: (formModel) => {
+					const { price, count } = toRefs(formModel);
+					return h(
+						"span",
+						{
+							style: {
+								color: "red",
+							},
+						},
+						`总金额 ${price.value * count.value} 元`
+					);
+				},
 			},
 			styleProps: {
 				width: "100%",
@@ -144,26 +169,12 @@ const [register, { setValue, getFormData }] = useForm({
 			value: "",
 			tip: "年龄就是岁月留下的痕迹",
 			component: "Input",
-			disabled: true,
 			prop: "age",
 			placeholder: "请输入年龄",
 			mock: {
 				type: "@integer(60, 100)",
 			},
-			customSlot: {
-				componentBottom: (formModel) => {
-					const { username, age } = toRefs(formModel);
-					return h(
-						"span",
-						{
-							style: {
-								color: "red",
-							},
-						},
-						`底部插槽，获取姓名：${username.value}，年龄${age.value}`
-					);
-				},
-			},
+
 			componentSlot: {
 				append: () => h("div", "岁"),
 				// labelLeft: () => h('span', '888'),

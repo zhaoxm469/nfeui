@@ -30,7 +30,7 @@ const [register] = useForm({
 			placeholder: "请输入姓名",
 			clearable: true,
 			mock: {
-				type: "@cname",
+				type: "@cfirst",
 			},
 			rules: [
 				{
@@ -53,6 +53,7 @@ const [register] = useForm({
 			label: "类型",
 			value: "",
 			component: "Select",
+			clearable: true,
 			styleProps: {
 				width: "100%",
 			},
@@ -98,9 +99,6 @@ const [register] = useForm({
 			mock: {
 				type: "@integer(60, 100)",
 			},
-			customSlot: {
-				componentBottom: () => h("span", "validator函数自定义校验"),
-			},
 		},
 		{
 			label: "爱好",
@@ -127,7 +125,7 @@ const [register] = useForm({
 			customSlot: {
 				componentBottom: () =>
 					h("div", [
-						h("span", "异步校验,爱好不能填写"),
+						h("span", "异步校验，2s后执行,爱好不能填写"),
 						h(
 							"span",
 							{
@@ -140,7 +138,7 @@ const [register] = useForm({
 					]),
 			},
 			mock: {
-				type: "@mobile()",
+				type: "@pick(xx,爬山,跳舞)",
 			},
 		},
 	],

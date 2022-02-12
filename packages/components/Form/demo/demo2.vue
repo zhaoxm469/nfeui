@@ -63,10 +63,6 @@ const [register] = useForm({
 
 const onSubmit = ({ formData, loading }: FormSubmitParams) => {
 	console.log(formData);
-	loading();
-	setTimeout(() => {
-		loading(false);
-	}, 1000);
 };
 
 const onReset = () => {

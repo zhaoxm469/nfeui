@@ -1,7 +1,7 @@
 <template>
 	<div class>
 		<div>
-			<h4>任何插槽value属性都支持两种类型</h4>
+			<h4>任何插槽value都支持两种类型</h4>
 			<p class="nt-text-gray nt-text-14">
 				1. 第一种 customSlotKey 类型为 <b class="nt-text-rose-600">string</b>
 				类型，然后在 nfeForm 组件中模板种 ，插入 template 元素 ，设置插槽名称为
@@ -17,10 +17,8 @@
 		<div class="nfe-hr"></div>
 
 		<nfeForm @register="register">
-			<template #usernameLeftRight="formData">
-				<span class="nt-text-rose-600">
-					{{ formData["username"] }} 右边插槽</span
-				>
+			<template #usernameLeftRight>
+				<span class="nt-text-sky-700"> label 右边插槽 </span>
 			</template>
 		</nfeForm>
 
@@ -34,7 +32,13 @@
 
 		<div class="nfe-hr nt-mt-30"></div>
 
-		<nfeForm @register="register4" />
+		<nfeForm @register="register4">
+			<template #passwordCompoentBottom="formData">
+				<span>
+					template元素插槽监听数据变化,密码为：{{ formData["password"] }}
+				</span>
+			</template>
+		</nfeForm>
 	</div>
 </template>
 
@@ -56,10 +60,10 @@ const [register] = useForm({
 						"span",
 						{
 							style: {
-								color: "#e42a4f",
+								color: "#006aa6",
 							},
 						},
-						"左插槽"
+						"label 左边插入"
 					),
 				labelRight: "usernameLeftRight",
 			},
@@ -81,10 +85,10 @@ const [register2] = useForm({
 						"span",
 						{
 							style: {
-								color: "#e42a4f",
+								color: "#006aa6",
 							},
 						},
-						"下边插入啥"
+						"el-input下边插入"
 					),
 
 				componentTop: () =>
@@ -92,10 +96,10 @@ const [register2] = useForm({
 						"span",
 						{
 							style: {
-								color: "#e42a4f",
+								color: "#006aa6",
 							},
 						},
-						"上边插入点"
+						"el-input上边插入"
 					),
 			},
 		},
@@ -111,25 +115,25 @@ const [register3] = useForm({
 			value: "",
 			placeholder: "请输入用户名",
 			customSlot: {
-				append: () =>
+				wrapAppend: () =>
 					h(
 						"span",
 						{
 							style: {
-								color: "#e42a4f",
+								color: "#006aa6",
 							},
 						},
-						"el-col 并集下方"
+						"最外层 el-col 同级下方"
 					),
-				before: () =>
+				wrapBefore: () =>
 					h(
 						"span",
 						{
 							style: {
-								color: "#e42a4f",
+								color: "#006aa6",
 							},
 						},
-						"el-col 并集上方"
+						"最外层 el-col 同级上方"
 					),
 			},
 		},
@@ -140,7 +144,7 @@ const [register4] = useForm({
 	colProps: {
 		span: 12,
 	},
-	labelWidth: 130,
+	labelWidth: 60,
 	formItems: [
 		{
 			label: "用户名",
@@ -150,8 +154,22 @@ const [register4] = useForm({
 			placeholder: "请输入用户名",
 			customSlot: {
 				componentBottom: (formData) => {
-					return h("span", `插槽监听数据变化:${formData["username"]}`);
+					return h(
+						"span",
+						`h函数渲染的插槽监听数据变化,用户名为:${formData["username"]}`
+					);
 				},
+			},
+		},
+		{
+			label: "密码",
+			value: "",
+			type: "password",
+			component: "Input",
+			prop: "password",
+			placeholder: "请输入密码",
+			customSlot: {
+				componentBottom: "passwordCompoentBottom",
 			},
 		},
 		{
@@ -165,8 +183,7 @@ const [register4] = useForm({
 			},
 			componentSlot: {
 				append: () => h("span", "元"),
-				suffix: () => h("span", "suffix"),
-				prefix: () => h("span", "prefix"),
+				prepend: () => h("span", "prepend"),
 			},
 			customSlot: {
 				componentBottom: () =>
@@ -177,7 +194,7 @@ const [register4] = useForm({
 								background: "green",
 								color: "#fff",
 								textAlign: "center",
-								padding: "0 20px",
+								padding: "0 10px",
 							},
 						},
 						"componentBottom"
@@ -195,5 +212,6 @@ const [register4] = useForm({
 @import "../../../style/tailwindcss.scss";
 .nfe-hr {
 	@apply nt-w-full nt-border-2 nt-border-gray-100 nt-mb-20 nt-border-solid;
+	border-width: 1px;
 }
 </style>
