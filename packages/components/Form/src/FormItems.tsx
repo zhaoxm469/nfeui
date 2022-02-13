@@ -1,15 +1,4 @@
-import {
-	ElInput,
-	ElFormItem,
-	ElTooltip,
-	ElIcon,
-	ElAutocomplete,
-	ElCol,
-	ElInputNumber,
-	ElSelect,
-	ElOption,
-	ColProps,
-} from "element-plus";
+import * as elComponent from "./formItemUseElComponent";
 import {
 	computed,
 	DefineComponent,
@@ -17,28 +6,17 @@ import {
 	h,
 	resolveComponent,
 } from "vue";
+import { formItemProps } from "./formItemProps";
 import {
 	customComponentSlot,
 	elFormItemSlot,
 	getElComponentSlot,
+	getElOptions,
 } from "./slot";
 import { FormItemComponentName, PartialFormSchema } from "./types";
 
-// 需要使用到的饿了么的组件
-const components = {
-	ElFormItem,
-	ElInput,
-	ElAutocomplete,
-	ElCol,
-	ElTooltip,
-	ElIcon,
-	ElInputNumber,
-	ElSelect,
-	ElOption,
-};
-
-// 不同组件调用不同策略接口
-const componentStrategy: Partial<
+// 不同el组件调用不同策略 , 来进行数据的适配
+const elComponentStrategy: Partial<
 	Record<FormItemComponentName, (schema: PartialFormSchema) => void>
 > = {
 	Autocomplete(schema) {
@@ -59,6 +37,29 @@ const componentStrategy: Partial<
 			cb(result);
 		};
 	},
+	Radio(schema) {
+		schema.component = "RadioGroup" as any;
+	},
+	Checkbox(schema) {
+		schema.component = "CheckboxGroup" as any;
+	},
+	Cascader(schema) {
+		schema.options = getElOptions(schema);
+	},
+	DatePicker(schema) {
+		if (!schema.defaultValue) schema.defaultValue = new Date();
+		if (!schema.type) schema.type = "date";
+	},
+	SelectV2(schema) {
+		schema.options = getElOptions(schema);
+	},
+	TimePicker(schema) {
+		if (!schema.defaultValue) schema.defaultValue = new Date();
+	},
+	// DateTimePicker(schema) {
+	//     if (!schema.defaultValue) schema.defaultValue = new Date()
+	//     if (!schema.type) schema.type = 'year'
+	// },
 };
 
 // 这里过滤掉一些数据，避免把不必要的数据也传递给组件的props
@@ -75,32 +76,15 @@ const componentSchemaPropsFilter = (schema: PartialFormSchema) => {
 };
 
 export default defineComponent({
-	components,
-	props: {
-		schema: {
-			type: Object as PropType<PartialFormSchema>,
-			default: () => {},
-		},
-		slots: {
-			type: Object,
-			default: () => {},
-		},
-		colProps: {
-			type: Object as PropType<Partial<ColProps>>,
-			default: () => {},
-		},
-		formModel: {
-			type: Object as PropType<Partial<Recordable>>,
-			default: () => {},
-		},
-	},
+	components: elComponent,
+	props: formItemProps,
 	setup(props, { emit }) {
 		let { schema, slots, formModel } = props;
 
-		// 不同组件可能需要不同的动作，例如远程搜索等，这里使用策略模式，后期只要componentStrategy加上不同的策略名跟方法就能扩展各组件的差异
+		// 不同组件可能需要不同的动作，例如远程搜索等，这里使用策略模式，后期只要elComponentStrategy加上不同的策略名跟方法就能扩展各组件的差异
 		schema.component &&
-			componentStrategy[schema.component] &&
-			componentStrategy[schema.component]!(schema);
+			elComponentStrategy[schema.component] &&
+			elComponentStrategy[schema.component]!(schema);
 
 		// 同过component->Value获取组件
 		const getElComponent = () => {
@@ -117,13 +101,13 @@ export default defineComponent({
 					style: schema.styleProps,
 				},
 				{
-					// 组件插槽数据
+					// el组件插槽数据
 					...getElComponentSlot(schema, slots),
 				}
 			);
 		};
 
-		// 获取自定义插槽组件
+		// 获取自定义插槽
 		const {
 			componentBottom,
 			formItemTop,
@@ -149,8 +133,7 @@ export default defineComponent({
 					<el-form-item
 						v-slots={elFormItemSlot(schema, labelLeft, labelRight)}
 						labelWidth={schema.labelWidth}
-						prop={schema.prop}
-						style={colRow}>
+						prop={schema.prop}>
 						{componentTop()}
 						{getElComponent()}
 						{componentBottom()}

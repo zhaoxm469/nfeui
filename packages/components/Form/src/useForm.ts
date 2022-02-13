@@ -38,9 +38,17 @@ export default function useForm(
 
 	// 这个相当于十个中交枢纽站（也可以理解为代理模式，后期可以在这做一些操作）。
 	const methods: MethodsType = {
-		async setProps(formProps: Partial<FormProps>) {},
-		async setValue(params) {
-			return formCptMethods?.setValue(params);
+		async setProps(formProps) {
+			return formCptMethods?.setProps(formProps);
+		},
+		async setFormItemOptions(params) {
+			return formCptMethods?.setFormItemOptions(params);
+		},
+		async setFormItemValue(params) {
+			return formCptMethods?.setFormItemValue(params);
+		},
+		async setFormItemProps(params) {
+			return formCptMethods?.setFormItemProps(params);
 		},
 		async sumbit() {
 			return formCptMethods?.onSubmit!();

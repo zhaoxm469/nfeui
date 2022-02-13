@@ -6,7 +6,7 @@
 			:model="formModel"
 			:rules="formRules"
 		>
-			<el-row>
+			<el-row :gutter="formPropsRef.gutter">
 				<template v-for="schema in formItemSchema" :key="schema.prop">
 					<FormItems
 						:schema="schema"
@@ -16,7 +16,11 @@
 					></FormItems>
 				</template>
 			</el-row>
-			<el-row :span="24" v-if="showFootBtn" align="middle" justify="center">
+			<el-row
+				:span="24"
+				v-if="showFootBtn"
+				v-bind="menuButtonPosition(formPropsRef.menuBtnProps?.position)"
+			>
 				<el-button
 					type="primary"
 					v-if="formPropsRef.showSubmitButton"
@@ -70,10 +74,11 @@ import {
 	FormRules,
 	FormSubmitParams,
 } from "./types";
-import { formEmits, formProps } from ".";
+import { formEmits, formProps, menuButtonPosition } from ".";
 import FormItems from "./FormItems";
 import useMock from "../../../hooks/useMock";
 import getFormRules from "./formRules";
+import { extend } from "../../../utils/basic";
 
 type FormInstance = InstanceType<typeof ElForm>;
 
@@ -127,6 +132,7 @@ export default defineComponent({
 		});
 
 		// 监听formItemSchema数据变化，重新生成formModel
+		// TODO 这里后期可以加上节流
 		watch(
 			() => state.formItemSchema,
 			(newFormItemSchema) => {
@@ -153,8 +159,33 @@ export default defineComponent({
 		);
 
 		const methods: FormActionType = {
-			async setProps(formProps: FormProps) {
-				Object.assign(state.formPropsRef, formProps);
+			async setProps(formProps) {
+				extend(state.formPropsRef, formProps);
+			},
+			async setFormItemProps(params) {
+				state.formPropsRef.formItems?.forEach((item) => {
+					Object.keys(params).forEach((paramsKey) => {
+						if (item.prop === paramsKey) {
+							extend(item, params[paramsKey]);
+						}
+					});
+				});
+			},
+			async setFormItemOptions(params) {
+				state.formPropsRef.formItems?.forEach((item) => {
+					Object.keys(params).forEach((paramsKey) => {
+						if (item.prop === paramsKey) {
+							item.options = params[paramsKey];
+						}
+					});
+				});
+			},
+			async setFormItemValue(params) {
+				state.formItemSchema?.forEach((item) => {
+					Object.keys(params).forEach((paramsKey) => {
+						if (item.prop === paramsKey) item.value = params[item.prop];
+					});
+				});
 			},
 			async onSubmit() {
 				const loading = (isLoading = true) => {
@@ -201,11 +232,6 @@ export default defineComponent({
 					}
 				});
 			},
-			async setValue(params) {
-				state.formItemSchema?.forEach((item) => {
-					if (params[item.prop!]) item.value = params[item.prop!];
-				});
-			},
 		};
 
 		onMounted(() => {
@@ -215,6 +241,7 @@ export default defineComponent({
 		return {
 			slots,
 			ruleFormRef,
+			menuButtonPosition,
 			...toRefs(state),
 			...methods,
 		};

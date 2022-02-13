@@ -1,4 +1,4 @@
-import { h, reactive, toRaw, VNode } from "vue";
+import { h, toRaw, VNode } from "vue";
 import {
 	ComponentSlot,
 	FormItemComponentName,
@@ -8,8 +8,71 @@ import {
 	PartialFormSchema,
 } from "./types";
 import { QuestionFilled } from "@element-plus/icons-vue";
-import { ElOption } from "element-plus";
-type SlotStrategy = Partial<Record<FormItemComponentName, () => void>>;
+import {
+	ElCheckbox,
+	ElCheckboxButton,
+	ElOption,
+	ElRadio,
+	ElRadioButton,
+} from "element-plus";
+import { isPromise } from "../../../utils/basic";
+
+type SlotStrategy = Partial<Record<FormItemComponentName, () => void>> &
+	Recordable;
+
+// 获取用户在FormItem[].options 用户传递过来的options数据 ，把不同类型的value 统一适配一下
+export const getElOptions = (
+	schema: PartialFormSchema
+): FormSchemaOptions[] => {
+	let options = schema.options;
+
+	// 如果用户没有传递options，提示一下用户
+	if (!options) {
+		console.warn(`${schema.label}{props:${schema.prop}}，缺少options选项`);
+		return [];
+	}
+
+	// 如果是函数执行函数
+	if (typeof options === "function") {
+		const value = options();
+		// 函数可能是异步函数，也可能是同步函数，同步函数直接返回执行结果即可
+		if (isPromise(value)) {
+			(value as Promise<any[]>).then((options) => (schema.options = options));
+			// 如果是promise 先默认给插槽放个空数组，等待上边promise执行完成以后 再重新赋值
+			return [];
+		} else {
+			return value as FormSchemaOptions[];
+		}
+	}
+
+	return options;
+};
+
+const optionsMap = (schema: PartialFormSchema) => {
+	// 获取适配的options数据
+	let options = getElOptions(schema);
+	let elOptions: VNode[] = [];
+
+	// 将用户传递的 field 转换到 options 组数
+	const field2Options = (item: FormSchemaOptions) => {
+		if (schema.fieldObj) {
+			for (let key in schema.fieldObj) {
+				if (item[key]) item[schema.fieldObj[key]] = item[key];
+			}
+		}
+	};
+
+	return {
+		map: function (callback: Function) {
+			elOptions = options.map((item) => {
+				field2Options(item);
+				return callback(item);
+			});
+
+			return elOptions;
+		},
+	};
+};
 
 // 有的组件需要插槽，比如Select，这里存放各种组件对应默认插槽的策略
 const elSlotStrategy = (
@@ -18,37 +81,51 @@ const elSlotStrategy = (
 ): Recordable => {
 	const strategy: SlotStrategy = {
 		Select() {
-			let options = schema.options;
+			const elOptions = optionsMap(schema).map((item: FormSchemaOptions) =>
+				h(ElOption, {
+					key: item.key!,
+					value: item.value!,
+					label: item.label,
+				})
+			);
 
-			if (typeof options === "function") {
-				(options as () => Promise<any[]>)().then(
-					(options) => (schema.options = options)
-				);
-			} else {
-				options as FormSchemaOptions[];
-			}
-
-			let elOptions: VNode[] = [];
-
-			if (Array.isArray(options)) {
-				elOptions = options.map((item) => {
-					if (schema.fieldObj) {
-						for (let key in schema.fieldObj) {
-							if (item[key]) item[schema.fieldObj[key]] = item[key];
-						}
-					}
-
-					return h(ElOption, {
-						key: item.key!,
-						value: item.value!,
-						label: item.label,
-					});
-				});
-			}
-
-			// 这样写样式有点丑陋，以后有时间优化这个
+			// TODO: 这样写样式有点丑陋，以后有时间优化这个
 			// componentSlot["empty"] = () => h('span', '暂无数据')
 			componentSlot["default"] = () => h("div", elOptions);
+		},
+		RadioGroup() {
+			const component = schema.isRadioButton ? ElRadioButton : ElRadio;
+			const elOptions = optionsMap(schema).map((item: FormSchemaOptions) =>
+				h(
+					component,
+					{
+						...item,
+						label: item.value,
+					},
+					{
+						default: () => h("span", item.label),
+					}
+				)
+			);
+
+			componentSlot["default"] = () => elOptions;
+		},
+		CheckboxGroup() {
+			const component = schema.isCheckBoxButton ? ElCheckboxButton : ElCheckbox;
+			const elOptions = optionsMap(schema).map((item: FormSchemaOptions) =>
+				h(
+					component,
+					{
+						...item,
+						label: item.value,
+					},
+					{
+						default: () => h("span", item.label),
+					}
+				)
+			);
+
+			componentSlot["default"] = () => elOptions;
 		},
 	};
 
@@ -73,7 +150,7 @@ export const normalizationSlotData = (
 		if (vnodeOrRfe && typeof vnodeOrRfe !== "function") {
 			// 这里在slot中没有找到对应的插槽，说明用户可能单词拼写错误，也可能没有在模板中定义插槽
 			if (!slots[vnodeOrRfe]) {
-				console.error(`请检查您是否在模板中定义${vnodeOrRfe}插槽了`);
+				console.warn(`请检查您是否在模板中定义${vnodeOrRfe}插槽了`);
 				break;
 			}
 			componentSlot[slotName] = slots[vnodeOrRfe];

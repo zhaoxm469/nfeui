@@ -1,4 +1,4 @@
-import { Component, VNode } from "vue";
+import { VNode } from "vue";
 import { ComponentSize } from "element-plus/es/utils/types";
 import { FormItemRule } from "element-plus/es/components/form/src/form.type";
 
@@ -28,9 +28,9 @@ type ColProps = {
 };
 
 export type FormSchemaOptions = {
-	key?: string | number;
-	label?: string;
-	value?: string | number;
+	key: string | number;
+	label: string;
+	value: string | number;
 	[x: string]: any;
 };
 
@@ -38,7 +38,11 @@ export interface FormActionType {
 	// clearValidate: (name?: string | string[]) => Promise<void>;
 	// updateSchema: (data: Partial<FormSchema> | Partial<FormSchema>[]) => Promise<void>;
 	setProps: (formProps: Partial<FormProps>) => Promise<void>;
-	setValue: (params: Recordable) => Promise<void>;
+	setFormItemValue: (params: Recordable) => Promise<void>;
+	setFormItemOptions: (
+		params: Recordable<FormSchemaOptions[]>
+	) => Promise<void>;
+	setFormItemProps: (params: Recordable<PartialFormSchema>) => Promise<void>;
 	onSubmit: () => Promise<void>;
 	onCancel: () => Promise<void>;
 	onResetFields: () => Promise<void>;
@@ -55,6 +59,12 @@ export interface FormActionType {
 	// scrollToField: (name: NamePath, options?: ScrollOptions) => Promise<void>;
 }
 export type RegisterFn = (formInstance: FormActionType) => void;
+
+export type FormPropsMenuBtnPropsPosition = "left" | "center" | "right";
+
+type FormPropsMenuBtnProps = {
+	position: FormPropsMenuBtnPropsPosition;
+};
 
 export type FormProps = {
 	/** 行内表单模式 */
@@ -79,6 +89,10 @@ export type FormProps = {
 	showCancelButton?: boolean;
 	/** el props 配置项，子集formItems会继承此属性 */
 	colProps?: Partial<ColProps>;
+	/** 栅格间隔 */
+	gutter?: number;
+	/** 底部菜单按钮Props配置 */
+	menuBtnProps?: FormPropsMenuBtnProps;
 	// scrollToError: BooleanConstructor;
 	// footBottonSlot: {}
 } & Recordable;
@@ -86,21 +100,21 @@ export type FormProps = {
 export type FormItemComponentName =
 	| "Input"
 	| "Autocomplete"
-	| "Cascade"
+	| "Cascader"
 	| "Checkbox"
 	| "ColorPicker"
 	| "DatePicker"
-	| "DateTimePicker"
 	| "InputNumber"
 	| "Radio"
 	| "Rate"
 	| "Select"
-	| "Virtualized Select"
+	| "VirtualizedSelect"
 	| "Slider"
 	| "Switch"
-	| "Time Picker"
-	| "Time Select"
+	| "TimePicker"
+	| "TimeSelect"
 	| "Transfer"
+	| "SelectV2"
 	| "Upload";
 
 export enum FormItemCustomSlotNameEnum {
@@ -134,7 +148,9 @@ export type CustomSlot = Partial<
 
 export type ComponentSlot = Record<string, FormItemCustomSlotReturn>;
 
-export type FormItemOptions = FormSchemaOptions[] | (() => Promise<any[]>);
+export type FormItemOptions =
+	| FormSchemaOptions[]
+	| (() => FormSchemaOptions[] | Promise<any[]>);
 
 export type FormItemsSchema = {
 	/** 标签标题 */
@@ -157,16 +173,18 @@ export type FormItemsSchema = {
 	field?: string;
 	/** 存放的数据 */
 	value: any;
+	/** 只有在component=Radio 的时候才有效 , 是否展示按钮的样式 */
+	isRadioButton?: boolean;
+	/** 尺寸设置 */
+	size?: ComponentSize;
+	/** 只有在component=CheckBox 的时候才有效 ， 是否展示按钮的样式 */
+	isCheckBoxButton?: boolean;
 	/** 是否展示清除按钮 */
 	clearable?: boolean;
 	/** 占位符 */
 	placeholder?: string;
 	/** label宽度 */
 	labelWidth?: string;
-	/** 后缀icon */
-	suffixIcon?: Component;
-	/** 前缀icon */
-	prefixIcon?: Component;
 	/** 最大长度 */
 	maxlength?: number;
 	/** 是否禁用 */
@@ -179,6 +197,8 @@ export type FormItemsSchema = {
 	rules?: FormItemRule[];
 	/** 点击触发 */
 	onClick?: Function;
+	/** componetKey 组件的type */
+	type?: string;
 	/** 操作label上层的Col 组件配置 */
 	colProps?: Partial<ColProps> & { row?: boolean };
 	/** 操作label上层的Col 组件配置 */
@@ -187,6 +207,8 @@ export type FormItemsSchema = {
 	styleProps?: Recordable;
 	/** 重置表单时候的默认值，用户如果不传会自定赋值为value为用户传入的value */
 	defaultValue?: any;
+	/** 只有在compoentKey = DatePicker 时有效，  指定绑定值的格式。 */
+	valueFormat?: string;
 } & Recordable;
 
 interface Mock {
