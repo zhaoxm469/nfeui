@@ -35,7 +35,10 @@
 		<nfeForm @register="register4">
 			<template #passwordCompoentBottom="formData">
 				<span>
-					template元素插槽监听数据变化,密码为：{{ formData["password"] }}
+					template元素插槽监听数据变化,密码为：<span
+						class="nt-text-green-800"
+						>{{ formData["password"] }}</span
+					>
 				</span>
 			</template>
 		</nfeForm>
@@ -154,10 +157,18 @@ const [register4] = useForm({
 			placeholder: "请输入用户名",
 			customSlot: {
 				componentBottom: (formData) => {
-					return h(
-						"span",
-						`h函数渲染的插槽监听数据变化,用户名为:${formData["username"]}`
-					);
+					return h("span", [
+						h("span", "h函数渲染的插槽监听数据变化,用户名为: "),
+						h(
+							"span",
+							{
+								style: {
+									color: "red",
+								},
+							},
+							formData["username"]
+						),
+					]);
 				},
 			},
 		},
