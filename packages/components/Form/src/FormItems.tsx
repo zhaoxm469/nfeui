@@ -56,10 +56,6 @@ const elComponentStrategy: Partial<
 	TimePicker(schema) {
 		if (!schema.defaultValue) schema.defaultValue = new Date();
 	},
-	// DateTimePicker(schema) {
-	//     if (!schema.defaultValue) schema.defaultValue = new Date()
-	//     if (!schema.type) schema.type = 'year'
-	// },
 };
 
 // 这里过滤掉一些数据，避免把不必要的数据也传递给组件的props
