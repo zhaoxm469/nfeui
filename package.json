@@ -1,6 +1,6 @@
 {
 	"name": "nfeui",
-	"version": "0.0.7",
+	"version": "0.0.8",
 	"description": "牛卡福PC端UI组件库",
 	"main": "dist/nfeui.umd.js",
 	"module": "dist/nfeui.es.js",
