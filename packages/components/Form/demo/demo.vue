@@ -715,11 +715,17 @@ const onSubmit = ({ formData, loading }: FormSubmitParams) => {
 };
 
 const onCancel = () => {
-	console.log("触发取消");
+	ElMessage({
+		message: "点击取消按钮",
+		type: "info",
+	});
 };
 
 const onReset = () => {
-	console.log("重置数据");
+	ElMessage({
+		message: "点击重置按钮",
+		type: "success",
+	});
 };
 
 const [register1, {}] = useForm({
