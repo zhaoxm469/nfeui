@@ -357,6 +357,26 @@ const [
 			mock: {
 				type: "@integer(1,100)",
 			},
+			onInput(val: number) {
+				setFormItemValue({
+					slider2: val,
+				});
+			},
+		},
+		{
+			label: "滑块2",
+			prop: "slider2",
+			value: 0,
+			component: "Slider",
+			step: 10,
+			mock: {
+				type: "@integer(1,100)",
+			},
+			onInput(val: number) {
+				setFormItemValue({
+					slider: val,
+				});
+			},
 		},
 		{
 			label: "颜色",
