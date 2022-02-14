@@ -115,7 +115,7 @@ export default defineComponent({
 			componentTop,
 		} = customComponentSlot(schema, slots, formModel);
 
-		const colRow = schema.colProps?.row ? "display:flex" : "";
+		// const colRow = schema.colProps?.row ? "display:flex" : "";
 		const colProps = { ...props.colProps, ...schema.colProps };
 		const ifShow = computed(() =>
 			schema.ifShow ? schema.ifShow(formModel) : true
