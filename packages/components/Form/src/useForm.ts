@@ -23,8 +23,7 @@ export default function useForm(
 		// 这些是SVG组件，通过markRaw把他们标记为不是响应式的，有助于提升性能
 		if (item.prefixIcon) item.prefixIcon = markRaw(item.prefixIcon);
 		if (item.suffixIcon) item.suffixIcon = markRaw(item.suffixIcon);
-
-		if (!item.defaultValue) item.defaultValue = item.value;
+		if (!item.resetValue) item.resetValue = item.value;
 	});
 
 	// 将formProps用户传入的数据，转换为响应式数据
