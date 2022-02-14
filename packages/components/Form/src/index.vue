@@ -141,12 +141,21 @@ export default defineComponent({
 				toRaw(newFormItemSchema)?.forEach((item) => {
 					// 给formModel赋值的时候 首先判断 跟原来的value 是否相等，如果不想等在赋值
 					if (state.formModel[item.prop] !== item.value) {
+						// 值发生变化调用给用户传入的watchValue
+						item.watchValue &&
+							item.watchValue({
+								newValue: item.value,
+								oldValue: state.formModel[item.prop],
+							});
 						state.formModel[item.prop] = item.value;
 					}
+
+					// console.log(oldFormItemSchema && oldFormItemSchema.find(it => it.prop === item.prop))
+					// console.log(oldFormItemSchema && oldFormItemSchema[item])
 				});
 
 				// 获取新的fule校验规则
-				let formRules = getFormRules(toRaw(state.formItemSchema!));
+				let formRules = getFormRules(toRaw(newFormItemSchema!));
 				// 这里要判断老的规则 跟监听 formItem新生成的规则是否一样，如果一样代表虽然formItems数据发生变化了，但是用户没有修改规则
 				// 就无需重新设置formRules对象了，避免其他值发生更改页面规则全部触发的bug
 				if (!isEqual(formRules, toRaw(state.formRules))) {
@@ -214,20 +223,27 @@ export default defineComponent({
 				emit("cancel");
 			},
 			async onResetFields() {
-				// console.log(toRaw(state.formItemSchema));
 				state.formItemSchema?.forEach((item) => {
-					item.value = item.defaultValue;
+					item.value = item.resetValue;
 				});
 				ruleFormRef.value?.resetFields();
 
 				emit("reset");
 			},
 			async onMock() {
-				state.formItemSchema?.forEach((item) => {
-					if (item.mock && (item.mock.type || item.mock.rules)) {
+				state.formItemSchema?.forEach(async (item) => {
+					if (typeof item.mock === "function") {
+						return (item.value = await item.mock(toRaw(item) as any));
+					}
+
+					if (
+						item.mock &&
+						typeof item.mock !== "function" &&
+						(item.mock.type || item.mock.rules)
+					) {
 						const mockData = item.mock.type
-							? getTyperData(item.mock.type)
-							: getRulesData(item.mock.rules);
+							? await getTyperData(item.mock.type)
+							: await getRulesData(item.mock.rules);
 						item.value = mockData;
 					}
 				});
