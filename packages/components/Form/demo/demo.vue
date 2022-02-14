@@ -18,40 +18,32 @@ import { FormSubmitParams } from "../src/types";
 import { h, toRefs } from "vue";
 import { ElMessage } from "element-plus";
 
-const { getRulesData } = useMock();
+const { getRulesData, getMock } = useMock();
 
-const getCityList = (keyword: string) => {
+const getCityList = async (keyword: string) => {
 	console.log(`地址输入keyword：${keyword}`);
 
-	return new Promise((reslove, reject) => {
-		setTimeout(() => {
-			const result = getRulesData({
-				"list|10": [
-					{
-						ff: "@province()",
-						cc: "@uid()",
-					},
-				],
-			});
-			reslove(result.list);
-		}, 500);
+	const result = await getRulesData({
+		"list|10": [
+			{
+				ff: "@province()",
+				cc: "@uid()",
+			},
+		],
 	});
+
+	return [...result.list];
 };
 
-const getPriceOptions = () => {
-	return new Promise<any[]>((reslove, reject) => {
-		setTimeout(() => {
-			const result = getRulesData({
-				"list|1-20": [
-					{
-						"label|1-100": 1,
-						"key|1-100000000": 1,
-					},
-				],
-			}).list;
-			reslove(result);
-		}, 1000);
+const getPriceOptions = async () => {
+	const result = await getRulesData({
+		"list|5": [
+			{
+				label: "@float(4,10,2,2)",
+			},
+		],
 	});
+	return [...result.list];
 };
 
 const getClassifyList = () => {
@@ -79,14 +71,14 @@ const getClassifyList = () => {
 			value: 2,
 			child: [
 				{
-					key: 21,
+					key: 11,
 					label: "显卡",
-					value: 21,
+					value: 11,
 				},
 				{
-					key: 22,
+					key: 12,
 					label: "显示器",
-					value: 22,
+					value: 12,
 				},
 			],
 		},
@@ -146,11 +138,14 @@ const [
 			component: "Select",
 			options: getPriceOptions,
 			value: "",
+			field: "label as value",
 			required: true,
 			placeholder: "请选择单价",
-			field: "label as value",
 			styleProps: {
 				flex: "1",
+			},
+			mock: (item) => {
+				return getMock().pick(item.options?.map((item) => item.value));
 			},
 			colProps: {
 				row: true,
@@ -181,6 +176,7 @@ const [
 			customSlot: {
 				componentBottom: (formModel) => {
 					const { price, count } = toRefs(formModel);
+					const total = (price.value * count.value).toFixed(2);
 					return h(
 						"span",
 						{
@@ -188,7 +184,7 @@ const [
 								color: "red",
 							},
 						},
-						`总金额 ${price.value * count.value} 元`
+						`总金额 ${total} 元`
 					);
 				},
 			},
@@ -202,9 +198,6 @@ const [
 			type: "button",
 			isRadioButton: true,
 			value: 1,
-			mock: {
-				type: "@integer(1,0)",
-			},
 			component: "Radio",
 			options: [
 				{
@@ -243,11 +236,13 @@ const [
 			customSlot: {
 				componentBottom: () => h("span", "商品会根据分类进行联动"),
 			},
-			options: getClassifyList,
-			onChange(value: number) {
-				const options = getClassifyList().find(
-					(item) => item.value === value
-				)?.child;
+			mock: {
+				type: "@pick(1,2)",
+			},
+			watchValue({ newValue }) {
+				const options =
+					getClassifyList().find((item) => item.value === newValue)?.child ||
+					[];
 
 				// setFormItemOptions({
 				//     goods:options!
@@ -257,7 +252,7 @@ const [
 				//     goods:''
 				// })
 
-				// 上边这种写法等于下边这种写法
+				// 上边这两种写法等于下边这种写法
 				setFormItemProps({
 					goods: {
 						options,
@@ -265,6 +260,7 @@ const [
 					},
 				});
 			},
+			options: getClassifyList,
 		},
 		{
 			label: "商品",
@@ -287,6 +283,9 @@ const [
 					},
 				},
 			],
+			mock: {
+				type: "@pick(11,12)",
+			},
 		},
 		{
 			label: "多选",
@@ -305,7 +304,15 @@ const [
 					value: 2,
 					key: 2,
 				},
+				{
+					label: "第三",
+					value: 3,
+					key: 3,
+				},
 			],
+			mock: {
+				type: "@pick([1,2,3],2)",
+			},
 		},
 		{
 			suffixIcon: Search,
@@ -337,12 +344,8 @@ const [
 			mock: {
 				type: "@integer(60, 100)",
 			},
-
 			componentSlot: {
 				append: () => h("div", "岁"),
-				// labelLeft: () => h('span', '888'),
-				// labelRight: 'usenameLabelRight'
-				// formItemTop: () => h('div', '44')
 			},
 		},
 		{
@@ -351,6 +354,9 @@ const [
 			value: 0,
 			component: "Slider",
 			step: 10,
+			mock: {
+				type: "@integer(1,100)",
+			},
 		},
 		{
 			label: "颜色",
@@ -371,6 +377,9 @@ const [
 						},
 						`色值为：${formData["color"]}`
 					),
+			},
+			mock: {
+				type: "@color()",
 			},
 		},
 		{
@@ -403,17 +412,13 @@ const [
 						`${formData["rate"] || ""}`
 					),
 			},
-			// customSlot:{
-			//     componentBottom:(formData)=>h('span',{
-			//         style:{
-			//             marginLeft:'20px'
-			//         }
-			//     },formData['color'])
-			// }
+			mock: {
+				type: "@integer(0,5)",
+			},
 		},
 		{
 			label: "级联选择器",
-			prop: "",
+			prop: "cascader",
 			value: "",
 			labelWidth: "90px",
 			component: "Cascader",
@@ -421,32 +426,46 @@ const [
 			styleProps: {
 				width: "100%",
 			},
-			options: () => {
-				return new Promise((r) => {
-					setTimeout(() => {
-						const data = getRulesData({
-							"options|3-10": [
+			options: async () => {
+				const data = await getRulesData({
+					"options|10": [
+						{
+							value: "@increment()",
+							label: "@cname()",
+							"children|5-10": [
 								{
-									value: "@integer()",
+									value: "@increment()",
 									label: "@cname()",
 									"children|5-10": [
 										{
-											value: "@integer()",
+											value: "@increment()",
 											label: "@cname()",
-											"children|5-10": [
-												{
-													value: "@integer()",
-													label: "@cname()",
-												},
-											],
 										},
 									],
 								},
 							],
-						});
-						r(data.options);
-					}, 1000);
+						},
+					],
 				});
+				return data.options;
+			},
+			mock: (item) => {
+				const Mock = getMock();
+				const getValue = (options: any[]) => {
+					let index = Mock.integer(0, options.length - 1);
+					return options[index].value;
+				};
+				const options = item.options!;
+				const index1 = getValue(options);
+				const index2 = getValue(
+					options.find((item) => item.value === index1).children
+				);
+				const index3 = getValue(
+					options
+						.find((item) => item.value === index1)
+						.children.find((item: any) => item.value === index2).children
+				);
+				return [index1, index2, index3];
 			},
 			componentSlot: {
 				default: ({ node, data }) => {
@@ -484,12 +503,15 @@ const [
 					}, 1000);
 				});
 			},
+			mock: {
+				type: "@boolean()",
+			},
 		},
 		{
 			label: "某一天",
 			prop: "day",
 			component: "DatePicker",
-			value: new Date(),
+			value: "",
 			styleProps: {
 				width: "100%",
 			},
@@ -515,12 +537,15 @@ const [
 					},
 				},
 			],
+			mock: {
+				type: "@date()",
+			},
 		},
 
 		{
 			label: "动态加载",
 			prop: "dtjz",
-			value: "",
+			value: [],
 			labelWidth: "90px",
 			component: "Cascader",
 			filterable: true,
@@ -530,16 +555,50 @@ const [
 				lazyLoad: (node: any, resolve: Function) => {
 					let id = 0;
 					const { level } = node;
+
 					setTimeout(() => {
 						const nodes = Array.from({ length: level + 1 }).map((item) => ({
 							value: ++id,
 							label: `Option - ${id}`,
 							leaf: level >= 2,
 						}));
+
 						resolve(nodes);
 					}, 1000);
 				},
 			},
+			mock: async () => {
+				const result = await getRulesData({
+					list: [
+						{
+							label: "@cname()",
+							leaf: false,
+							value: 1,
+							"children|2": [
+								{
+									label: "@cname()",
+									leaf: false,
+									value: 1,
+									children: [
+										{
+											label: "@cname()",
+											value: 1,
+											leaf: true,
+										},
+									],
+								},
+							],
+						},
+					],
+				});
+
+				setFormItemOptions({
+					dtjz: result.list,
+				});
+
+				return [1, 1, 1];
+			},
+			clearable: true,
 			styleProps: {
 				width: "100%",
 			},
@@ -553,8 +612,12 @@ const [
 			rangeSeparator: "To",
 			startPlaceholder: "Start month",
 			endPlaceholder: "End month",
+			valueFormat: "YYYY-MM-DD",
 			styleProps: {
 				width: "100%",
+			},
+			async mock() {
+				return [await getRulesData("@date()"), await getRulesData("@date()")];
 			},
 		},
 		{
@@ -563,32 +626,42 @@ const [
 			value: "",
 			type: "datetime",
 			component: "DatePicker",
+			valueFormat: "x",
 			placeholder: "请选择时间",
 			styleProps: {
 				width: "100%",
+			},
+			async mock() {
+				return new Date(await getRulesData("@datetime()")).getTime();
+			},
+			customSlot: {
+				componentBottom: (f) => h("span", f["time"]),
 			},
 		},
 		{
 			label: "大数据渲染,虚拟列表",
 			prop: "selectv2",
-			value: "",
+			value: [],
 			labelWidth: "160px",
 			component: "SelectV2",
+			multiple: true,
 			placeholder: "请选择",
-			options: () => {
-				return new Promise((r) => {
-					setTimeout(() => {
-						const data = getRulesData({
-							"options|10000-20000": [
-								{
-									value: "@integer()",
-									label: "@cname()",
-								},
-							],
-						});
-						r(data.options);
-					}, 1000);
+			options: async () => {
+				const result = await getRulesData({
+					"options|3000": [
+						{
+							value: "@integer(1,3000)",
+							label: "@cname()",
+						},
+					],
 				});
+				return result.options;
+			},
+			async mock(item) {
+				return getMock().pick(
+					item.options?.map((item) => item.value),
+					2
+				);
 			},
 			styleProps: {
 				width: "100%",
@@ -600,8 +673,12 @@ const [
 			placeholder: "请选择时间",
 			value: "",
 			prop: "time2",
+			valueFormat: "x",
 			styleProps: {
 				width: "100%",
+			},
+			async mock() {
+				return new Date(await getRulesData("@now()")).getTime();
 			},
 		},
 		{
@@ -609,12 +686,18 @@ const [
 			component: "TimeSelect",
 			placeholder: "请选择时间",
 			value: "",
-			start: "08:30",
-			step: "00:15",
-			end: "18:30",
+			start: "06:00",
+			step: "00:30",
+			end: "24:00",
 			prop: "time3",
+			valueFormat: "x",
 			styleProps: {
 				width: "100%",
+			},
+			async mock() {
+				return `${await getRulesData("@integer(6,23)")}:${await getRulesData(
+					'@pick("00",30)'
+				)}`;
 			},
 		},
 	],
