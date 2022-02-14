@@ -60,8 +60,6 @@ export interface FormActionType {
 }
 export type RegisterFn = (formInstance: FormActionType) => void;
 
-export type FormPropsMenuBtnPropsPosition = "left" | "center" | "right";
-
 type FormPropsMenuBtnProps = {
 	position: FormPropsMenuBtnPropsPosition;
 };
@@ -148,6 +146,11 @@ export type CustomSlot = Partial<
 
 export type ComponentSlot = Record<string, FormItemCustomSlotReturn>;
 
+export type WatchValueParams = {
+	newValue: any;
+	oldValue: any;
+};
+
 export type FormItemOptions =
 	| FormSchemaOptions[]
 	| (() => FormSchemaOptions[] | Promise<any[]>);
@@ -169,8 +172,14 @@ export type FormItemsSchema = {
 	required?: boolean;
 	/** 提示 */
 	tip?: string;
+	/** 监听value发生变化 */
+	watchValue?: (params: WatchValueParams) => void;
 	/** 字段筛选，需要 as 成前端组件支持的字段名 text、value。 例如 oldKey as newKey */
 	field?: string;
+	/** 只有在日期时间组件时有效，指定绑定值的格式。绑定值的格式。 不指定则绑定值为 Date 对象 */
+	valueFormat?: string;
+	// 显示在输入框中的格式
+	format?: string;
 	/** 存放的数据 */
 	value: any;
 	/** 只有在component=Radio 的时候才有效 , 是否展示按钮的样式 */
@@ -192,7 +201,15 @@ export type FormItemsSchema = {
 	/** 最小长度 */
 	minLength?: number;
 	/** mock数据 */
-	mock?: Mock;
+	mock?: Mock | ((formItem: PartialFormSchema & { options?: any[] }) => any);
+	/** 是否可搜索(部分组件可用，详细查看componmentKey 对应的el组件是否支持 )*/
+	filterable?: boolean;
+	/** 是否允许用户创建新条目， 只有当 filterable 设置为 true 时才会生效。(部分组件可用) */
+	allowCreate?: boolean;
+	/** 选项为空时显示的文字，也可以使用 empty 插槽自定义该内容(部分组件可用，详细查看componmentKey 对应的el组件是否支持 ) */
+	noDataText?: string;
+	/** 是否多选(部分组件可用，详细查看componmentKey 对应的el组件是否支持 ) */
+	multiple?: boolean;
 	/** 表单验证规则 */
 	rules?: FormItemRule[];
 	/** 点击触发 */
@@ -203,12 +220,12 @@ export type FormItemsSchema = {
 	colProps?: Partial<ColProps> & { row?: boolean };
 	/** 操作label上层的Col 组件配置 */
 	options?: FormItemOptions;
+	/** 重置表单的默认值 */
+	resetValue?: any;
 	/** 样式 */
 	styleProps?: Recordable;
-	/** 重置表单时候的默认值，用户如果不传会自定赋值为value为用户传入的value */
+	/** 用于日期组件 这个这代表选择器打开默认显示的时间 */
 	defaultValue?: any;
-	/** 只有在compoentKey = DatePicker 时有效，  指定绑定值的格式。 */
-	valueFormat?: string;
 } & Recordable;
 
 interface Mock {
@@ -304,11 +321,18 @@ interface Mock {
 	 * @mobile()            -> 随机生成手机号
 	 * @constellation()     -> 随机生成某一个星座
 	 */
-	type?: string;
+	type?: any;
 	rules?: Recordable;
 }
 
 export type FormSubmitParams = {
 	formData: Recordable;
 	loading: (isLoading?: boolean) => void;
+};
+
+export type FormPropsMenuBtnPropsPosition = "left" | "center" | "right";
+
+export type MnuButtonPositionConfig = {
+	justify: "start" | "end" | "center" | "space-around" | "space-between";
+	align: "top" | "middle" | "bottom";
 };
