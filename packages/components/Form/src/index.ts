@@ -1,4 +1,7 @@
-import { FormPropsMenuBtnPropsPosition } from "./types";
+import {
+	FormPropsMenuBtnPropsPosition,
+	MnuButtonPositionConfig,
+} from "./types";
 /*
  * @Author: zhaoxm
  * @LastEditors: vscode
@@ -28,19 +31,20 @@ export const formProps = extend(
 export const menuButtonPosition = (
 	type: FormPropsMenuBtnPropsPosition = "center"
 ) => {
-	const config = {
-		left: {
-			align: "middle",
-			justify: "start",
-		},
-		center: {
-			align: "middle",
-			justify: "center",
-		},
-		right: {
-			align: "middle",
-			justify: "end",
-		},
-	};
+	const config: Record<FormPropsMenuBtnPropsPosition, MnuButtonPositionConfig> =
+		{
+			left: {
+				align: "middle",
+				justify: "start",
+			},
+			center: {
+				align: "middle",
+				justify: "center",
+			},
+			right: {
+				align: "middle",
+				justify: "end",
+			},
+		};
 	return config[type];
 };
