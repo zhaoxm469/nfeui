@@ -32,7 +32,7 @@ map:
 
 ### 动态控制是否显示隐藏 FormItem
 
-<demo src="./demo/demo2.vue" desc="监听 是否显示年龄选项的变化，通过formItem[].isShow属性 动态设置 年龄输入框 的显示隐藏 " ></demo>
+<demo src="./demo/demo2.vue" desc="监听「显示年龄」选项的变化，通过isShow属性 动态设置 年龄输入框 的显示隐藏 " ></demo>
 
 ### 表单校验
 

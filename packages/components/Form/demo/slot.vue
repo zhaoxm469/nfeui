@@ -3,14 +3,15 @@
 		<div>
 			<h4>任何插槽value都支持两种类型</h4>
 			<p class="nt-text-gray nt-text-14">
-				1. 第一种 customSlotKey 类型为 <b class="nt-text-rose-600">string</b>
-				类型，然后在 nfeForm 组件中模板种 ，插入 template 元素 ，设置插槽名称为
-				customSlotKey 的 value 即可。
+				1. 第一种 customSlotKey 类型为
+				<b class="nt-text-rose-600">string</b>
+				类型，然后在 nfeForm 元素中插入 template 元素 ，设置插槽名称为
+				customSlotKey 对应的 value 即可。
 			</p>
 			<p class="nt-text-gray nt-text-14">
 				2. 第二种 customSlotKey 类型为
 				<b class="nt-text-rose-600">Function</b>
-				，返回值是一个VNode类型，我们直接返回执行的h函数即可。
+				，返回值是一个VNode类型，我们可以利用h函数返回VNode对象。
 			</p>
 		</div>
 
@@ -18,7 +19,7 @@
 
 		<nfeForm @register="register">
 			<template #usernameLeftRight>
-				<span class="nt-text-sky-700"> label 右边插槽 </span>
+				<span class="nt-text-sky-700">label 右边插槽</span>
 			</template>
 		</nfeForm>
 
@@ -35,10 +36,8 @@
 		<nfeForm @register="register4">
 			<template #passwordCompoentBottom="formData">
 				<span>
-					template元素插槽监听数据变化,密码为：<span
-						class="nt-text-green-800"
-						>{{ formData["password"] }}</span
-					>
+					template元素插槽监听数据变化,密码为：
+					<span class="nt-text-green-800">{{ formData["password"] }}</span>
 				</span>
 			</template>
 		</nfeForm>
