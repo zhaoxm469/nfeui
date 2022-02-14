@@ -11,3 +11,7 @@ export function isPromise(val: any): boolean {
 		typeof val.catch === "function"
 	);
 }
+
+export function isFunction(val: Function): boolean {
+	return typeof val === "function";
+}
