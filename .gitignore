@@ -8,4 +8,4 @@ yarn.lock
 .DS_Store
 my-vue3-elementplsh
 stats.html
-packages/index.ts
+./packages/index.ts
