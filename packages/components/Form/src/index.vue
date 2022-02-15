@@ -55,7 +55,7 @@
 
 <script lang="ts">
 import { ElForm, ElFormItem, ElInput, ElButton, ElRow } from "element-plus";
-import isEqual from "lodash/isEqual";
+// import isEqual from "lodash/isEqual";
 
 import {
 	computed,
@@ -78,7 +78,7 @@ import { formEmits, formProps, menuButtonPosition } from ".";
 import FormItems from "./FormItems";
 import useMock from "../../../hooks/useMock";
 import getFormRules from "./formRules";
-import { extend } from "../../../utils/basic";
+import { deepEqual, extend } from "../../../utils/basic";
 
 type FormInstance = InstanceType<typeof ElForm>;
 
@@ -158,7 +158,7 @@ export default defineComponent({
 				let formRules = getFormRules(toRaw(newFormItemSchema!));
 				// 这里要判断老的规则 跟监听 formItem新生成的规则是否一样，如果一样代表虽然formItems数据发生变化了，但是用户没有修改规则
 				// 就无需重新设置formRules对象了，避免其他值发生更改页面规则全部触发的bug
-				if (!isEqual(formRules, toRaw(state.formRules))) {
+				if (!deepEqual(formRules, toRaw(state.formRules))) {
 					state.formRules = formRules;
 				}
 			},
