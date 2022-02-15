@@ -1,18 +1,20 @@
-// yarn build 用到的vite配置
 require("dotenv/config");
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import { resolve } from "path";
 import config from "./package.json";
+import visualizer from "rollup-plugin-visualizer";
 
 const { UI_NAME } = process.env;
+
+// viteSvgIcons
 
 const banner = `/*!
 * ${config.name} v${config.version} ${new Date()}
 * (c) 2022 @nucarf.
 */`;
 
-import AutoImport from "unplugin-auto-import/vite";
+// import AutoImport from "unplugin-auto-import/vite";
 // import Components from 'unplugin-vue-components/vite';
 // import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 // import ElementPlus from "unplugin-element-plus/vite";
@@ -28,6 +30,10 @@ export default {
 	plugins: [
 		vue(),
 		vueJsx(),
+		// 可视化打包
+		visualizer({
+			open: true,
+		}),
 		// ElementPlus(),
 		// AutoImport({
 		//     resolvers: [ElementPlusResolver()],
@@ -51,13 +57,12 @@ export default {
 			formats: ["es", "umd"],
 		},
 		rollupOptions: {
-			// make sure to externalize deps that shouldn't be bundled
-			// into your library
+			// 确保外部化处理那些你不想打包进库的依赖
 			external: ["vue"],
+			// external: ['vue', 'element-plus'],
 			output: {
 				banner,
-				// Provide global variables to use in the UMD build
-				// for externalized deps
+				// 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
 				globals: {
 					vue: "Vue",
 					// "element-plus": "ElementPlus",
