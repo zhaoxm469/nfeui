@@ -3,7 +3,8 @@ import 'dotenv/config'
 
 const { UI_PREFIX } = process.env;
 const artTemplate = require('art-template');
-const { copySync, writeFileSync, removeSync, ensureFileSync } = require('fs-extra')
+const { copySync, writeFileSync, removeSync, ensureFileSync } = require('fs-extra');
+const { version }= require('../../../package.json')
 
 // 差值表达式解析规则修改
 artTemplate.defaults.rules[1].test = /{{{([@#]?)[ \t]*(\/?)([\w\W]*?)[ \t]*}}}/;
@@ -137,7 +138,8 @@ export function createComponentExportFile ({
         cmtExportNames: cmtExportNames.join(','),
         imports,
         exportMethodsList,
-        exportMethodsNames: exportMethodsNames.join(',')
+        exportMethodsNames: exportMethodsNames.join(','),
+        version
     });
 
     writeFileSync(exportComponentIndexTsPath, code, 'utf-8')
