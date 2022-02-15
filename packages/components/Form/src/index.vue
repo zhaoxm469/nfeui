@@ -24,26 +24,27 @@
 				<el-button
 					type="primary"
 					v-if="formPropsRef.showSubmitButton"
-					:loading="isSubmitLoading"
-					:disabled="isSubmitLoading"
+					:loading="isSubmitBtnLoading"
+					:disabled="menuFootButtonsDisabled"
 					@click="onSubmit"
 					>确定</el-button
 				>
 				<el-button
 					v-if="formPropsRef.showResetButton"
-					:disabled="isSubmitLoading"
+					:disabled="menuFootButtonsDisabled"
 					@click="onResetFields"
 					>重置</el-button
 				>
 				<el-button
 					type="primary"
-					:disabled="isSubmitLoading"
+					:disabled="menuFootButtonsDisabled"
 					v-if="formPropsRef.showMockButton"
+					:loading="isMockBtnLoading"
 					@click="onMock"
 					>模拟数据</el-button
 				>
 				<el-button
-					:disabled="isSubmitLoading"
+					:disabled="menuFootButtonsDisabled"
 					v-if="formPropsRef.showCancelButton"
 					@click="onCancel"
 					>取消</el-button
@@ -82,14 +83,19 @@ import { deepEqual, extend } from "../../../utils/basic";
 
 type FormInstance = InstanceType<typeof ElForm>;
 
-interface State {
+type IsButtonLoading = {
+	isMockBtnLoading: boolean;
+	isSubmitBtnLoading: boolean;
+};
+
+type State = {
 	formPropsRef: Partial<FormProps>;
 	formModel: Recordable;
 	formItemSchema: FormItemsSchema[] | undefined;
 	showFootBtn: boolean | undefined;
-	isSubmitLoading: boolean;
 	formRules: FormRules;
-}
+	menuFootButtonsDisabled: boolean;
+} & IsButtonLoading;
 
 export default defineComponent({
 	name: "nfeForm",
@@ -127,7 +133,12 @@ export default defineComponent({
 					showSubmitButton
 				);
 			}),
-			isSubmitLoading: false,
+			isSubmitBtnLoading: false,
+			isMockBtnLoading: false,
+			menuFootButtonsDisabled: computed(() => {
+				const { isSubmitBtnLoading, isMockBtnLoading } = state;
+				return isSubmitBtnLoading || isMockBtnLoading;
+			}),
 			formRules: {},
 		});
 
@@ -167,6 +178,15 @@ export default defineComponent({
 			}
 		);
 
+		const buttonLoadingToggle = (bottonName: keyof IsButtonLoading) => {
+			return (isLoading = true) => {
+				state[bottonName] = isLoading;
+			};
+		};
+
+		const submitBtnLoadingToggle = buttonLoadingToggle("isSubmitBtnLoading"),
+			mockBtnLoadingToggle = buttonLoadingToggle("isMockBtnLoading");
+
 		const methods: FormActionType = {
 			async setProps(formProps) {
 				extend(state.formPropsRef, formProps);
@@ -197,18 +217,14 @@ export default defineComponent({
 				});
 			},
 			async onSubmit() {
-				const loading = (isLoading = true) => {
-					state.isSubmitLoading = isLoading;
-				};
-
-				loading();
+				submitBtnLoadingToggle();
 				ruleFormRef.value?.validate((valid) => {
-					loading(false);
+					submitBtnLoadingToggle(false);
 
 					if (valid) {
 						emit("submit", {
 							formData: toRaw(state.formModel),
-							loading,
+							loading: submitBtnLoadingToggle,
 						} as FormSubmitParams);
 					} else {
 						console.log("error submit!");
@@ -231,9 +247,11 @@ export default defineComponent({
 				emit("reset");
 			},
 			async onMock() {
-				state.formItemSchema?.forEach(async (item) => {
+				mockBtnLoadingToggle();
+				let mockResult: Recordable = {};
+				for (let item of state.formItemSchema!) {
 					if (typeof item.mock === "function") {
-						return (item.value = await item.mock(toRaw(item) as any));
+						mockResult[item.prop] = await item.mock(toRaw(item) as any);
 					}
 
 					if (
@@ -244,9 +262,13 @@ export default defineComponent({
 						const mockData = item.mock.type
 							? await getTyperData(item.mock.type)
 							: await getRulesData(item.mock.rules);
-						item.value = mockData;
+						mockResult[item.prop] = mockData;
 					}
-				});
+				}
+
+				mockBtnLoadingToggle(false);
+
+				methods.setFormItemValue(mockResult);
 			},
 		};
 

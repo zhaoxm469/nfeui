@@ -286,6 +286,9 @@ const [
 			mock: {
 				type: "@pick(11,12)",
 			},
+			customSlot: {
+				componentBottom: (f) => h("span", f["goods"]),
+			},
 		},
 		{
 			label: "多选",
@@ -653,9 +656,6 @@ const [
 			},
 			async mock() {
 				return new Date(await getRulesData("@datetime()")).getTime();
-			},
-			customSlot: {
-				componentBottom: (f) => h("span", f["time"]),
 			},
 		},
 		{
