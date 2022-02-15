@@ -82,8 +82,15 @@ export default defineComponent({
 			elComponentStrategy[schema.component] &&
 			elComponentStrategy[schema.component]!(schema);
 
+        const colProps = { ...props.colProps, ...schema.colProps };
+        const ifShow = computed(() =>
+            schema.ifShow ? schema.ifShow(formModel) : true
+        );
+
 		// 同过component->Value获取组件
 		const getElComponent = () => {
+            // 如果用户没有传入 component 则返回个空
+            if (!schema.component) return '';
 			const elComponent = resolveComponent(
 				"El" + schema.component
 			) as DefineComponent;
@@ -116,10 +123,6 @@ export default defineComponent({
 		} = customComponentSlot(schema, slots, formModel);
 
 		// const colRow = schema.colProps?.row ? "display:flex" : "";
-		const colProps = { ...props.colProps, ...schema.colProps };
-		const ifShow = computed(() =>
-			schema.ifShow ? schema.ifShow(formModel) : true
-		);
 
 		return () => (
 			<>
